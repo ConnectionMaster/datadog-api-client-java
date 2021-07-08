@@ -48,6 +48,12 @@
       "type": "idempotent"
     }
   },
+  "GetApplicationKey": {
+    "tag": "Key Management",
+    "undo": {
+      "type": "safe"
+    }
+  },
   "UpdateApplicationKey": {
     "tag": "Key Management",
     "undo": {
@@ -274,6 +280,55 @@
       "type": "safe"
     }
   },
+  "ListTagConfigurations": {
+    "tag": "Metrics",
+    "undo": {
+      "type": "safe"
+    }
+  },
+  "ListTagsByMetricName": {
+    "tag": "Metrics",
+    "undo": {
+      "type": "safe"
+    }
+  },
+  "DeleteTagConfiguration": {
+    "tag": "Metrics",
+    "undo": {
+      "type": "idempotent"
+    }
+  },
+  "ListTagConfigurationByName": {
+    "tag": "Metrics",
+    "undo": {
+      "type": "safe"
+    }
+  },
+  "UpdateTagConfiguration": {
+    "tag": "Metrics",
+    "undo": {
+      "type": "idempotent"
+    }
+  },
+  "CreateTagConfiguration": {
+    "tag": "Metrics",
+    "undo": {
+      "operationId": "DeleteTagConfiguration",
+      "parameters": [
+        {
+          "name": "metric_name",
+          "source": "data.id"
+        }
+      ],
+      "type": "unsafe"
+    }
+  },
+  "ListVolumesByMetricName": {
+    "tag": "Metrics",
+    "undo": {
+      "type": "safe"
+    }
+  },
   "ListPermissions": {
     "tag": "Roles",
     "undo": {
@@ -359,6 +414,43 @@
       "type": "safe"
     }
   },
+  "ListSecurityFilters": {
+    "tag": "Security Monitoring",
+    "undo": {
+      "type": "safe"
+    }
+  },
+  "CreateSecurityFilter": {
+    "tag": "Security Monitoring",
+    "undo": {
+      "operationId": "DeleteSecurityFilter",
+      "parameters": [
+        {
+          "name": "security_filter_id",
+          "source": "data.id"
+        }
+      ],
+      "type": "unsafe"
+    }
+  },
+  "DeleteSecurityFilter": {
+    "tag": "Security Monitoring",
+    "undo": {
+      "type": "idempotent"
+    }
+  },
+  "GetSecurityFilter": {
+    "tag": "Security Monitoring",
+    "undo": {
+      "type": "safe"
+    }
+  },
+  "UpdateSecurityFilter": {
+    "tag": "Security Monitoring",
+    "undo": {
+      "type": "idempotent"
+    }
+  },
   "ListSecurityMonitoringRules": {
     "tag": "Security Monitoring",
     "undo": {
@@ -372,7 +464,7 @@
       "parameters": [
         {
           "name": "rule_id",
-          "source": "data.id"
+          "source": "id"
         }
       ],
       "type": "unsafe"

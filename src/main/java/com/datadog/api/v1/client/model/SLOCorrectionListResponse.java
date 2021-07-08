@@ -8,46 +8,37 @@
  * Do not edit the class manually.
  */
 
-
 package com.datadog.api.v1.client.model;
 
-import java.util.Objects;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.datadog.api.v1.client.model.SLOCorrectionListResponseData;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.datadog.api.v1.client.JSON;
+import java.util.Objects;
 
-
-/**
- * A list of  SLO correction objects
- */
+/** A list of SLO correction objects */
 @ApiModel(description = "A list of  SLO correction objects")
 @JsonPropertyOrder({
-  SLOCorrectionListResponse.JSON_PROPERTY_DATA
+  SLOCorrectionListResponse.JSON_PROPERTY_DATA,
+  SLOCorrectionListResponse.JSON_PROPERTY_META
 })
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class SLOCorrectionListResponse {
   public static final String JSON_PROPERTY_DATA = "data";
-  private List<SLOCorrectionListResponseData> data = null;
+  private List<SLOCorrection> data = null;
 
+  public static final String JSON_PROPERTY_META = "meta";
+  private ResponseMetaAttributes meta;
 
-  public SLOCorrectionListResponse data(List<SLOCorrectionListResponseData> data) {
+  public SLOCorrectionListResponse data(List<SLOCorrection> data) {
     this.data = data;
     return this;
   }
 
-  public SLOCorrectionListResponse addDataItem(SLOCorrectionListResponseData dataItem) {
+  public SLOCorrectionListResponse addDataItem(SLOCorrection dataItem) {
     if (this.data == null) {
       this.data = new ArrayList<>();
     }
@@ -55,28 +46,46 @@ public class SLOCorrectionListResponse {
     return this;
   }
 
-   /**
+  /**
    * The list of of SLO corrections objects
+   *
    * @return data
-  **/
+   */
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The list of of SLO corrections objects")
   @JsonProperty(JSON_PROPERTY_DATA)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public List<SLOCorrectionListResponseData> getData() {
+  public List<SLOCorrection> getData() {
     return data;
   }
 
-
-  public void setData(List<SLOCorrectionListResponseData> data) {
+  public void setData(List<SLOCorrection> data) {
     this.data = data;
   }
 
+  public SLOCorrectionListResponse meta(ResponseMetaAttributes meta) {
+    this.meta = meta;
+    return this;
+  }
 
   /**
-   * Return true if this SLOCorrectionListResponse object is equal to o.
+   * Get meta
+   *
+   * @return meta
    */
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+  @JsonProperty(JSON_PROPERTY_META)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public ResponseMetaAttributes getMeta() {
+    return meta;
+  }
+
+  public void setMeta(ResponseMetaAttributes meta) {
+    this.meta = meta;
+  }
+
+  /** Return true if this SLOCorrectionListResponse object is equal to o. */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -86,27 +95,27 @@ public class SLOCorrectionListResponse {
       return false;
     }
     SLOCorrectionListResponse slOCorrectionListResponse = (SLOCorrectionListResponse) o;
-    return Objects.equals(this.data, slOCorrectionListResponse.data);
+    return Objects.equals(this.data, slOCorrectionListResponse.data)
+        && Objects.equals(this.meta, slOCorrectionListResponse.meta);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(data);
+    return Objects.hash(data, meta);
   }
-
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class SLOCorrectionListResponse {\n");
     sb.append("    data: ").append(toIndentedString(data)).append("\n");
+    sb.append("    meta: ").append(toIndentedString(meta)).append("\n");
     sb.append("}");
     return sb.toString();
   }
 
   /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
+   * Convert the given object to string with each line indented by 4 spaces (except the first line).
    */
   private String toIndentedString(Object o) {
     if (o == null) {
@@ -114,6 +123,4 @@ public class SLOCorrectionListResponse {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
-

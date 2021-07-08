@@ -3,6 +3,7 @@
 # SyntheticsStepDetail
 
 Object describing a step for a Synthetic test.
+
 ## Properties
 
 Name | Type | Description | Notes
@@ -22,7 +23,8 @@ Name | Type | Description | Notes
 **type** | **SyntheticsStepType** |  |  [optional]
 **url** | **String** | URL to perform the step against. |  [optional]
 **value** | **Object** | Value for the step. |  [optional]
-**warnings** | [**List&lt;SyntheticsStepDetailWarnings&gt;**](SyntheticsStepDetailWarnings.md) | Warning collected that didn&#39;t failed the step. |  [optional]
+**vitalsMetrics** | [**List&lt;SyntheticsCoreWebVitals&gt;**](SyntheticsCoreWebVitals.md) | Array of Core Web Vitals metrics for the step. |  [optional]
+**warnings** | [**List&lt;SyntheticsStepDetailWarning&gt;**](SyntheticsStepDetailWarning.md) | Warning collected that didn&#39;t failed the step. |  [optional]
 
 
 

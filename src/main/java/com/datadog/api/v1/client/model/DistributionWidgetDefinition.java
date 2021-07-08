@@ -8,48 +8,48 @@
  * Do not edit the class manually.
  */
 
-
 package com.datadog.api.v1.client.model;
 
-import java.util.Objects;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.datadog.api.v1.client.model.DistributionWidgetDefinitionType;
-import com.datadog.api.v1.client.model.DistributionWidgetRequest;
-import com.datadog.api.v1.client.model.WidgetTextAlign;
-import com.datadog.api.v1.client.model.WidgetTime;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.datadog.api.v1.client.JSON;
-
+import java.util.Objects;
 
 /**
- * The Distribution visualization is another way of showing metrics aggregated across one or several tags, such as hosts. Unlike the heat map, a distribution graph’s x-axis is quantity rather than time.
+ * The Distribution visualization is another way of showing metrics aggregated across one or several
+ * tags, such as hosts. Unlike the heat map, a distribution graph’s x-axis is quantity rather than
+ * time.
  */
-@ApiModel(description = "The Distribution visualization is another way of showing metrics aggregated across one or several tags, such as hosts. Unlike the heat map, a distribution graph’s x-axis is quantity rather than time.")
+@ApiModel(
+    description =
+        "The Distribution visualization is another way of showing metrics aggregated across one or"
+            + " several tags, such as hosts. Unlike the heat map, a distribution graph’s x-axis is"
+            + " quantity rather than time.")
 @JsonPropertyOrder({
   DistributionWidgetDefinition.JSON_PROPERTY_LEGEND_SIZE,
+  DistributionWidgetDefinition.JSON_PROPERTY_MARKERS,
   DistributionWidgetDefinition.JSON_PROPERTY_REQUESTS,
   DistributionWidgetDefinition.JSON_PROPERTY_SHOW_LEGEND,
   DistributionWidgetDefinition.JSON_PROPERTY_TIME,
   DistributionWidgetDefinition.JSON_PROPERTY_TITLE,
   DistributionWidgetDefinition.JSON_PROPERTY_TITLE_ALIGN,
   DistributionWidgetDefinition.JSON_PROPERTY_TITLE_SIZE,
-  DistributionWidgetDefinition.JSON_PROPERTY_TYPE
+  DistributionWidgetDefinition.JSON_PROPERTY_TYPE,
+  DistributionWidgetDefinition.JSON_PROPERTY_XAXIS,
+  DistributionWidgetDefinition.JSON_PROPERTY_YAXIS
 })
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class DistributionWidgetDefinition {
   public static final String JSON_PROPERTY_LEGEND_SIZE = "legend_size";
   private String legendSize;
+
+  public static final String JSON_PROPERTY_MARKERS = "markers";
+  private List<WidgetMarker> markers = null;
 
   public static final String JSON_PROPERTY_REQUESTS = "requests";
   private List<DistributionWidgetRequest> requests = new ArrayList<>();
@@ -72,30 +72,75 @@ public class DistributionWidgetDefinition {
   public static final String JSON_PROPERTY_TYPE = "type";
   private DistributionWidgetDefinitionType type = DistributionWidgetDefinitionType.DISTRIBUTION;
 
+  public static final String JSON_PROPERTY_XAXIS = "xaxis";
+  private DistributionWidgetXAxis xaxis;
+
+  public static final String JSON_PROPERTY_YAXIS = "yaxis";
+  private DistributionWidgetYAxis yaxis;
+
+  public DistributionWidgetDefinition() {}
+
+  @JsonCreator
+  public DistributionWidgetDefinition(
+      @JsonProperty(required = true, value = JSON_PROPERTY_REQUESTS)
+          List<DistributionWidgetRequest> requests,
+      @JsonProperty(required = true, value = JSON_PROPERTY_TYPE)
+          DistributionWidgetDefinitionType type) {
+    this.requests = requests;
+    this.type = type;
+  }
 
   public DistributionWidgetDefinition legendSize(String legendSize) {
     this.legendSize = legendSize;
     return this;
   }
 
-   /**
-   * Available legend sizes for a widget. Should be one of \&quot;0\&quot;, \&quot;2\&quot;, \&quot;4\&quot;, \&quot;8\&quot;, \&quot;16\&quot;, or \&quot;auto\&quot;.
+  /**
+   * (Deprecated) The widget legend was replaced by a tooltip and sidebar.
+   *
    * @return legendSize
-  **/
+   */
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "Available legend sizes for a widget. Should be one of \"0\", \"2\", \"4\", \"8\", \"16\", or \"auto\".")
+  @ApiModelProperty(value = "(Deprecated) The widget legend was replaced by a tooltip and sidebar.")
   @JsonProperty(JSON_PROPERTY_LEGEND_SIZE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getLegendSize() {
     return legendSize;
   }
-
 
   public void setLegendSize(String legendSize) {
     this.legendSize = legendSize;
   }
 
+  public DistributionWidgetDefinition markers(List<WidgetMarker> markers) {
+    this.markers = markers;
+    return this;
+  }
+
+  public DistributionWidgetDefinition addMarkersItem(WidgetMarker markersItem) {
+    if (this.markers == null) {
+      this.markers = new ArrayList<>();
+    }
+    this.markers.add(markersItem);
+    return this;
+  }
+
+  /**
+   * List of markers.
+   *
+   * @return markers
+   */
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "List of markers.")
+  @JsonProperty(JSON_PROPERTY_MARKERS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public List<WidgetMarker> getMarkers() {
+    return markers;
+  }
+
+  public void setMarkers(List<WidgetMarker> markers) {
+    this.markers = markers;
+  }
 
   public DistributionWidgetDefinition requests(List<DistributionWidgetRequest> requests) {
     this.requests = requests;
@@ -107,170 +152,207 @@ public class DistributionWidgetDefinition {
     return this;
   }
 
-   /**
-   * Array of one request object to display in the widget.  See the dedicated [Request JSON schema documentation](https://docs.datadoghq.com/dashboards/graphing_json/request_json)  to learn how to build the &#x60;REQUEST_SCHEMA&#x60;.
+  /**
+   * Array of one request object to display in the widget. See the dedicated [Request JSON schema
+   * documentation](https://docs.datadoghq.com/dashboards/graphing_json/request_json) to learn how
+   * to build the &#x60;REQUEST_SCHEMA&#x60;.
+   *
    * @return requests
-  **/
-  @ApiModelProperty(example = "[{\"q\":\"host:X tags:Y\"}]", required = true, value = "Array of one request object to display in the widget.  See the dedicated [Request JSON schema documentation](https://docs.datadoghq.com/dashboards/graphing_json/request_json)  to learn how to build the `REQUEST_SCHEMA`.")
+   */
+  @ApiModelProperty(
+      example = "[{\"q\":\"host:X tags:Y\"}]",
+      required = true,
+      value =
+          "Array of one request object to display in the widget.  See the dedicated [Request JSON"
+              + " schema"
+              + " documentation](https://docs.datadoghq.com/dashboards/graphing_json/request_json)"
+              + "  to learn how to build the `REQUEST_SCHEMA`.")
   @JsonProperty(JSON_PROPERTY_REQUESTS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
   public List<DistributionWidgetRequest> getRequests() {
     return requests;
   }
 
-
   public void setRequests(List<DistributionWidgetRequest> requests) {
     this.requests = requests;
   }
-
 
   public DistributionWidgetDefinition showLegend(Boolean showLegend) {
     this.showLegend = showLegend;
     return this;
   }
 
-   /**
-   * Whether or not to display the legend on this widget.
+  /**
+   * (Deprecated) The widget legend was replaced by a tooltip and sidebar.
+   *
    * @return showLegend
-  **/
+   */
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "Whether or not to display the legend on this widget.")
+  @ApiModelProperty(value = "(Deprecated) The widget legend was replaced by a tooltip and sidebar.")
   @JsonProperty(JSON_PROPERTY_SHOW_LEGEND)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Boolean getShowLegend() {
     return showLegend;
   }
 
-
   public void setShowLegend(Boolean showLegend) {
     this.showLegend = showLegend;
   }
-
 
   public DistributionWidgetDefinition time(WidgetTime time) {
     this.time = time;
     return this;
   }
 
-   /**
+  /**
    * Get time
+   *
    * @return time
-  **/
+   */
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
   @JsonProperty(JSON_PROPERTY_TIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public WidgetTime getTime() {
     return time;
   }
 
-
   public void setTime(WidgetTime time) {
     this.time = time;
   }
-
 
   public DistributionWidgetDefinition title(String title) {
     this.title = title;
     return this;
   }
 
-   /**
+  /**
    * Title of the widget.
+   *
    * @return title
-  **/
+   */
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Title of the widget.")
   @JsonProperty(JSON_PROPERTY_TITLE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getTitle() {
     return title;
   }
 
-
   public void setTitle(String title) {
     this.title = title;
   }
-
 
   public DistributionWidgetDefinition titleAlign(WidgetTextAlign titleAlign) {
     this.titleAlign = titleAlign;
     return this;
   }
 
-   /**
+  /**
    * Get titleAlign
+   *
    * @return titleAlign
-  **/
+   */
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
   @JsonProperty(JSON_PROPERTY_TITLE_ALIGN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public WidgetTextAlign getTitleAlign() {
     return titleAlign;
   }
 
-
   public void setTitleAlign(WidgetTextAlign titleAlign) {
     this.titleAlign = titleAlign;
   }
-
 
   public DistributionWidgetDefinition titleSize(String titleSize) {
     this.titleSize = titleSize;
     return this;
   }
 
-   /**
+  /**
    * Size of the title.
+   *
    * @return titleSize
-  **/
+   */
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Size of the title.")
   @JsonProperty(JSON_PROPERTY_TITLE_SIZE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getTitleSize() {
     return titleSize;
   }
 
-
   public void setTitleSize(String titleSize) {
     this.titleSize = titleSize;
   }
-
 
   public DistributionWidgetDefinition type(DistributionWidgetDefinitionType type) {
     this.type = type;
     return this;
   }
 
-   /**
+  /**
    * Get type
+   *
    * @return type
-  **/
+   */
   @ApiModelProperty(required = true, value = "")
   @JsonProperty(JSON_PROPERTY_TYPE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
   public DistributionWidgetDefinitionType getType() {
     return type;
   }
-
 
   public void setType(DistributionWidgetDefinitionType type) {
     this.type = type;
   }
 
+  public DistributionWidgetDefinition xaxis(DistributionWidgetXAxis xaxis) {
+    this.xaxis = xaxis;
+    return this;
+  }
 
   /**
-   * Return true if this DistributionWidgetDefinition object is equal to o.
+   * Get xaxis
+   *
+   * @return xaxis
    */
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+  @JsonProperty(JSON_PROPERTY_XAXIS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public DistributionWidgetXAxis getXaxis() {
+    return xaxis;
+  }
+
+  public void setXaxis(DistributionWidgetXAxis xaxis) {
+    this.xaxis = xaxis;
+  }
+
+  public DistributionWidgetDefinition yaxis(DistributionWidgetYAxis yaxis) {
+    this.yaxis = yaxis;
+    return this;
+  }
+
+  /**
+   * Get yaxis
+   *
+   * @return yaxis
+   */
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+  @JsonProperty(JSON_PROPERTY_YAXIS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public DistributionWidgetYAxis getYaxis() {
+    return yaxis;
+  }
+
+  public void setYaxis(DistributionWidgetYAxis yaxis) {
+    this.yaxis = yaxis;
+  }
+
+  /** Return true if this DistributionWidgetDefinition object is equal to o. */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -280,27 +362,41 @@ public class DistributionWidgetDefinition {
       return false;
     }
     DistributionWidgetDefinition distributionWidgetDefinition = (DistributionWidgetDefinition) o;
-    return Objects.equals(this.legendSize, distributionWidgetDefinition.legendSize) &&
-        Objects.equals(this.requests, distributionWidgetDefinition.requests) &&
-        Objects.equals(this.showLegend, distributionWidgetDefinition.showLegend) &&
-        Objects.equals(this.time, distributionWidgetDefinition.time) &&
-        Objects.equals(this.title, distributionWidgetDefinition.title) &&
-        Objects.equals(this.titleAlign, distributionWidgetDefinition.titleAlign) &&
-        Objects.equals(this.titleSize, distributionWidgetDefinition.titleSize) &&
-        Objects.equals(this.type, distributionWidgetDefinition.type);
+    return Objects.equals(this.legendSize, distributionWidgetDefinition.legendSize)
+        && Objects.equals(this.markers, distributionWidgetDefinition.markers)
+        && Objects.equals(this.requests, distributionWidgetDefinition.requests)
+        && Objects.equals(this.showLegend, distributionWidgetDefinition.showLegend)
+        && Objects.equals(this.time, distributionWidgetDefinition.time)
+        && Objects.equals(this.title, distributionWidgetDefinition.title)
+        && Objects.equals(this.titleAlign, distributionWidgetDefinition.titleAlign)
+        && Objects.equals(this.titleSize, distributionWidgetDefinition.titleSize)
+        && Objects.equals(this.type, distributionWidgetDefinition.type)
+        && Objects.equals(this.xaxis, distributionWidgetDefinition.xaxis)
+        && Objects.equals(this.yaxis, distributionWidgetDefinition.yaxis);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(legendSize, requests, showLegend, time, title, titleAlign, titleSize, type);
+    return Objects.hash(
+        legendSize,
+        markers,
+        requests,
+        showLegend,
+        time,
+        title,
+        titleAlign,
+        titleSize,
+        type,
+        xaxis,
+        yaxis);
   }
-
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class DistributionWidgetDefinition {\n");
     sb.append("    legendSize: ").append(toIndentedString(legendSize)).append("\n");
+    sb.append("    markers: ").append(toIndentedString(markers)).append("\n");
     sb.append("    requests: ").append(toIndentedString(requests)).append("\n");
     sb.append("    showLegend: ").append(toIndentedString(showLegend)).append("\n");
     sb.append("    time: ").append(toIndentedString(time)).append("\n");
@@ -308,13 +404,14 @@ public class DistributionWidgetDefinition {
     sb.append("    titleAlign: ").append(toIndentedString(titleAlign)).append("\n");
     sb.append("    titleSize: ").append(toIndentedString(titleSize)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
+    sb.append("    xaxis: ").append(toIndentedString(xaxis)).append("\n");
+    sb.append("    yaxis: ").append(toIndentedString(yaxis)).append("\n");
     sb.append("}");
     return sb.toString();
   }
 
   /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
+   * Convert the given object to string with each line indented by 4 spaces (except the first line).
    */
   private String toIndentedString(Object o) {
     if (o == null) {
@@ -322,6 +419,4 @@ public class DistributionWidgetDefinition {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
-

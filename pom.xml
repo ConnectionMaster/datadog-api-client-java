@@ -4,12 +4,12 @@
     <artifactId>datadog-api-client</artifactId>
     <packaging>jar</packaging>
     <name>datadog-api-client</name>
-    <version>1.0.0-beta.9-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
     <url>https://github.com/DataDog/datadog-api-client-java</url>
     <description>Java client library for Datadog API</description>
     <scm>
         <connection>scm:git:git://github.com/DataDog/datadog-api-client-java.git</connection>
-        <developerConnection>scm:git:git@github.com:DataDog/datadog-api-client-java.git</developerConnection>
+        <developerConnection>scm:git:https://github.com/DataDog/datadog-api-client-java.git</developerConnection>
         <url>https://github.com/DataDog/datadog-api-client-java</url>
         <tag>HEAD</tag>
     </scm>
@@ -21,13 +21,6 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
-
-    <distributionManagement>
-        <repository>
-            <id>bintray-datadog-api-client</id>
-            <url>https://api.bintray.com/maven/${bintray.repo}/${bintray.package}/</url>
-        </repository>
-    </distributionManagement>
 
     <developers>
         <developer>
@@ -43,6 +36,95 @@
             <organizationUrl>http://openapitools.org</organizationUrl>
         </developer>
     </developers>
+
+    <profiles>
+        <profile>
+            <id>surefire-java16</id>
+            <activation>
+                <property>
+                    <name>java.version</name>
+                    <value>16.0.1</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.19.1</version>
+                        <configuration>
+                            <runOrder>random</runOrder>
+                            <argLine>-DloggerPath=conf/log4j.properties -Ddd.integration.junit.enabled=true -Ddd.prioritization.type=ENSURE_TRACE -Ddd.jmxfetch.enabled=false -javaagent:${basedir}/target/dd-java-agent-${dd-java-agent-version}.jar ${argLine} -Xms512m -Xmx3500m -DsurefireForkNumber=${surefire.forkNumber} --add-exports java.base/sun.security.x509=ALL-UNNAMED --add-opens java.base/sun.net.www.protocol.https=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED</argLine>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <!-- Performing a release deployment requires setting of performRelease property -->
+        <profile>
+            <id>deploy-artifacts</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <property>
+                    <name>performRelease</name>
+                    <value>true</value>
+                </property>
+            </activation>
+
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>nexus</id>
+                    <!-- Use the localhost endpoint for testing -->
+                    <!-- <url>http://localhost:8081/repository/maven-snapshots/</url> -->
+                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+                </snapshotRepository>
+                <repository>
+                    <id>nexus</id>
+                    <!-- Use the localhost endpoint for testing -->
+                    <!-- <url>http://localhost:8081/repository/maven-releases/</url> -->
+                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                </repository>
+            </distributionManagement>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>1.6.6</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>nexus</serverId>
+                            <!-- Use the localhost endpoint for testing -->
+                            <!-- <nexusUrl>http://localhost:8081/repository/maven-releases/</nexusUrl> -->
+                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>false</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.6</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                                <configuration>
+                                    <gpgArguments>
+                                        <arg>--pinentry-mode</arg>
+                                        <arg>loopback</arg>
+                                    </gpgArguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
     <build>
         <resources>
@@ -74,28 +156,28 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>3.0.0-M1</version>
+                <configuration>
+                    <tagNameFormat>@{project.version}</tagNameFormat>
+                </configuration>
+            </plugin>
+            <!-- Skip the maven release default deploy, we use the nexus staging plugin for this-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>3.0.0-M1</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.19.1</version>
                 <configuration>
                     <runOrder>random</runOrder>
-                    <!-- We don't use threads, as that would complicate cassette recording, plus keystore used by tests isn't thread safe. -->
-                    <!-- FIXME
-                    <forkCount>2</forkCount>
-                    <reuseForks>true</reuseForks>
-                    <threadCount>1</threadCount>
-                    <parallel>classes</parallel>
-                    -->
-                    <systemProperties>
-                        <property>
-                            <name>loggerPath</name>
-                            <value>conf/log4j.properties</value>
-                        </property>
-                        <property>
-                            <name>dd.prioritization.type</name>
-                            <value>EnsureTrace</value>
-                        </property>
-                    </systemProperties>
-                    <argLine>-javaagent:${basedir}/target/dd-java-agent-${dd-java-agent-version}.jar ${argLine} -Xms512m -Xmx3500m -DsurefireForkNumber=${surefire.forkNumber}</argLine>
+                    <argLine>-DloggerPath=conf/log4j.properties -Ddd.integration.junit.enabled=true -Ddd.prioritization.type=ENSURE_TRACE -Ddd.jmxfetch.enabled=false -javaagent:${basedir}/target/dd-java-agent-${dd-java-agent-version}.jar ${argLine} -Xms512m -Xmx3500m -DsurefireForkNumber=${surefire.forkNumber}</argLine>
                 </configuration>
             </plugin>
             <plugin>
@@ -132,7 +214,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.5</version>
+                <version>0.8.6</version>
                 <executions>
                     <execution>
                         <goals>
@@ -227,30 +309,6 @@
             </plugin>
         </plugins>
     </build>
-
-    <profiles>
-        <profile>
-            <id>sign-artifacts</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.5</version>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
 
     <dependencies>
         <dependency>
@@ -400,13 +458,12 @@
         <swagger-annotations-version>1.5.22</swagger-annotations-version>
         <jersey-version>2.27</jersey-version>
         <jackson-version>2.10.4</jackson-version>
-        <jackson-databind-version>2.10.4</jackson-databind-version>
+        <jackson-databind-version>2.10.5.1</jackson-databind-version>
         <jackson-databind-nullable-version>0.2.0</jackson-databind-nullable-version>
         <http-signature-version>1.3</http-signature-version>
         <maven-plugin-version>1.0.0</maven-plugin-version>
         <junit-version>4.13.1</junit-version>
         <dd-java-agent-version>0.72.0</dd-java-agent-version>
-        <bintray.repo>datadog/datadog-maven</bintray.repo>
-        <bintray.package>datadog-api-client</bintray.package>
+        <project.scm.id>github</project.scm.id>
     </properties>
 </project>

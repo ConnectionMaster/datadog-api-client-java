@@ -2,8 +2,8 @@
 
 All URIs are relative to *https://api.datadoghq.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
+Method        | HTTP request | Description
+------------- | ------------ | ------------
 [**getHostTotals**](HostsApi.md#getHostTotals) | **GET** /api/v1/hosts/totals | Get the total number of active hosts
 [**listHosts**](HostsApi.md#listHosts) | **GET** /api/v1/hosts | Get all hosts for your organization
 [**muteHost**](HostsApi.md#muteHost) | **POST** /api/v1/host/{host_name}/mute | Mute a host
@@ -13,9 +13,7 @@ Method | HTTP request | Description
 
 ## getHostTotals
 
-> HostTotals getHostTotals().from(from).execute();
-
-Get the total number of active hosts
+> HostTotals getHostTotals(parameters);
 
 This endpoint returns the total number of active and up hosts in your Datadog account.
 Active means the host has reported in the past hour, and up means it has reported in the past two hours.
@@ -23,37 +21,22 @@ Active means the host has reported in the past hour, and up means it has reporte
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.HostsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         HostsApi apiInstance = new HostsApi(defaultClient);
         Long from = 56L; // Long | Number of seconds from which you want to get total number of active hosts.
         try {
-            HostTotals result = apiInstance.getHostTotals()
-                .from(from)
-                .execute();
+	    HostTotals result = apiInstance.getHostTotals(new HostsApi.GetHostTotalsOptionalParameters()
+                .from(from));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling HostsApi#getHostTotals");
@@ -96,9 +79,7 @@ Name | Type | Description  | Notes
 
 ## listHosts
 
-> HostListResponse listHosts().filter(filter).sortField(sortField).sortDir(sortDir).start(start).count(count).from(from).includeMutedHostsData(includeMutedHostsData).includeHostsMetadata(includeHostsMetadata).execute();
-
-Get all hosts for your organization
+> HostListResponse listHosts(parameters);
 
 This endpoint allows searching for hosts by name, alias, or tag.
 Hosts live within the past 3 hours are included by default.
@@ -108,30 +89,16 @@ Results are paginated with a max of 1000 results at a time.
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.HostsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         HostsApi apiInstance = new HostsApi(defaultClient);
         String filter = "filter_example"; // String | String to filter search results.
@@ -143,7 +110,7 @@ public class Example {
         Boolean includeMutedHostsData = true; // Boolean | Include information on the muted status of hosts and when the mute expires.
         Boolean includeHostsMetadata = true; // Boolean | Include additional metadata about the hosts (agent_version, machine, platform, processor, etc.).
         try {
-            HostListResponse result = apiInstance.listHosts()
+	    HostListResponse result = apiInstance.listHosts(new HostsApi.ListHostsOptionalParameters()
                 .filter(filter)
                 .sortField(sortField)
                 .sortDir(sortDir)
@@ -151,8 +118,7 @@ public class Example {
                 .count(count)
                 .from(from)
                 .includeMutedHostsData(includeMutedHostsData)
-                .includeHostsMetadata(includeHostsMetadata)
-                .execute();
+                .includeHostsMetadata(includeHostsMetadata));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling HostsApi#listHosts");
@@ -202,47 +168,29 @@ Name | Type | Description  | Notes
 
 ## muteHost
 
-> HostMuteResponse muteHost(hostName).body(body).execute();
-
-Mute a host
+> HostMuteResponse muteHost(hostName, body);
 
 Mute a host.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.HostsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         HostsApi apiInstance = new HostsApi(defaultClient);
         String hostName = "hostName_example"; // String | Name of the host to mute.
         HostMuteSettings body = new HostMuteSettings(); // HostMuteSettings | Mute a host request body.
         try {
-            HostMuteResponse result = apiInstance.muteHost(hostName)
-                .body(body)
-                .execute();
+            HostMuteResponse result = apiInstance.muteHost(hostName, body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling HostsApi#muteHost");
@@ -286,45 +234,28 @@ Name | Type | Description  | Notes
 
 ## unmuteHost
 
-> HostMuteResponse unmuteHost(hostName).execute();
-
-Unmute a host
+> HostMuteResponse unmuteHost(hostName);
 
 Unmutes a host. This endpoint takes no JSON arguments.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.HostsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         HostsApi apiInstance = new HostsApi(defaultClient);
         String hostName = "hostName_example"; // String | Name of the host to unmute.
         try {
-            HostMuteResponse result = apiInstance.unmuteHost(hostName)
-                .execute();
+            HostMuteResponse result = apiInstance.unmuteHost(hostName);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling HostsApi#unmuteHost");

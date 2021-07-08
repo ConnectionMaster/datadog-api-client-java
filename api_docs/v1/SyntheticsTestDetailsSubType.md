@@ -13,5 +13,9 @@
 
 * `DNS` (value: `"dns"`)
 
+* `MULTI` (value: `"multi"`)
+
+* `ICMP` (value: `"icmp"`)
+
 
 

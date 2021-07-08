@@ -1,0 +1,57 @@
+[
+  {
+    "httpRequest": {
+      "body": {
+        "type": "JSON",
+        "json": "[{\"check\":\"app.ok\",\"host_name\":\"host\",\"status\":0,\"tags\":[\"test:TestSubmitaServiceCheckreturnsPayloadacceptedresponse1618491676\"]}]"
+      },
+      "headers": {
+        "JAVA-TEST-NAME": [
+          "Submit_a_Service_Check_returns_Payload_accepted_response"
+        ]
+      },
+      "method": "POST",
+      "path": "/api/v1/check_run",
+      "keepAlive": false,
+      "secure": true
+    },
+    "httpResponse": {
+      "body": "{\"status\": \"ok\"}",
+      "headers": {
+        "Date": [
+          "Thu, 15 Apr 2021 13:01:16 GMT"
+        ],
+        "Content-Type": [
+          "text/json"
+        ],
+        "Content-Length": [
+          "16"
+        ],
+        "Connection": [
+          "close"
+        ],
+        "X-Content-Type-Options": [
+          "nosniff"
+        ],
+        "Strict-Transport-Security": [
+          "max-age=15724800;"
+        ],
+        "Content-Security-Policy": [
+          "frame-ancestors 'self'; report-uri https://api.datadoghq.com/csp-report"
+        ],
+        "X-Frame-Options": [
+          "SAMEORIGIN"
+        ]
+      },
+      "statusCode": 202,
+      "reasonPhrase": "Accepted"
+    },
+    "times": {
+      "remainingTimes": 1
+    },
+    "timeToLive": {
+      "unlimited": true
+    },
+    "id": "b1d64004-5842-53cc-004b-537169f77b88"
+  }
+]

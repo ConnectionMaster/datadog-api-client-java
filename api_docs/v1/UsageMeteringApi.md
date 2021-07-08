@@ -2,8 +2,8 @@
 
 All URIs are relative to *https://api.datadoghq.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
+Method        | HTTP request | Description
+------------- | ------------ | ------------
 [**getDailyCustomReports**](UsageMeteringApi.md#getDailyCustomReports) | **GET** /api/v1/daily_custom_reports | Get the list of available daily custom reports
 [**getIncidentManagement**](UsageMeteringApi.md#getIncidentManagement) | **GET** /api/v1/usage/incident-management | Get hourly usage for incident management
 [**getIngestedSpans**](UsageMeteringApi.md#getIngestedSpans) | **GET** /api/v1/usage/ingested-spans | Get hourly usage for ingested spans
@@ -13,13 +13,18 @@ Method | HTTP request | Description
 [**getTracingWithoutLimits**](UsageMeteringApi.md#getTracingWithoutLimits) | **GET** /api/v1/usage/tracing-without-limits | Get hourly usage for tracing without limits
 [**getUsageAnalyzedLogs**](UsageMeteringApi.md#getUsageAnalyzedLogs) | **GET** /api/v1/usage/analyzed_logs | Get hourly usage for analyzed logs
 [**getUsageAttribution**](UsageMeteringApi.md#getUsageAttribution) | **GET** /api/v1/usage/attribution | Get Usage Attribution
+[**getUsageAuditLogs**](UsageMeteringApi.md#getUsageAuditLogs) | **GET** /api/v1/usage/audit_logs | Get hourly usage for audit logs
 [**getUsageBillableSummary**](UsageMeteringApi.md#getUsageBillableSummary) | **GET** /api/v1/usage/billable-summary | Get billable usage across your account
+[**getUsageCWS**](UsageMeteringApi.md#getUsageCWS) | **GET** /api/v1/usage/cws | Get hourly usage for Cloud Workload Security
+[**getUsageCloudSecurityPostureManagement**](UsageMeteringApi.md#getUsageCloudSecurityPostureManagement) | **GET** /api/v1/usage/cspm | Get hourly usage for CSPM
 [**getUsageFargate**](UsageMeteringApi.md#getUsageFargate) | **GET** /api/v1/usage/fargate | Get hourly usage for Fargate
 [**getUsageHosts**](UsageMeteringApi.md#getUsageHosts) | **GET** /api/v1/usage/hosts | Get hourly usage for hosts and containers
 [**getUsageIndexedSpans**](UsageMeteringApi.md#getUsageIndexedSpans) | **GET** /api/v1/usage/indexed-spans | Get hourly usage for indexed spans
+[**getUsageInternetOfThings**](UsageMeteringApi.md#getUsageInternetOfThings) | **GET** /api/v1/usage/iot | Get hourly usage for IoT
 [**getUsageLambda**](UsageMeteringApi.md#getUsageLambda) | **GET** /api/v1/usage/aws_lambda | Get hourly usage for Lambda
 [**getUsageLogs**](UsageMeteringApi.md#getUsageLogs) | **GET** /api/v1/usage/logs | Get hourly usage for Logs
 [**getUsageLogsByIndex**](UsageMeteringApi.md#getUsageLogsByIndex) | **GET** /api/v1/usage/logs_by_index | Get hourly usage for Logs by Index
+[**getUsageLogsByRetention**](UsageMeteringApi.md#getUsageLogsByRetention) | **GET** /api/v1/usage/logs-by-retention | Get hourly logs usage by retention
 [**getUsageNetworkFlows**](UsageMeteringApi.md#getUsageNetworkFlows) | **GET** /api/v1/usage/network_flows | Get hourly usage for Network Flows
 [**getUsageNetworkHosts**](UsageMeteringApi.md#getUsageNetworkHosts) | **GET** /api/v1/usage/network_hosts | Get hourly usage for Network Hosts
 [**getUsageProfiling**](UsageMeteringApi.md#getUsageProfiling) | **GET** /api/v1/usage/profiling | Get hourly usage for profiled hosts
@@ -30,46 +35,30 @@ Method | HTTP request | Description
 [**getUsageSyntheticsAPI**](UsageMeteringApi.md#getUsageSyntheticsAPI) | **GET** /api/v1/usage/synthetics_api | Get hourly usage for Synthetics API Checks
 [**getUsageSyntheticsBrowser**](UsageMeteringApi.md#getUsageSyntheticsBrowser) | **GET** /api/v1/usage/synthetics_browser | Get hourly usage for Synthetics Browser Checks
 [**getUsageTimeseries**](UsageMeteringApi.md#getUsageTimeseries) | **GET** /api/v1/usage/timeseries | Get hourly usage for custom metrics
-[**getUsageTopAvgMetrics**](UsageMeteringApi.md#getUsageTopAvgMetrics) | **GET** /api/v1/usage/top_avg_metrics | Get top custom metrics by hourly average
+[**getUsageTopAvgMetrics**](UsageMeteringApi.md#getUsageTopAvgMetrics) | **GET** /api/v1/usage/top_avg_metrics | Get all custom metrics by hourly average
 [**getUsageTrace**](UsageMeteringApi.md#getUsageTrace) | **GET** /api/v1/usage/traces | Get hourly usage for Trace Search
 
 
 
 ## getDailyCustomReports
 
-> UsageCustomReportsResponse getDailyCustomReports().pageSize(pageSize).pageNumber(pageNumber).sortDir(sortDir).sort(sort).execute();
-
-Get the list of available daily custom reports
+> UsageCustomReportsResponse getDailyCustomReports(parameters);
 
 Get daily custom reports.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.UsageMeteringApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         UsageMeteringApi apiInstance = new UsageMeteringApi(defaultClient);
         Long pageSize = 56L; // Long | The number of files to return in the response. `[default=60]`.
@@ -77,12 +66,11 @@ public class Example {
         UsageSortDirection sortDir = UsageSortDirection.fromValue("desc"); // UsageSortDirection | The direction to sort by: `[desc, asc]`.
         UsageSort sort = UsageSort.fromValue("computed_on"); // UsageSort | The field to sort by: `[computed_on, size, start_date, end_date]`.
         try {
-            UsageCustomReportsResponse result = apiInstance.getDailyCustomReports()
+	    UsageCustomReportsResponse result = apiInstance.getDailyCustomReports(new UsageMeteringApi.GetDailyCustomReportsOptionalParameters()
                 .pageSize(pageSize)
                 .pageNumber(pageNumber)
                 .sortDir(sortDir)
-                .sort(sort)
-                .execute();
+                .sort(sort));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UsageMeteringApi#getDailyCustomReports");
@@ -102,8 +90,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **pageSize** | **Long**| The number of files to return in the response. &#x60;[default&#x3D;60]&#x60;. | [optional]
  **pageNumber** | **Long**| The identifier of the first page to return. This parameter is used for the pagination feature &#x60;[default&#x3D;0]&#x60;. | [optional]
- **sortDir** | **UsageSortDirection**| The direction to sort by: &#x60;[desc, asc]&#x60;. | [optional] [default to desc] [enum: desc, asc]
- **sort** | **UsageSort**| The field to sort by: &#x60;[computed_on, size, start_date, end_date]&#x60;. | [optional] [default to start_date] [enum: computed_on, size, start_date, end_date]
+ **sortDir** | **UsageSortDirection**| The direction to sort by: &#x60;[desc, asc]&#x60;. | [optional] [enum: desc, asc]
+ **sort** | **UsageSort**| The field to sort by: &#x60;[computed_on, size, start_date, end_date]&#x60;. | [optional] [enum: computed_on, size, start_date, end_date]
 
 ### Return type
 
@@ -127,9 +115,7 @@ Name | Type | Description  | Notes
 
 ## getIncidentManagement
 
-> UsageIncidentManagementResponse getIncidentManagement().startHr(startHr).endHr(endHr).execute();
-
-Get hourly usage for incident management
+> UsageIncidentManagementResponse getIncidentManagement(startHr, parameters);
 
 Get hourly usage for incident management.
 
@@ -137,39 +123,23 @@ Get hourly usage for incident management.
 
 ```java
 import java.time.OffsetDateTime;
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.UsageMeteringApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         UsageMeteringApi apiInstance = new UsageMeteringApi(defaultClient);
         OffsetDateTime startHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]` for usage beginning at this hour.
         OffsetDateTime endHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]` for usage ending **before** this hour.
         try {
-            UsageIncidentManagementResponse result = apiInstance.getIncidentManagement()
-                .startHr(startHr)
-                .endHr(endHr)
-                .execute();
+	    UsageIncidentManagementResponse result = apiInstance.getIncidentManagement(startHr, new UsageMeteringApi.GetIncidentManagementOptionalParameters()
+                .endHr(endHr));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UsageMeteringApi#getIncidentManagement");
@@ -213,9 +183,7 @@ Name | Type | Description  | Notes
 
 ## getIngestedSpans
 
-> UsageIngestedSpansResponse getIngestedSpans().startHr(startHr).endHr(endHr).execute();
-
-Get hourly usage for ingested spans
+> UsageIngestedSpansResponse getIngestedSpans(startHr, parameters);
 
 Get hourly usage for ingested spans.
 
@@ -223,39 +191,23 @@ Get hourly usage for ingested spans.
 
 ```java
 import java.time.OffsetDateTime;
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.UsageMeteringApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         UsageMeteringApi apiInstance = new UsageMeteringApi(defaultClient);
         OffsetDateTime startHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]` for usage beginning at this hour.
         OffsetDateTime endHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]` for usage ending **before** this hour.
         try {
-            UsageIngestedSpansResponse result = apiInstance.getIngestedSpans()
-                .startHr(startHr)
-                .endHr(endHr)
-                .execute();
+	    UsageIngestedSpansResponse result = apiInstance.getIngestedSpans(startHr, new UsageMeteringApi.GetIngestedSpansOptionalParameters()
+                .endHr(endHr));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UsageMeteringApi#getIngestedSpans");
@@ -299,39 +251,23 @@ Name | Type | Description  | Notes
 
 ## getMonthlyCustomReports
 
-> UsageCustomReportsResponse getMonthlyCustomReports().pageSize(pageSize).pageNumber(pageNumber).sortDir(sortDir).sort(sort).execute();
-
-Get the list of available monthly custom reports
+> UsageCustomReportsResponse getMonthlyCustomReports(parameters);
 
 Get monthly custom reports.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.UsageMeteringApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         UsageMeteringApi apiInstance = new UsageMeteringApi(defaultClient);
         Long pageSize = 56L; // Long | The number of files to return in the response `[default=60].`
@@ -339,12 +275,11 @@ public class Example {
         UsageSortDirection sortDir = UsageSortDirection.fromValue("desc"); // UsageSortDirection | The direction to sort by: `[desc, asc]`.
         UsageSort sort = UsageSort.fromValue("computed_on"); // UsageSort | The field to sort by: `[computed_on, size, start_date, end_date]`.
         try {
-            UsageCustomReportsResponse result = apiInstance.getMonthlyCustomReports()
+	    UsageCustomReportsResponse result = apiInstance.getMonthlyCustomReports(new UsageMeteringApi.GetMonthlyCustomReportsOptionalParameters()
                 .pageSize(pageSize)
                 .pageNumber(pageNumber)
                 .sortDir(sortDir)
-                .sort(sort)
-                .execute();
+                .sort(sort));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UsageMeteringApi#getMonthlyCustomReports");
@@ -364,8 +299,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **pageSize** | **Long**| The number of files to return in the response &#x60;[default&#x3D;60].&#x60; | [optional]
  **pageNumber** | **Long**| The identifier of the first page to return. This parameter is used for the pagination feature &#x60;[default&#x3D;0]&#x60;. | [optional]
- **sortDir** | **UsageSortDirection**| The direction to sort by: &#x60;[desc, asc]&#x60;. | [optional] [default to desc] [enum: desc, asc]
- **sort** | **UsageSort**| The field to sort by: &#x60;[computed_on, size, start_date, end_date]&#x60;. | [optional] [default to start_date] [enum: computed_on, size, start_date, end_date]
+ **sortDir** | **UsageSortDirection**| The direction to sort by: &#x60;[desc, asc]&#x60;. | [optional] [enum: desc, asc]
+ **sort** | **UsageSort**| The field to sort by: &#x60;[computed_on, size, start_date, end_date]&#x60;. | [optional] [enum: computed_on, size, start_date, end_date]
 
 ### Return type
 
@@ -389,45 +324,28 @@ Name | Type | Description  | Notes
 
 ## getSpecifiedDailyCustomReports
 
-> UsageSpecifiedCustomReportsResponse getSpecifiedDailyCustomReports(reportId).execute();
-
-Get specified daily custom reports
+> UsageSpecifiedCustomReportsResponse getSpecifiedDailyCustomReports(reportId);
 
 Get specified daily custom reports.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.UsageMeteringApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         UsageMeteringApi apiInstance = new UsageMeteringApi(defaultClient);
-        String reportId = "reportId_example"; // String | The specified ID to search results for.
+        String reportId = "reportId_example"; // String | Date of the report in the format `YYYY-MM-DD`.
         try {
-            UsageSpecifiedCustomReportsResponse result = apiInstance.getSpecifiedDailyCustomReports(reportId)
-                .execute();
+            UsageSpecifiedCustomReportsResponse result = apiInstance.getSpecifiedDailyCustomReports(reportId);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UsageMeteringApi#getSpecifiedDailyCustomReports");
@@ -445,7 +363,7 @@ public class Example {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **reportId** | **String**| The specified ID to search results for. |
+ **reportId** | **String**| Date of the report in the format &#x60;YYYY-MM-DD&#x60;. |
 
 ### Return type
 
@@ -470,45 +388,28 @@ Name | Type | Description  | Notes
 
 ## getSpecifiedMonthlyCustomReports
 
-> UsageSpecifiedCustomReportsResponse getSpecifiedMonthlyCustomReports(reportId).execute();
-
-Get specified monthly custom reports
+> UsageSpecifiedCustomReportsResponse getSpecifiedMonthlyCustomReports(reportId);
 
 Get specified monthly custom reports.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.UsageMeteringApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         UsageMeteringApi apiInstance = new UsageMeteringApi(defaultClient);
-        String reportId = "reportId_example"; // String | The specified ID to search results for.
+        String reportId = "reportId_example"; // String | Date of the report in the format `YYYY-MM-DD`.
         try {
-            UsageSpecifiedCustomReportsResponse result = apiInstance.getSpecifiedMonthlyCustomReports(reportId)
-                .execute();
+            UsageSpecifiedCustomReportsResponse result = apiInstance.getSpecifiedMonthlyCustomReports(reportId);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UsageMeteringApi#getSpecifiedMonthlyCustomReports");
@@ -526,7 +427,7 @@ public class Example {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **reportId** | **String**| The specified ID to search results for. |
+ **reportId** | **String**| Date of the report in the format &#x60;YYYY-MM-DD&#x60;. |
 
 ### Return type
 
@@ -552,9 +453,7 @@ Name | Type | Description  | Notes
 
 ## getTracingWithoutLimits
 
-> UsageTracingWithoutLimitsResponse getTracingWithoutLimits().startHr(startHr).endHr(endHr).execute();
-
-Get hourly usage for tracing without limits
+> UsageTracingWithoutLimitsResponse getTracingWithoutLimits(startHr, parameters);
 
 Get hourly usage for tracing without limits.
 
@@ -564,39 +463,23 @@ Get hourly usage for tracing without limits.
 
 ```java
 import java.time.OffsetDateTime;
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.UsageMeteringApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         UsageMeteringApi apiInstance = new UsageMeteringApi(defaultClient);
         OffsetDateTime startHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]` for usage beginning at this hour.
         OffsetDateTime endHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]` for usage ending **before** this hour.
         try {
-            UsageTracingWithoutLimitsResponse result = apiInstance.getTracingWithoutLimits()
-                .startHr(startHr)
-                .endHr(endHr)
-                .execute();
+	    UsageTracingWithoutLimitsResponse result = apiInstance.getTracingWithoutLimits(startHr, new UsageMeteringApi.GetTracingWithoutLimitsOptionalParameters()
+                .endHr(endHr));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UsageMeteringApi#getTracingWithoutLimits");
@@ -640,9 +523,7 @@ Name | Type | Description  | Notes
 
 ## getUsageAnalyzedLogs
 
-> UsageAnalyzedLogsResponse getUsageAnalyzedLogs().startHr(startHr).endHr(endHr).execute();
-
-Get hourly usage for analyzed logs
+> UsageAnalyzedLogsResponse getUsageAnalyzedLogs(startHr, parameters);
 
 Get hourly usage for analyzed logs (Security Monitoring).
 
@@ -650,39 +531,23 @@ Get hourly usage for analyzed logs (Security Monitoring).
 
 ```java
 import java.time.OffsetDateTime;
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.UsageMeteringApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         UsageMeteringApi apiInstance = new UsageMeteringApi(defaultClient);
         OffsetDateTime startHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]` for usage beginning at this hour.
         OffsetDateTime endHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]` for usage ending **before** this hour.
         try {
-            UsageAnalyzedLogsResponse result = apiInstance.getUsageAnalyzedLogs()
-                .startHr(startHr)
-                .endHr(endHr)
-                .execute();
+	    UsageAnalyzedLogsResponse result = apiInstance.getUsageAnalyzedLogs(startHr, new UsageMeteringApi.GetUsageAnalyzedLogsOptionalParameters()
+                .endHr(endHr));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UsageMeteringApi#getUsageAnalyzedLogs");
@@ -726,9 +591,7 @@ Name | Type | Description  | Notes
 
 ## getUsageAttribution
 
-> UsageAttributionResponse getUsageAttribution().startMonth(startMonth).fields(fields).endMonth(endMonth).sortDirection(sortDirection).sortName(sortName).execute();
-
-Get Usage Attribution
+> UsageAttributionResponse getUsageAttribution(startMonth, fields, parameters);
 
 Get Usage Attribution.
 
@@ -736,45 +599,28 @@ Get Usage Attribution.
 
 ```java
 import java.time.OffsetDateTime;
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.UsageMeteringApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         UsageMeteringApi apiInstance = new UsageMeteringApi(defaultClient);
         OffsetDateTime startMonth = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]` for usage beginning in this month. Maximum of 15 months ago.
-        String fields = "fields_example"; // String | The specified field to search results for.
+        UsageAttributionSupportedMetrics fields = UsageAttributionSupportedMetrics.fromValue("custom_timeseries_usage"); // UsageAttributionSupportedMetrics | Comma-separated list of usage types to return, or `*` for all usage types.
         OffsetDateTime endMonth = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]` for usage ending this month.
         UsageSortDirection sortDirection = UsageSortDirection.fromValue("desc"); // UsageSortDirection | The direction to sort by: `[desc, asc]`.
         UsageAttributionSort sortName = UsageAttributionSort.fromValue("api_percentage"); // UsageAttributionSort | The field to sort by.
         try {
-            UsageAttributionResponse result = apiInstance.getUsageAttribution()
-                .startMonth(startMonth)
-                .fields(fields)
+	    UsageAttributionResponse result = apiInstance.getUsageAttribution(startMonth, fields, new UsageMeteringApi.GetUsageAttributionOptionalParameters()
                 .endMonth(endMonth)
                 .sortDirection(sortDirection)
-                .sortName(sortName)
-                .execute();
+                .sortName(sortName));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UsageMeteringApi#getUsageAttribution");
@@ -793,10 +639,10 @@ public class Example {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **startMonth** | **OffsetDateTime**| Datetime in ISO-8601 format, UTC, precise to month: &#x60;[YYYY-MM]&#x60; for usage beginning in this month. Maximum of 15 months ago. |
- **fields** | **String**| The specified field to search results for. |
+ **fields** | **UsageAttributionSupportedMetrics**| Comma-separated list of usage types to return, or &#x60;*&#x60; for all usage types. | [enum: custom_timeseries_usage, container_usage, snmp_percentage, apm_host_usage, browser_usage, npm_host_percentage, infra_host_usage, custom_timeseries_percentage, container_percentage, lambda_usage, api_usage, apm_host_percentage, infra_host_percentage, snmp_usage, browser_percentage, api_percentage, lambda_percentage, npm_host_usage, lambda_functions_usage, lambda_functions_percentage, lambda_invocations_usage, lambda_invocations_percentage, fargate_usage, fargate_percentage, profiled_host_usage, profiled_host_percentage, profiled_container_usage, profiled_container_percentage, *]
  **endMonth** | **OffsetDateTime**| Datetime in ISO-8601 format, UTC, precise to month: &#x60;[YYYY-MM]&#x60; for usage ending this month. | [optional]
- **sortDirection** | **UsageSortDirection**| The direction to sort by: &#x60;[desc, asc]&#x60;. | [optional] [default to desc] [enum: desc, asc]
- **sortName** | **UsageAttributionSort**| The field to sort by. | [optional] [default to custom_timeseries_usage] [enum: api_percentage, snmp_usage, lambda_percentage, apm_host_usage, api_usage, container_usage, custom_timeseries_percentage, container_percentage, lambda_usage, apm_host_percentage, npm_host_percentage, browser_percentage, browser_usage, infra_host_percentage, snmp_percentage, npm_host_usage, infra_host_usage, custom_timeseries_usage]
+ **sortDirection** | **UsageSortDirection**| The direction to sort by: &#x60;[desc, asc]&#x60;. | [optional] [enum: desc, asc]
+ **sortName** | **UsageAttributionSort**| The field to sort by. | [optional] [enum: api_percentage, snmp_usage, apm_host_usage, api_usage, container_usage, custom_timeseries_percentage, container_percentage, apm_host_percentage, npm_host_percentage, browser_percentage, browser_usage, infra_host_percentage, snmp_percentage, npm_host_usage, infra_host_usage, custom_timeseries_usage, lambda_functions_usage, lambda_functions_percentage, lambda_invocations_usage, lambda_invocations_percentage, lambda_usage, lambda_percentage]
 
 ### Return type
 
@@ -818,11 +664,77 @@ Name | Type | Description  | Notes
 | **403** | Forbidden - User is not authorized |  -  |
 
 
+## getUsageAuditLogs
+
+> UsageAuditLogsResponse getUsageAuditLogs(startHr, parameters);
+
+Get hourly usage for audit logs.
+
+### Example
+
+```java
+import java.time.OffsetDateTime;
+import java.util.*;
+import com.datadog.api.v1.client.ApiClient;
+import com.datadog.api.v1.client.ApiException;
+import com.datadog.api.v1.client.Configuration;
+import com.datadog.api.v1.client.model.*;
+import com.datadog.api.v1.client.api.UsageMeteringApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+        UsageMeteringApi apiInstance = new UsageMeteringApi(defaultClient);
+        OffsetDateTime startHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]` for usage beginning at this hour.
+        OffsetDateTime endHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]` for usage ending **before** this hour.
+        try {
+	    UsageAuditLogsResponse result = apiInstance.getUsageAuditLogs(startHr, new UsageMeteringApi.GetUsageAuditLogsOptionalParameters()
+                .endHr(endHr));
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling UsageMeteringApi#getUsageAuditLogs");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **startHr** | **OffsetDateTime**| Datetime in ISO-8601 format, UTC, precise to hour: &#x60;[YYYY-MM-DDThh]&#x60; for usage beginning at this hour. |
+ **endHr** | **OffsetDateTime**| Datetime in ISO-8601 format, UTC, precise to hour: &#x60;[YYYY-MM-DDThh]&#x60; for usage ending **before** this hour. | [optional]
+
+### Return type
+
+[**UsageAuditLogsResponse**](UsageAuditLogsResponse.md)
+
+### Authorization
+
+[apiKeyAuth](README.md#apiKeyAuth), [appKeyAuth](README.md#appKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json;datetime-format=rfc3339
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | Bad Request |  -  |
+| **403** | Forbidden - User is not authorized |  -  |
+
+
 ## getUsageBillableSummary
 
-> UsageBillableSummaryResponse getUsageBillableSummary().month(month).execute();
-
-Get billable usage across your account
+> UsageBillableSummaryResponse getUsageBillableSummary(parameters);
 
 Get billable usage across your account.
 
@@ -830,37 +742,22 @@ Get billable usage across your account.
 
 ```java
 import java.time.OffsetDateTime;
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.UsageMeteringApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         UsageMeteringApi apiInstance = new UsageMeteringApi(defaultClient);
         OffsetDateTime month = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]` for usage starting this month.
         try {
-            UsageBillableSummaryResponse result = apiInstance.getUsageBillableSummary()
-                .month(month)
-                .execute();
+	    UsageBillableSummaryResponse result = apiInstance.getUsageBillableSummary(new UsageMeteringApi.GetUsageBillableSummaryOptionalParameters()
+                .month(month));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UsageMeteringApi#getUsageBillableSummary");
@@ -901,11 +798,145 @@ Name | Type | Description  | Notes
 | **403** | Forbidden - User is not authorized |  -  |
 
 
+## getUsageCWS
+
+> UsageCWSResponse getUsageCWS(startHr, parameters);
+
+Get hourly usage for Cloud Workload Security.
+
+### Example
+
+```java
+import java.time.OffsetDateTime;
+import java.util.*;
+import com.datadog.api.v1.client.ApiClient;
+import com.datadog.api.v1.client.ApiException;
+import com.datadog.api.v1.client.Configuration;
+import com.datadog.api.v1.client.model.*;
+import com.datadog.api.v1.client.api.UsageMeteringApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+        UsageMeteringApi apiInstance = new UsageMeteringApi(defaultClient);
+        OffsetDateTime startHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]` for usage beginning at this hour.
+        OffsetDateTime endHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]` for usage ending **before** this hour.
+        try {
+	    UsageCWSResponse result = apiInstance.getUsageCWS(startHr, new UsageMeteringApi.GetUsageCWSOptionalParameters()
+                .endHr(endHr));
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling UsageMeteringApi#getUsageCWS");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **startHr** | **OffsetDateTime**| Datetime in ISO-8601 format, UTC, precise to hour: &#x60;[YYYY-MM-DDThh]&#x60; for usage beginning at this hour. |
+ **endHr** | **OffsetDateTime**| Datetime in ISO-8601 format, UTC, precise to hour: &#x60;[YYYY-MM-DDThh]&#x60; for usage ending **before** this hour. | [optional]
+
+### Return type
+
+[**UsageCWSResponse**](UsageCWSResponse.md)
+
+### Authorization
+
+[apiKeyAuth](README.md#apiKeyAuth), [appKeyAuth](README.md#appKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json;datetime-format=rfc3339
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | Bad Request |  -  |
+| **403** | Forbidden - User is not authorized |  -  |
+
+
+## getUsageCloudSecurityPostureManagement
+
+> UsageCloudSecurityPostureManagementResponse getUsageCloudSecurityPostureManagement(startHr, parameters);
+
+Get hourly usage for Cloud Security Posture Management (CSPM).
+
+### Example
+
+```java
+import java.time.OffsetDateTime;
+import java.util.*;
+import com.datadog.api.v1.client.ApiClient;
+import com.datadog.api.v1.client.ApiException;
+import com.datadog.api.v1.client.Configuration;
+import com.datadog.api.v1.client.model.*;
+import com.datadog.api.v1.client.api.UsageMeteringApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+        UsageMeteringApi apiInstance = new UsageMeteringApi(defaultClient);
+        OffsetDateTime startHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]` for usage beginning at this hour.
+        OffsetDateTime endHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]` for usage ending **before** this hour.
+        try {
+	    UsageCloudSecurityPostureManagementResponse result = apiInstance.getUsageCloudSecurityPostureManagement(startHr, new UsageMeteringApi.GetUsageCloudSecurityPostureManagementOptionalParameters()
+                .endHr(endHr));
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling UsageMeteringApi#getUsageCloudSecurityPostureManagement");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **startHr** | **OffsetDateTime**| Datetime in ISO-8601 format, UTC, precise to hour: &#x60;[YYYY-MM-DDThh]&#x60; for usage beginning at this hour. |
+ **endHr** | **OffsetDateTime**| Datetime in ISO-8601 format, UTC, precise to hour: &#x60;[YYYY-MM-DDThh]&#x60; for usage ending **before** this hour. | [optional]
+
+### Return type
+
+[**UsageCloudSecurityPostureManagementResponse**](UsageCloudSecurityPostureManagementResponse.md)
+
+### Authorization
+
+[apiKeyAuth](README.md#apiKeyAuth), [appKeyAuth](README.md#appKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json;datetime-format=rfc3339
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | Bad Request |  -  |
+| **403** | Forbidden - User is not authorized |  -  |
+
+
 ## getUsageFargate
 
-> UsageFargateResponse getUsageFargate().startHr(startHr).endHr(endHr).execute();
-
-Get hourly usage for Fargate
+> UsageFargateResponse getUsageFargate(startHr, parameters);
 
 Get hourly usage for [Fargate](https://docs.datadoghq.com/integrations/ecs_fargate/).
 
@@ -913,39 +944,23 @@ Get hourly usage for [Fargate](https://docs.datadoghq.com/integrations/ecs_farga
 
 ```java
 import java.time.OffsetDateTime;
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.UsageMeteringApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         UsageMeteringApi apiInstance = new UsageMeteringApi(defaultClient);
         OffsetDateTime startHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour.
         OffsetDateTime endHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending **before** this hour.
         try {
-            UsageFargateResponse result = apiInstance.getUsageFargate()
-                .startHr(startHr)
-                .endHr(endHr)
-                .execute();
+	    UsageFargateResponse result = apiInstance.getUsageFargate(startHr, new UsageMeteringApi.GetUsageFargateOptionalParameters()
+                .endHr(endHr));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UsageMeteringApi#getUsageFargate");
@@ -989,9 +1004,7 @@ Name | Type | Description  | Notes
 
 ## getUsageHosts
 
-> UsageHostsResponse getUsageHosts().startHr(startHr).endHr(endHr).execute();
-
-Get hourly usage for hosts and containers
+> UsageHostsResponse getUsageHosts(startHr, parameters);
 
 Get hourly usage for hosts and containers.
 
@@ -999,39 +1012,23 @@ Get hourly usage for hosts and containers.
 
 ```java
 import java.time.OffsetDateTime;
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.UsageMeteringApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         UsageMeteringApi apiInstance = new UsageMeteringApi(defaultClient);
         OffsetDateTime startHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour.
         OffsetDateTime endHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending **before** this hour.
         try {
-            UsageHostsResponse result = apiInstance.getUsageHosts()
-                .startHr(startHr)
-                .endHr(endHr)
-                .execute();
+	    UsageHostsResponse result = apiInstance.getUsageHosts(startHr, new UsageMeteringApi.GetUsageHostsOptionalParameters()
+                .endHr(endHr));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UsageMeteringApi#getUsageHosts");
@@ -1075,9 +1072,7 @@ Name | Type | Description  | Notes
 
 ## getUsageIndexedSpans
 
-> UsageIndexedSpansResponse getUsageIndexedSpans().startHr(startHr).endHr(endHr).execute();
-
-Get hourly usage for indexed spans
+> UsageIndexedSpansResponse getUsageIndexedSpans(startHr, parameters);
 
 Get hourly usage for indexed spans.
 
@@ -1085,39 +1080,23 @@ Get hourly usage for indexed spans.
 
 ```java
 import java.time.OffsetDateTime;
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.UsageMeteringApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         UsageMeteringApi apiInstance = new UsageMeteringApi(defaultClient);
         OffsetDateTime startHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]` for usage beginning at this hour.
         OffsetDateTime endHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]` for usage ending **before** this hour.
         try {
-            UsageIndexedSpansResponse result = apiInstance.getUsageIndexedSpans()
-                .startHr(startHr)
-                .endHr(endHr)
-                .execute();
+	    UsageIndexedSpansResponse result = apiInstance.getUsageIndexedSpans(startHr, new UsageMeteringApi.GetUsageIndexedSpansOptionalParameters()
+                .endHr(endHr));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UsageMeteringApi#getUsageIndexedSpans");
@@ -1159,11 +1138,77 @@ Name | Type | Description  | Notes
 | **403** | Forbidden - User is not authorized |  -  |
 
 
+## getUsageInternetOfThings
+
+> UsageIoTResponse getUsageInternetOfThings(startHr, parameters);
+
+Get hourly usage for IoT.
+
+### Example
+
+```java
+import java.time.OffsetDateTime;
+import java.util.*;
+import com.datadog.api.v1.client.ApiClient;
+import com.datadog.api.v1.client.ApiException;
+import com.datadog.api.v1.client.Configuration;
+import com.datadog.api.v1.client.model.*;
+import com.datadog.api.v1.client.api.UsageMeteringApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+        UsageMeteringApi apiInstance = new UsageMeteringApi(defaultClient);
+        OffsetDateTime startHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]` for usage beginning at this hour.
+        OffsetDateTime endHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]` for usage ending **before** this hour.
+        try {
+	    UsageIoTResponse result = apiInstance.getUsageInternetOfThings(startHr, new UsageMeteringApi.GetUsageInternetOfThingsOptionalParameters()
+                .endHr(endHr));
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling UsageMeteringApi#getUsageInternetOfThings");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **startHr** | **OffsetDateTime**| Datetime in ISO-8601 format, UTC, precise to hour: &#x60;[YYYY-MM-DDThh]&#x60; for usage beginning at this hour. |
+ **endHr** | **OffsetDateTime**| Datetime in ISO-8601 format, UTC, precise to hour: &#x60;[YYYY-MM-DDThh]&#x60; for usage ending **before** this hour. | [optional]
+
+### Return type
+
+[**UsageIoTResponse**](UsageIoTResponse.md)
+
+### Authorization
+
+[apiKeyAuth](README.md#apiKeyAuth), [appKeyAuth](README.md#appKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json;datetime-format=rfc3339
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | Bad Request |  -  |
+| **403** | Forbidden - User is not authorized |  -  |
+
+
 ## getUsageLambda
 
-> UsageLambdaResponse getUsageLambda().startHr(startHr).endHr(endHr).execute();
-
-Get hourly usage for Lambda
+> UsageLambdaResponse getUsageLambda(startHr, parameters);
 
 Get hourly usage for lambda.
 
@@ -1171,39 +1216,23 @@ Get hourly usage for lambda.
 
 ```java
 import java.time.OffsetDateTime;
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.UsageMeteringApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         UsageMeteringApi apiInstance = new UsageMeteringApi(defaultClient);
         OffsetDateTime startHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour.
         OffsetDateTime endHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending **before** this hour.
         try {
-            UsageLambdaResponse result = apiInstance.getUsageLambda()
-                .startHr(startHr)
-                .endHr(endHr)
-                .execute();
+	    UsageLambdaResponse result = apiInstance.getUsageLambda(startHr, new UsageMeteringApi.GetUsageLambdaOptionalParameters()
+                .endHr(endHr));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UsageMeteringApi#getUsageLambda");
@@ -1247,9 +1276,7 @@ Name | Type | Description  | Notes
 
 ## getUsageLogs
 
-> UsageLogsResponse getUsageLogs().startHr(startHr).endHr(endHr).execute();
-
-Get hourly usage for Logs
+> UsageLogsResponse getUsageLogs(startHr, parameters);
 
 Get hourly usage for logs.
 
@@ -1257,39 +1284,23 @@ Get hourly usage for logs.
 
 ```java
 import java.time.OffsetDateTime;
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.UsageMeteringApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         UsageMeteringApi apiInstance = new UsageMeteringApi(defaultClient);
         OffsetDateTime startHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour.
         OffsetDateTime endHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending **before** this hour.
         try {
-            UsageLogsResponse result = apiInstance.getUsageLogs()
-                .startHr(startHr)
-                .endHr(endHr)
-                .execute();
+	    UsageLogsResponse result = apiInstance.getUsageLogs(startHr, new UsageMeteringApi.GetUsageLogsOptionalParameters()
+                .endHr(endHr));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UsageMeteringApi#getUsageLogs");
@@ -1333,9 +1344,7 @@ Name | Type | Description  | Notes
 
 ## getUsageLogsByIndex
 
-> UsageLogsByIndexResponse getUsageLogsByIndex().startHr(startHr).endHr(endHr).indexName(indexName).execute();
-
-Get hourly usage for Logs by Index
+> UsageLogsByIndexResponse getUsageLogsByIndex(startHr, parameters);
 
 Get hourly usage for logs by index.
 
@@ -1343,41 +1352,25 @@ Get hourly usage for logs by index.
 
 ```java
 import java.time.OffsetDateTime;
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.UsageMeteringApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         UsageMeteringApi apiInstance = new UsageMeteringApi(defaultClient);
         OffsetDateTime startHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour.
         OffsetDateTime endHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending **before** this hour.
         List<String> indexName = Arrays.asList(); // List<String> | Comma-separated list of log index names.
         try {
-            UsageLogsByIndexResponse result = apiInstance.getUsageLogsByIndex()
-                .startHr(startHr)
+	    UsageLogsByIndexResponse result = apiInstance.getUsageLogsByIndex(startHr, new UsageMeteringApi.GetUsageLogsByIndexOptionalParameters()
                 .endHr(endHr)
-                .indexName(indexName)
-                .execute();
+                .indexName(indexName));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UsageMeteringApi#getUsageLogsByIndex");
@@ -1420,11 +1413,77 @@ Name | Type | Description  | Notes
 | **403** | Forbidden - User is not authorized |  -  |
 
 
+## getUsageLogsByRetention
+
+> UsageLogsByRetentionResponse getUsageLogsByRetention(startHr, parameters);
+
+Get hourly usage for indexed logs by retention period.
+
+### Example
+
+```java
+import java.time.OffsetDateTime;
+import java.util.*;
+import com.datadog.api.v1.client.ApiClient;
+import com.datadog.api.v1.client.ApiException;
+import com.datadog.api.v1.client.Configuration;
+import com.datadog.api.v1.client.model.*;
+import com.datadog.api.v1.client.api.UsageMeteringApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+        UsageMeteringApi apiInstance = new UsageMeteringApi(defaultClient);
+        OffsetDateTime startHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]` for usage beginning at this hour.
+        OffsetDateTime endHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]` for usage ending **before** this hour.
+        try {
+	    UsageLogsByRetentionResponse result = apiInstance.getUsageLogsByRetention(startHr, new UsageMeteringApi.GetUsageLogsByRetentionOptionalParameters()
+                .endHr(endHr));
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling UsageMeteringApi#getUsageLogsByRetention");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **startHr** | **OffsetDateTime**| Datetime in ISO-8601 format, UTC, precise to hour: &#x60;[YYYY-MM-DDThh]&#x60; for usage beginning at this hour. |
+ **endHr** | **OffsetDateTime**| Datetime in ISO-8601 format, UTC, precise to hour: &#x60;[YYYY-MM-DDThh]&#x60; for usage ending **before** this hour. | [optional]
+
+### Return type
+
+[**UsageLogsByRetentionResponse**](UsageLogsByRetentionResponse.md)
+
+### Authorization
+
+[apiKeyAuth](README.md#apiKeyAuth), [appKeyAuth](README.md#appKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json;datetime-format=rfc3339
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | Bad Request |  -  |
+| **403** | Forbidden - User is not authorized |  -  |
+
+
 ## getUsageNetworkFlows
 
-> UsageNetworkFlowsResponse getUsageNetworkFlows().startHr(startHr).endHr(endHr).execute();
-
-Get hourly usage for Network Flows
+> UsageNetworkFlowsResponse getUsageNetworkFlows(startHr, parameters);
 
 Get hourly usage for network flows.
 
@@ -1432,39 +1491,23 @@ Get hourly usage for network flows.
 
 ```java
 import java.time.OffsetDateTime;
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.UsageMeteringApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         UsageMeteringApi apiInstance = new UsageMeteringApi(defaultClient);
         OffsetDateTime startHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]` for usage beginning at this hour.
         OffsetDateTime endHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]` for usage ending **before** this hour.
         try {
-            UsageNetworkFlowsResponse result = apiInstance.getUsageNetworkFlows()
-                .startHr(startHr)
-                .endHr(endHr)
-                .execute();
+	    UsageNetworkFlowsResponse result = apiInstance.getUsageNetworkFlows(startHr, new UsageMeteringApi.GetUsageNetworkFlowsOptionalParameters()
+                .endHr(endHr));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UsageMeteringApi#getUsageNetworkFlows");
@@ -1508,9 +1551,7 @@ Name | Type | Description  | Notes
 
 ## getUsageNetworkHosts
 
-> UsageNetworkHostsResponse getUsageNetworkHosts().startHr(startHr).endHr(endHr).execute();
-
-Get hourly usage for Network Hosts
+> UsageNetworkHostsResponse getUsageNetworkHosts(startHr, parameters);
 
 Get hourly usage for network hosts.
 
@@ -1518,39 +1559,23 @@ Get hourly usage for network hosts.
 
 ```java
 import java.time.OffsetDateTime;
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.UsageMeteringApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         UsageMeteringApi apiInstance = new UsageMeteringApi(defaultClient);
         OffsetDateTime startHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour.
         OffsetDateTime endHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending **before** this hour.
         try {
-            UsageNetworkHostsResponse result = apiInstance.getUsageNetworkHosts()
-                .startHr(startHr)
-                .endHr(endHr)
-                .execute();
+	    UsageNetworkHostsResponse result = apiInstance.getUsageNetworkHosts(startHr, new UsageMeteringApi.GetUsageNetworkHostsOptionalParameters()
+                .endHr(endHr));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UsageMeteringApi#getUsageNetworkHosts");
@@ -1594,9 +1619,7 @@ Name | Type | Description  | Notes
 
 ## getUsageProfiling
 
-> UsageProfilingResponse getUsageProfiling().startHr(startHr).endHr(endHr).execute();
-
-Get hourly usage for profiled hosts
+> UsageProfilingResponse getUsageProfiling(startHr, parameters);
 
 Get hourly usage for profiled hosts.
 
@@ -1604,39 +1627,23 @@ Get hourly usage for profiled hosts.
 
 ```java
 import java.time.OffsetDateTime;
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.UsageMeteringApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         UsageMeteringApi apiInstance = new UsageMeteringApi(defaultClient);
         OffsetDateTime startHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]` for usage beginning at this hour.
         OffsetDateTime endHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]` for usage ending **before** this hour.
         try {
-            UsageProfilingResponse result = apiInstance.getUsageProfiling()
-                .startHr(startHr)
-                .endHr(endHr)
-                .execute();
+	    UsageProfilingResponse result = apiInstance.getUsageProfiling(startHr, new UsageMeteringApi.GetUsageProfilingOptionalParameters()
+                .endHr(endHr));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UsageMeteringApi#getUsageProfiling");
@@ -1680,9 +1687,7 @@ Name | Type | Description  | Notes
 
 ## getUsageRumSessions
 
-> UsageRumSessionsResponse getUsageRumSessions().startHr(startHr).endHr(endHr).type(type).execute();
-
-Get hourly usage for RUM Sessions
+> UsageRumSessionsResponse getUsageRumSessions(startHr, parameters);
 
 Get hourly usage for [RUM](https://docs.datadoghq.com/real_user_monitoring/) Sessions.
 
@@ -1690,41 +1695,25 @@ Get hourly usage for [RUM](https://docs.datadoghq.com/real_user_monitoring/) Ses
 
 ```java
 import java.time.OffsetDateTime;
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.UsageMeteringApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         UsageMeteringApi apiInstance = new UsageMeteringApi(defaultClient);
         OffsetDateTime startHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour.
         OffsetDateTime endHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending **before** this hour.
         String type = "type_example"; // String | RUM type: `[browser, mobile]`. Defaults to `browser`.
         try {
-            UsageRumSessionsResponse result = apiInstance.getUsageRumSessions()
-                .startHr(startHr)
+	    UsageRumSessionsResponse result = apiInstance.getUsageRumSessions(startHr, new UsageMeteringApi.GetUsageRumSessionsOptionalParameters()
                 .endHr(endHr)
-                .type(type)
-                .execute();
+                .type(type));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UsageMeteringApi#getUsageRumSessions");
@@ -1769,9 +1758,7 @@ Name | Type | Description  | Notes
 
 ## getUsageSNMP
 
-> UsageSNMPResponse getUsageSNMP().startHr(startHr).endHr(endHr).execute();
-
-Get hourly usage for SNMP devices
+> UsageSNMPResponse getUsageSNMP(startHr, parameters);
 
 Get hourly usage for SNMP devices.
 
@@ -1779,39 +1766,23 @@ Get hourly usage for SNMP devices.
 
 ```java
 import java.time.OffsetDateTime;
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.UsageMeteringApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         UsageMeteringApi apiInstance = new UsageMeteringApi(defaultClient);
         OffsetDateTime startHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]` for usage beginning at this hour.
         OffsetDateTime endHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]` for usage ending **before** this hour.
         try {
-            UsageSNMPResponse result = apiInstance.getUsageSNMP()
-                .startHr(startHr)
-                .endHr(endHr)
-                .execute();
+	    UsageSNMPResponse result = apiInstance.getUsageSNMP(startHr, new UsageMeteringApi.GetUsageSNMPOptionalParameters()
+                .endHr(endHr));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UsageMeteringApi#getUsageSNMP");
@@ -1855,9 +1826,7 @@ Name | Type | Description  | Notes
 
 ## getUsageSummary
 
-> UsageSummaryResponse getUsageSummary().startMonth(startMonth).endMonth(endMonth).includeOrgDetails(includeOrgDetails).execute();
-
-Get usage across your multi-org account
+> UsageSummaryResponse getUsageSummary(startMonth, parameters);
 
 Get usage across your multi-org account. You must have the multi-org feature enabled.
 
@@ -1865,41 +1834,25 @@ Get usage across your multi-org account. You must have the multi-org feature ena
 
 ```java
 import java.time.OffsetDateTime;
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.UsageMeteringApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         UsageMeteringApi apiInstance = new UsageMeteringApi(defaultClient);
         OffsetDateTime startMonth = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]` for usage beginning in this month. Maximum of 15 months ago.
         OffsetDateTime endMonth = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]` for usage ending this month.
         Boolean includeOrgDetails = true; // Boolean | Include usage summaries for each sub-org.
         try {
-            UsageSummaryResponse result = apiInstance.getUsageSummary()
-                .startMonth(startMonth)
+	    UsageSummaryResponse result = apiInstance.getUsageSummary(startMonth, new UsageMeteringApi.GetUsageSummaryOptionalParameters()
                 .endMonth(endMonth)
-                .includeOrgDetails(includeOrgDetails)
-                .execute();
+                .includeOrgDetails(includeOrgDetails));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UsageMeteringApi#getUsageSummary");
@@ -1944,9 +1897,7 @@ Name | Type | Description  | Notes
 
 ## getUsageSynthetics
 
-> UsageSyntheticsResponse getUsageSynthetics().startHr(startHr).endHr(endHr).execute();
-
-Get hourly usage for Synthetics Checks
+> UsageSyntheticsResponse getUsageSynthetics(startHr, parameters);
 
 Get hourly usage for [Synthetics checks](https://docs.datadoghq.com/synthetics/).
 
@@ -1954,39 +1905,23 @@ Get hourly usage for [Synthetics checks](https://docs.datadoghq.com/synthetics/)
 
 ```java
 import java.time.OffsetDateTime;
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.UsageMeteringApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         UsageMeteringApi apiInstance = new UsageMeteringApi(defaultClient);
         OffsetDateTime startHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour.
         OffsetDateTime endHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending **before** this hour.
         try {
-            UsageSyntheticsResponse result = apiInstance.getUsageSynthetics()
-                .startHr(startHr)
-                .endHr(endHr)
-                .execute();
+	    UsageSyntheticsResponse result = apiInstance.getUsageSynthetics(startHr, new UsageMeteringApi.GetUsageSyntheticsOptionalParameters()
+                .endHr(endHr));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UsageMeteringApi#getUsageSynthetics");
@@ -2030,9 +1965,7 @@ Name | Type | Description  | Notes
 
 ## getUsageSyntheticsAPI
 
-> UsageSyntheticsAPIResponse getUsageSyntheticsAPI().startHr(startHr).endHr(endHr).execute();
-
-Get hourly usage for Synthetics API Checks
+> UsageSyntheticsAPIResponse getUsageSyntheticsAPI(startHr, parameters);
 
 Get hourly usage for [synthetics API checks](https://docs.datadoghq.com/synthetics/).
 
@@ -2040,39 +1973,23 @@ Get hourly usage for [synthetics API checks](https://docs.datadoghq.com/syntheti
 
 ```java
 import java.time.OffsetDateTime;
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.UsageMeteringApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         UsageMeteringApi apiInstance = new UsageMeteringApi(defaultClient);
         OffsetDateTime startHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour.
         OffsetDateTime endHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending **before** this hour.
         try {
-            UsageSyntheticsAPIResponse result = apiInstance.getUsageSyntheticsAPI()
-                .startHr(startHr)
-                .endHr(endHr)
-                .execute();
+	    UsageSyntheticsAPIResponse result = apiInstance.getUsageSyntheticsAPI(startHr, new UsageMeteringApi.GetUsageSyntheticsAPIOptionalParameters()
+                .endHr(endHr));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UsageMeteringApi#getUsageSyntheticsAPI");
@@ -2116,9 +2033,7 @@ Name | Type | Description  | Notes
 
 ## getUsageSyntheticsBrowser
 
-> UsageSyntheticsBrowserResponse getUsageSyntheticsBrowser().startHr(startHr).endHr(endHr).execute();
-
-Get hourly usage for Synthetics Browser Checks
+> UsageSyntheticsBrowserResponse getUsageSyntheticsBrowser(startHr, parameters);
 
 Get hourly usage for synthetics browser checks.
 
@@ -2126,39 +2041,23 @@ Get hourly usage for synthetics browser checks.
 
 ```java
 import java.time.OffsetDateTime;
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.UsageMeteringApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         UsageMeteringApi apiInstance = new UsageMeteringApi(defaultClient);
         OffsetDateTime startHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour.
         OffsetDateTime endHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending **before** this hour.
         try {
-            UsageSyntheticsBrowserResponse result = apiInstance.getUsageSyntheticsBrowser()
-                .startHr(startHr)
-                .endHr(endHr)
-                .execute();
+	    UsageSyntheticsBrowserResponse result = apiInstance.getUsageSyntheticsBrowser(startHr, new UsageMeteringApi.GetUsageSyntheticsBrowserOptionalParameters()
+                .endHr(endHr));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UsageMeteringApi#getUsageSyntheticsBrowser");
@@ -2202,9 +2101,7 @@ Name | Type | Description  | Notes
 
 ## getUsageTimeseries
 
-> UsageTimeseriesResponse getUsageTimeseries().startHr(startHr).endHr(endHr).execute();
-
-Get hourly usage for custom metrics
+> UsageTimeseriesResponse getUsageTimeseries(startHr, parameters);
 
 Get hourly usage for [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/).
 
@@ -2212,39 +2109,23 @@ Get hourly usage for [custom metrics](https://docs.datadoghq.com/developers/metr
 
 ```java
 import java.time.OffsetDateTime;
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.UsageMeteringApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         UsageMeteringApi apiInstance = new UsageMeteringApi(defaultClient);
         OffsetDateTime startHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour.
         OffsetDateTime endHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending **before** this hour.
         try {
-            UsageTimeseriesResponse result = apiInstance.getUsageTimeseries()
-                .startHr(startHr)
-                .endHr(endHr)
-                .execute();
+	    UsageTimeseriesResponse result = apiInstance.getUsageTimeseries(startHr, new UsageMeteringApi.GetUsageTimeseriesOptionalParameters()
+                .endHr(endHr));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UsageMeteringApi#getUsageTimeseries");
@@ -2288,51 +2169,38 @@ Name | Type | Description  | Notes
 
 ## getUsageTopAvgMetrics
 
-> UsageTopAvgMetricsResponse getUsageTopAvgMetrics().month(month).names(names).limit(limit).execute();
+> UsageTopAvgMetricsResponse getUsageTopAvgMetrics(parameters);
 
-Get top custom metrics by hourly average
-
-Get top [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/) by hourly average.
+Get all [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/) by hourly average. Use the month parameter to get a month-to-date data resolution or use the day parameter to get a daily resolution. One of the two is required, and only one of the two is allowed.
 
 ### Example
 
 ```java
 import java.time.OffsetDateTime;
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.UsageMeteringApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         UsageMeteringApi apiInstance = new UsageMeteringApi(defaultClient);
-        OffsetDateTime month = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to month: [YYYY-MM] for usage beginning at this hour.
+        OffsetDateTime month = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to month: [YYYY-MM] for usage beginning at this hour. (Either month or day should be specified, but not both)
+        OffsetDateTime day = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to day: [YYYY-MM-DD] for usage beginning at this hour. (Either month or day should be specified, but not both)
         List<String> names = Arrays.asList(); // List<String> | Comma-separated list of metric names.
         Integer limit = 500; // Integer | Maximum number of results to return (between 1 and 5000) - defaults to 500 results if limit not specified.
+        String nextRecordId = "nextRecordId_example"; // String | List following results with a next_record_id provided in the previous query.
         try {
-            UsageTopAvgMetricsResponse result = apiInstance.getUsageTopAvgMetrics()
+	    UsageTopAvgMetricsResponse result = apiInstance.getUsageTopAvgMetrics(new UsageMeteringApi.GetUsageTopAvgMetricsOptionalParameters()
                 .month(month)
+                .day(day)
                 .names(names)
                 .limit(limit)
-                .execute();
+                .nextRecordId(nextRecordId));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UsageMeteringApi#getUsageTopAvgMetrics");
@@ -2350,9 +2218,11 @@ public class Example {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **month** | **OffsetDateTime**| Datetime in ISO-8601 format, UTC, precise to month: [YYYY-MM] for usage beginning at this hour. |
+ **month** | **OffsetDateTime**| Datetime in ISO-8601 format, UTC, precise to month: [YYYY-MM] for usage beginning at this hour. (Either month or day should be specified, but not both) | [optional]
+ **day** | **OffsetDateTime**| Datetime in ISO-8601 format, UTC, precise to day: [YYYY-MM-DD] for usage beginning at this hour. (Either month or day should be specified, but not both) | [optional]
  **names** | **List&lt;String&gt;**| Comma-separated list of metric names. | [optional]
  **limit** | **Integer**| Maximum number of results to return (between 1 and 5000) - defaults to 500 results if limit not specified. | [optional] [default to 500]
+ **nextRecordId** | **String**| List following results with a next_record_id provided in the previous query. | [optional]
 
 ### Return type
 
@@ -2377,9 +2247,7 @@ Name | Type | Description  | Notes
 
 ## getUsageTrace
 
-> UsageTraceResponse getUsageTrace().startHr(startHr).endHr(endHr).execute();
-
-Get hourly usage for Trace Search
+> UsageTraceResponse getUsageTrace(startHr, parameters);
 
 Get hourly usage for trace search.
 
@@ -2389,39 +2257,23 @@ Get hourly usage for trace search.
 
 ```java
 import java.time.OffsetDateTime;
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.UsageMeteringApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         UsageMeteringApi apiInstance = new UsageMeteringApi(defaultClient);
         OffsetDateTime startHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour.
         OffsetDateTime endHr = OffsetDateTime.now(); // OffsetDateTime | Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending **before** this hour.
         try {
-            UsageTraceResponse result = apiInstance.getUsageTrace()
-                .startHr(startHr)
-                .endHr(endHr)
-                .execute();
+	    UsageTraceResponse result = apiInstance.getUsageTrace(startHr, new UsageMeteringApi.GetUsageTraceOptionalParameters()
+                .endHr(endHr));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UsageMeteringApi#getUsageTrace");

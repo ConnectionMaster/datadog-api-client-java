@@ -2,8 +2,8 @@
 
 All URIs are relative to *https://api.datadoghq.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
+Method        | HTTP request | Description
+------------- | ------------ | ------------
 [**createAPIKey**](KeyManagementApi.md#createAPIKey) | **POST** /api/v1/api_key | Create an API key
 [**createApplicationKey**](KeyManagementApi.md#createApplicationKey) | **POST** /api/v1/application_key | Create an application key
 [**deleteAPIKey**](KeyManagementApi.md#deleteAPIKey) | **DELETE** /api/v1/api_key/{key} | Delete an API key
@@ -19,46 +19,28 @@ Method | HTTP request | Description
 
 ## createAPIKey
 
-> ApiKeyResponse createAPIKey().body(body).execute();
-
-Create an API key
+> ApiKeyResponse createAPIKey(body);
 
 Creates an API key with a given name.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.KeyManagementApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         KeyManagementApi apiInstance = new KeyManagementApi(defaultClient);
         ApiKey body = new ApiKey(); // ApiKey | 
         try {
-            ApiKeyResponse result = apiInstance.createAPIKey()
-                .body(body)
-                .execute();
+            ApiKeyResponse result = apiInstance.createAPIKey(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling KeyManagementApi#createAPIKey");
@@ -101,46 +83,28 @@ Name | Type | Description  | Notes
 
 ## createApplicationKey
 
-> ApplicationKeyResponse createApplicationKey().body(body).execute();
-
-Create an application key
+> ApplicationKeyResponse createApplicationKey(body);
 
 Create an application key with a given name.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.KeyManagementApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         KeyManagementApi apiInstance = new KeyManagementApi(defaultClient);
         ApplicationKey body = new ApplicationKey(); // ApplicationKey | 
         try {
-            ApplicationKeyResponse result = apiInstance.createApplicationKey()
-                .body(body)
-                .execute();
+            ApplicationKeyResponse result = apiInstance.createApplicationKey(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling KeyManagementApi#createApplicationKey");
@@ -184,45 +148,28 @@ Name | Type | Description  | Notes
 
 ## deleteAPIKey
 
-> ApiKeyResponse deleteAPIKey(key).execute();
-
-Delete an API key
+> ApiKeyResponse deleteAPIKey(key);
 
 Delete a given API key.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.KeyManagementApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         KeyManagementApi apiInstance = new KeyManagementApi(defaultClient);
         String key = "key_example"; // String | The specific API key you are working with.
         try {
-            ApiKeyResponse result = apiInstance.deleteAPIKey(key)
-                .execute();
+            ApiKeyResponse result = apiInstance.deleteAPIKey(key);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling KeyManagementApi#deleteAPIKey");
@@ -266,45 +213,28 @@ Name | Type | Description  | Notes
 
 ## deleteApplicationKey
 
-> ApplicationKeyResponse deleteApplicationKey(key).execute();
-
-Delete an application key
+> ApplicationKeyResponse deleteApplicationKey(key);
 
 Delete a given application key.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.KeyManagementApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         KeyManagementApi apiInstance = new KeyManagementApi(defaultClient);
         String key = "key_example"; // String | The specific APP key you are working with.
         try {
-            ApplicationKeyResponse result = apiInstance.deleteApplicationKey(key)
-                .execute();
+            ApplicationKeyResponse result = apiInstance.deleteApplicationKey(key);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling KeyManagementApi#deleteApplicationKey");
@@ -347,45 +277,28 @@ Name | Type | Description  | Notes
 
 ## getAPIKey
 
-> ApiKeyResponse getAPIKey(key).execute();
-
-Get API key
+> ApiKeyResponse getAPIKey(key);
 
 Get a given API key.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.KeyManagementApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         KeyManagementApi apiInstance = new KeyManagementApi(defaultClient);
         String key = "key_example"; // String | The specific API key you are working with.
         try {
-            ApiKeyResponse result = apiInstance.getAPIKey(key)
-                .execute();
+            ApiKeyResponse result = apiInstance.getAPIKey(key);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling KeyManagementApi#getAPIKey");
@@ -428,45 +341,28 @@ Name | Type | Description  | Notes
 
 ## getApplicationKey
 
-> ApplicationKeyResponse getApplicationKey(key).execute();
-
-Get an application key
+> ApplicationKeyResponse getApplicationKey(key);
 
 Get a given application key.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.KeyManagementApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         KeyManagementApi apiInstance = new KeyManagementApi(defaultClient);
         String key = "key_example"; // String | The specific APP key you are working with.
         try {
-            ApplicationKeyResponse result = apiInstance.getApplicationKey(key)
-                .execute();
+            ApplicationKeyResponse result = apiInstance.getApplicationKey(key);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling KeyManagementApi#getApplicationKey");
@@ -509,44 +405,27 @@ Name | Type | Description  | Notes
 
 ## listAPIKeys
 
-> ApiKeyListResponse listAPIKeys().execute();
-
-Get all API keys
+> ApiKeyListResponse listAPIKeys();
 
 Get all API keys available for your account.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.KeyManagementApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         KeyManagementApi apiInstance = new KeyManagementApi(defaultClient);
         try {
-            ApiKeyListResponse result = apiInstance.listAPIKeys()
-                .execute();
+            ApiKeyListResponse result = apiInstance.listAPIKeys();
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling KeyManagementApi#listAPIKeys");
@@ -585,44 +464,27 @@ This endpoint does not need any parameter.
 
 ## listApplicationKeys
 
-> ApplicationKeyListResponse listApplicationKeys().execute();
-
-Get all application keys
+> ApplicationKeyListResponse listApplicationKeys();
 
 Get all application keys available for your Datadog account.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.KeyManagementApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         KeyManagementApi apiInstance = new KeyManagementApi(defaultClient);
         try {
-            ApplicationKeyListResponse result = apiInstance.listApplicationKeys()
-                .execute();
+            ApplicationKeyListResponse result = apiInstance.listApplicationKeys();
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling KeyManagementApi#listApplicationKeys");
@@ -661,47 +523,29 @@ This endpoint does not need any parameter.
 
 ## updateAPIKey
 
-> ApiKeyResponse updateAPIKey(key).body(body).execute();
-
-Edit an API key
+> ApiKeyResponse updateAPIKey(key, body);
 
 Edit an API key name.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.KeyManagementApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         KeyManagementApi apiInstance = new KeyManagementApi(defaultClient);
         String key = "key_example"; // String | The specific API key you are working with.
         ApiKey body = new ApiKey(); // ApiKey | 
         try {
-            ApiKeyResponse result = apiInstance.updateAPIKey(key)
-                .body(body)
-                .execute();
+            ApiKeyResponse result = apiInstance.updateAPIKey(key, body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling KeyManagementApi#updateAPIKey");
@@ -746,47 +590,29 @@ Name | Type | Description  | Notes
 
 ## updateApplicationKey
 
-> ApplicationKeyResponse updateApplicationKey(key).body(body).execute();
-
-Edit an application key
+> ApplicationKeyResponse updateApplicationKey(key, body);
 
 Edit an application key name.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.KeyManagementApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         KeyManagementApi apiInstance = new KeyManagementApi(defaultClient);
         String key = "key_example"; // String | The specific APP key you are working with.
         ApplicationKey body = new ApplicationKey(); // ApplicationKey | 
         try {
-            ApplicationKeyResponse result = apiInstance.updateApplicationKey(key)
-                .body(body)
-                .execute();
+            ApplicationKeyResponse result = apiInstance.updateApplicationKey(key, body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling KeyManagementApi#updateApplicationKey");

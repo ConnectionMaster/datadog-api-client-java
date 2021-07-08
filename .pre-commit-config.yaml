@@ -5,5 +5,11 @@ repos:
     name: Do not commit generated files
     language: fail
     entry: Unstage generated files with 'git reset --' command
-    files: '(src/main|api_docs/v)'
+    files: '^(src/main|api_docs/v)'
     verbose: true
+  - id: java-format
+    name: Format non-generated code
+    language: script
+    entry: ./format.sh
+    files: '^src/test/'
+    types: [file, java]

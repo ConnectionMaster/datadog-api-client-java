@@ -2,8 +2,8 @@
 
 All URIs are relative to *https://api.datadoghq.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
+Method        | HTTP request | Description
+------------- | ------------ | ------------
 [**createUser**](UsersApi.md#createUser) | **POST** /api/v1/user | Create a user
 [**disableUser**](UsersApi.md#disableUser) | **DELETE** /api/v1/user/{user_handle} | Disable a user
 [**getUser**](UsersApi.md#getUser) | **GET** /api/v1/user/{user_handle} | Get user details
@@ -14,9 +14,7 @@ Method | HTTP request | Description
 
 ## createUser
 
-> UserResponse createUser().body(body).execute();
-
-Create a user
+> UserResponse createUser(body);
 
 Create a user for your organization.
 
@@ -26,37 +24,21 @@ if application keys belong to administrators.
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.UsersApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         UsersApi apiInstance = new UsersApi(defaultClient);
         User body = new User(); // User | User object that needs to be created.
         try {
-            UserResponse result = apiInstance.createUser()
-                .body(body)
-                .execute();
+            UserResponse result = apiInstance.createUser(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UsersApi#createUser");
@@ -100,9 +82,7 @@ Name | Type | Description  | Notes
 
 ## disableUser
 
-> UserDisableResponse disableUser(userHandle).execute();
-
-Disable a user
+> UserDisableResponse disableUser(userHandle);
 
 Delete a user from an organization.
 
@@ -112,36 +92,21 @@ administrators.
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.UsersApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         UsersApi apiInstance = new UsersApi(defaultClient);
         String userHandle = "test@datadoghq.com"; // String | The handle of the user.
         try {
-            UserDisableResponse result = apiInstance.disableUser(userHandle)
-                .execute();
+            UserDisableResponse result = apiInstance.disableUser(userHandle);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UsersApi#disableUser");
@@ -185,45 +150,28 @@ Name | Type | Description  | Notes
 
 ## getUser
 
-> UserResponse getUser(userHandle).execute();
-
-Get user details
+> UserResponse getUser(userHandle);
 
 Get a user's details.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.UsersApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         UsersApi apiInstance = new UsersApi(defaultClient);
         String userHandle = "test@datadoghq.com"; // String | The ID of the user.
         try {
-            UserResponse result = apiInstance.getUser(userHandle)
-                .execute();
+            UserResponse result = apiInstance.getUser(userHandle);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UsersApi#getUser");
@@ -266,44 +214,27 @@ Name | Type | Description  | Notes
 
 ## listUsers
 
-> UserListResponse listUsers().execute();
-
-List all users
+> UserListResponse listUsers();
 
 List all users for your organization.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.UsersApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         UsersApi apiInstance = new UsersApi(defaultClient);
         try {
-            UserListResponse result = apiInstance.listUsers()
-                .execute();
+            UserListResponse result = apiInstance.listUsers();
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UsersApi#listUsers");
@@ -342,9 +273,7 @@ This endpoint does not need any parameter.
 
 ## updateUser
 
-> UserResponse updateUser(userHandle).body(body).execute();
-
-Update a user
+> UserResponse updateUser(userHandle, body);
 
 Update a user information.
 
@@ -353,38 +282,22 @@ Update a user information.
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.UsersApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         UsersApi apiInstance = new UsersApi(defaultClient);
         String userHandle = "test@datadoghq.com"; // String | The ID of the user.
         User body = new User(); // User | Description of the update.
         try {
-            UserResponse result = apiInstance.updateUser(userHandle)
-                .body(body)
-                .execute();
+            UserResponse result = apiInstance.updateUser(userHandle, body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UsersApi#updateUser");

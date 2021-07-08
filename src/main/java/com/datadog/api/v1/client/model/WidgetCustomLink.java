@@ -8,90 +8,145 @@
  * Do not edit the class manually.
  */
 
-
 package com.datadog.api.v1.client.model;
 
-import java.util.Objects;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.datadog.api.v1.client.JSON;
+import java.util.Objects;
 
-
-/**
- * Custom links help you connect a data value to a URL, like a Datadog page or your AWS console.
- */
-@ApiModel(description = "Custom links help you connect a data value to a URL, like a Datadog page or your AWS console.")
+/** Custom links help you connect a data value to a URL, like a Datadog page or your AWS console. */
+@ApiModel(
+    description =
+        "Custom links help you connect a data value to a URL, like a Datadog page or your AWS"
+            + " console.")
 @JsonPropertyOrder({
+  WidgetCustomLink.JSON_PROPERTY_IS_HIDDEN,
   WidgetCustomLink.JSON_PROPERTY_LABEL,
-  WidgetCustomLink.JSON_PROPERTY_LINK
+  WidgetCustomLink.JSON_PROPERTY_LINK,
+  WidgetCustomLink.JSON_PROPERTY_OVERRIDE_LABEL
 })
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class WidgetCustomLink {
+  public static final String JSON_PROPERTY_IS_HIDDEN = "is_hidden";
+  private Boolean isHidden;
+
   public static final String JSON_PROPERTY_LABEL = "label";
   private String label;
 
   public static final String JSON_PROPERTY_LINK = "link";
   private String link;
 
+  public static final String JSON_PROPERTY_OVERRIDE_LABEL = "override_label";
+  private String overrideLabel;
+
+  public WidgetCustomLink isHidden(Boolean isHidden) {
+    this.isHidden = isHidden;
+    return this;
+  }
+
+  /**
+   * The flag for toggling context menu link visibility.
+   *
+   * @return isHidden
+   */
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The flag for toggling context menu link visibility.")
+  @JsonProperty(JSON_PROPERTY_IS_HIDDEN)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Boolean getIsHidden() {
+    return isHidden;
+  }
+
+  public void setIsHidden(Boolean isHidden) {
+    this.isHidden = isHidden;
+  }
 
   public WidgetCustomLink label(String label) {
     this.label = label;
     return this;
   }
 
-   /**
-   * The label for the custom link URL. Keep the label short and descriptive. Use metrics and tags as variables.
+  /**
+   * The label for the custom link URL. Keep the label short and descriptive. Use metrics and tags
+   * as variables.
+   *
    * @return label
-  **/
-  @ApiModelProperty(example = "Search logs for {{host}}", required = true, value = "The label for the custom link URL. Keep the label short and descriptive. Use metrics and tags as variables.")
+   */
+  @javax.annotation.Nullable
+  @ApiModelProperty(
+      example = "Search logs for {{host}}",
+      value =
+          "The label for the custom link URL. Keep the label short and descriptive. Use metrics"
+              + " and tags as variables.")
   @JsonProperty(JSON_PROPERTY_LABEL)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLabel() {
     return label;
   }
 
-
   public void setLabel(String label) {
     this.label = label;
   }
-
 
   public WidgetCustomLink link(String link) {
     this.link = link;
     return this;
   }
 
-   /**
-   * The URL of the custom link. URL must include &#x60;http&#x60; or &#x60;https&#x60;. A relative URL must start with &#x60;/&#x60;.
+  /**
+   * The URL of the custom link. URL must include &#x60;http&#x60; or &#x60;https&#x60;. A relative
+   * URL must start with &#x60;/&#x60;.
+   *
    * @return link
-  **/
-  @ApiModelProperty(example = "https://app.datadoghq.com/logs?query={{host}}", required = true, value = "The URL of the custom link. URL must include `http` or `https`. A relative URL must start with `/`.")
+   */
+  @javax.annotation.Nullable
+  @ApiModelProperty(
+      example = "https://app.datadoghq.com/logs?query={{host}}",
+      value =
+          "The URL of the custom link. URL must include `http` or `https`. A relative URL must"
+              + " start with `/`.")
   @JsonProperty(JSON_PROPERTY_LINK)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLink() {
     return link;
   }
-
 
   public void setLink(String link) {
     this.link = link;
   }
 
+  public WidgetCustomLink overrideLabel(String overrideLabel) {
+    this.overrideLabel = overrideLabel;
+    return this;
+  }
 
   /**
-   * Return true if this WidgetCustomLink object is equal to o.
+   * The label ID that refers to a context menu link. Can be &#x60;logs&#x60;, &#x60;hosts&#x60;,
+   * &#x60;traces&#x60;, &#x60;profiles&#x60;, &#x60;processes&#x60;, &#x60;containers&#x60;, or
+   * &#x60;rum&#x60;.
+   *
+   * @return overrideLabel
    */
+  @javax.annotation.Nullable
+  @ApiModelProperty(
+      example = "logs",
+      value =
+          "The label ID that refers to a context menu link. Can be `logs`, `hosts`, `traces`,"
+              + " `profiles`, `processes`, `containers`, or `rum`.")
+  @JsonProperty(JSON_PROPERTY_OVERRIDE_LABEL)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public String getOverrideLabel() {
+    return overrideLabel;
+  }
+
+  public void setOverrideLabel(String overrideLabel) {
+    this.overrideLabel = overrideLabel;
+  }
+
+  /** Return true if this WidgetCustomLink object is equal to o. */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -101,29 +156,31 @@ public class WidgetCustomLink {
       return false;
     }
     WidgetCustomLink widgetCustomLink = (WidgetCustomLink) o;
-    return Objects.equals(this.label, widgetCustomLink.label) &&
-        Objects.equals(this.link, widgetCustomLink.link);
+    return Objects.equals(this.isHidden, widgetCustomLink.isHidden)
+        && Objects.equals(this.label, widgetCustomLink.label)
+        && Objects.equals(this.link, widgetCustomLink.link)
+        && Objects.equals(this.overrideLabel, widgetCustomLink.overrideLabel);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(label, link);
+    return Objects.hash(isHidden, label, link, overrideLabel);
   }
-
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class WidgetCustomLink {\n");
+    sb.append("    isHidden: ").append(toIndentedString(isHidden)).append("\n");
     sb.append("    label: ").append(toIndentedString(label)).append("\n");
     sb.append("    link: ").append(toIndentedString(link)).append("\n");
+    sb.append("    overrideLabel: ").append(toIndentedString(overrideLabel)).append("\n");
     sb.append("}");
     return sb.toString();
   }
 
   /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
+   * Convert the given object to string with each line indented by 4 spaces (except the first line).
    */
   private String toIndentedString(Object o) {
     if (o == null) {
@@ -131,6 +188,4 @@ public class WidgetCustomLink {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
-

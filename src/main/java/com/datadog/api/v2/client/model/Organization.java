@@ -8,29 +8,17 @@
  * Do not edit the class manually.
  */
 
-
 package com.datadog.api.v2.client.model;
 
-import java.util.Objects;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.datadog.api.v2.client.model.OrganizationAttributes;
-import com.datadog.api.v2.client.model.OrganizationsType;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.datadog.api.v2.client.JSON;
+import java.util.Objects;
 
-
-/**
- * Organization object.
- */
+/** Organization object. */
 @ApiModel(description = "Organization object.")
 @JsonPropertyOrder({
   Organization.JSON_PROPERTY_ATTRIBUTES,
@@ -48,81 +36,80 @@ public class Organization {
   public static final String JSON_PROPERTY_TYPE = "type";
   private OrganizationsType type = OrganizationsType.ORGS;
 
+  public Organization() {}
+
+  @JsonCreator
+  public Organization(
+      @JsonProperty(required = true, value = JSON_PROPERTY_TYPE) OrganizationsType type) {
+    this.type = type;
+  }
 
   public Organization attributes(OrganizationAttributes attributes) {
     this.attributes = attributes;
     return this;
   }
 
-   /**
+  /**
    * Get attributes
+   *
    * @return attributes
-  **/
+   */
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
   @JsonProperty(JSON_PROPERTY_ATTRIBUTES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public OrganizationAttributes getAttributes() {
     return attributes;
   }
 
-
   public void setAttributes(OrganizationAttributes attributes) {
     this.attributes = attributes;
   }
-
 
   public Organization id(String id) {
     this.id = id;
     return this;
   }
 
-   /**
+  /**
    * ID of the organization.
+   *
    * @return id
-  **/
+   */
   @javax.annotation.Nullable
   @ApiModelProperty(value = "ID of the organization.")
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getId() {
     return id;
   }
 
-
   public void setId(String id) {
     this.id = id;
   }
-
 
   public Organization type(OrganizationsType type) {
     this.type = type;
     return this;
   }
 
-   /**
+  /**
    * Get type
+   *
    * @return type
-  **/
+   */
   @ApiModelProperty(required = true, value = "")
   @JsonProperty(JSON_PROPERTY_TYPE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
   public OrganizationsType getType() {
     return type;
   }
-
 
   public void setType(OrganizationsType type) {
     this.type = type;
   }
 
-
-  /**
-   * Return true if this Organization object is equal to o.
-   */
+  /** Return true if this Organization object is equal to o. */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -132,16 +119,15 @@ public class Organization {
       return false;
     }
     Organization organization = (Organization) o;
-    return Objects.equals(this.attributes, organization.attributes) &&
-        Objects.equals(this.id, organization.id) &&
-        Objects.equals(this.type, organization.type);
+    return Objects.equals(this.attributes, organization.attributes)
+        && Objects.equals(this.id, organization.id)
+        && Objects.equals(this.type, organization.type);
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(attributes, id, type);
   }
-
 
   @Override
   public String toString() {
@@ -155,8 +141,7 @@ public class Organization {
   }
 
   /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
+   * Convert the given object to string with each line indented by 4 spaces (except the first line).
    */
   private String toIndentedString(Object o) {
     if (o == null) {
@@ -164,6 +149,4 @@ public class Organization {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
-

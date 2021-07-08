@@ -8,27 +8,16 @@
  * Do not edit the class manually.
  */
 
-
 package com.datadog.api.v1.client.model;
 
-import java.util.Objects;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.datadog.api.v1.client.JSON;
+import java.util.Objects;
 
-
-/**
- * Fields in Usage Summary by tag(s).
- */
+/** Fields in Usage Summary by tag(s). */
 @ApiModel(description = "Fields in Usage Summary by tag(s).")
 @JsonPropertyOrder({
   UsageAttributionValues.JSON_PROPERTY_API_PERCENTAGE,
@@ -41,12 +30,24 @@ import com.datadog.api.v1.client.JSON;
   UsageAttributionValues.JSON_PROPERTY_CONTAINER_USAGE,
   UsageAttributionValues.JSON_PROPERTY_CUSTOM_TIMESERIES_PERCENTAGE,
   UsageAttributionValues.JSON_PROPERTY_CUSTOM_TIMESERIES_USAGE,
+  UsageAttributionValues.JSON_PROPERTY_CWS_CONTAINER_PERCENTAGE,
+  UsageAttributionValues.JSON_PROPERTY_CWS_CONTAINER_USAGE,
+  UsageAttributionValues.JSON_PROPERTY_CWS_HOST_PERCENTAGE,
+  UsageAttributionValues.JSON_PROPERTY_CWS_HOST_USAGE,
   UsageAttributionValues.JSON_PROPERTY_INFRA_HOST_PERCENTAGE,
   UsageAttributionValues.JSON_PROPERTY_INFRA_HOST_USAGE,
+  UsageAttributionValues.JSON_PROPERTY_LAMBDA_FUNCTIONS_PERCENTAGE,
+  UsageAttributionValues.JSON_PROPERTY_LAMBDA_FUNCTIONS_USAGE,
+  UsageAttributionValues.JSON_PROPERTY_LAMBDA_INVOCATIONS_PERCENTAGE,
+  UsageAttributionValues.JSON_PROPERTY_LAMBDA_INVOCATIONS_USAGE,
   UsageAttributionValues.JSON_PROPERTY_LAMBDA_PERCENTAGE,
   UsageAttributionValues.JSON_PROPERTY_LAMBDA_USAGE,
   UsageAttributionValues.JSON_PROPERTY_NPM_HOST_PERCENTAGE,
   UsageAttributionValues.JSON_PROPERTY_NPM_HOST_USAGE,
+  UsageAttributionValues.JSON_PROPERTY_PROFILED_CONTAINERS_PERCENTAGE,
+  UsageAttributionValues.JSON_PROPERTY_PROFILED_CONTAINERS_USAGE,
+  UsageAttributionValues.JSON_PROPERTY_PROFILED_HOSTS_PERCENTAGE,
+  UsageAttributionValues.JSON_PROPERTY_PROFILED_HOSTS_USAGE,
   UsageAttributionValues.JSON_PROPERTY_SNMP_PERCENTAGE,
   UsageAttributionValues.JSON_PROPERTY_SNMP_USAGE
 })
@@ -76,17 +77,44 @@ public class UsageAttributionValues {
   public static final String JSON_PROPERTY_CONTAINER_USAGE = "container_usage";
   private Double containerUsage;
 
-  public static final String JSON_PROPERTY_CUSTOM_TIMESERIES_PERCENTAGE = "custom_timeseries_percentage";
+  public static final String JSON_PROPERTY_CUSTOM_TIMESERIES_PERCENTAGE =
+      "custom_timeseries_percentage";
   private Double customTimeseriesPercentage;
 
   public static final String JSON_PROPERTY_CUSTOM_TIMESERIES_USAGE = "custom_timeseries_usage";
   private Double customTimeseriesUsage;
+
+  public static final String JSON_PROPERTY_CWS_CONTAINER_PERCENTAGE = "cws_container_percentage";
+  private Double cwsContainerPercentage;
+
+  public static final String JSON_PROPERTY_CWS_CONTAINER_USAGE = "cws_container_usage";
+  private Double cwsContainerUsage;
+
+  public static final String JSON_PROPERTY_CWS_HOST_PERCENTAGE = "cws_host_percentage";
+  private Double cwsHostPercentage;
+
+  public static final String JSON_PROPERTY_CWS_HOST_USAGE = "cws_host_usage";
+  private Double cwsHostUsage;
 
   public static final String JSON_PROPERTY_INFRA_HOST_PERCENTAGE = "infra_host_percentage";
   private Double infraHostPercentage;
 
   public static final String JSON_PROPERTY_INFRA_HOST_USAGE = "infra_host_usage";
   private Double infraHostUsage;
+
+  public static final String JSON_PROPERTY_LAMBDA_FUNCTIONS_PERCENTAGE =
+      "lambda_functions_percentage";
+  private Double lambdaFunctionsPercentage;
+
+  public static final String JSON_PROPERTY_LAMBDA_FUNCTIONS_USAGE = "lambda_functions_usage";
+  private Double lambdaFunctionsUsage;
+
+  public static final String JSON_PROPERTY_LAMBDA_INVOCATIONS_PERCENTAGE =
+      "lambda_invocations_percentage";
+  private Double lambdaInvocationsPercentage;
+
+  public static final String JSON_PROPERTY_LAMBDA_INVOCATIONS_USAGE = "lambda_invocations_usage";
+  private Double lambdaInvocationsUsage;
 
   public static final String JSON_PROPERTY_LAMBDA_PERCENTAGE = "lambda_percentage";
   private Double lambdaPercentage;
@@ -100,448 +128,694 @@ public class UsageAttributionValues {
   public static final String JSON_PROPERTY_NPM_HOST_USAGE = "npm_host_usage";
   private Double npmHostUsage;
 
+  public static final String JSON_PROPERTY_PROFILED_CONTAINERS_PERCENTAGE =
+      "profiled_containers_percentage";
+  private Double profiledContainersPercentage;
+
+  public static final String JSON_PROPERTY_PROFILED_CONTAINERS_USAGE = "profiled_containers_usage";
+  private Double profiledContainersUsage;
+
+  public static final String JSON_PROPERTY_PROFILED_HOSTS_PERCENTAGE = "profiled_hosts_percentage";
+  private Double profiledHostsPercentage;
+
+  public static final String JSON_PROPERTY_PROFILED_HOSTS_USAGE = "profiled_hosts_usage";
+  private Double profiledHostsUsage;
+
   public static final String JSON_PROPERTY_SNMP_PERCENTAGE = "snmp_percentage";
   private Double snmpPercentage;
 
   public static final String JSON_PROPERTY_SNMP_USAGE = "snmp_usage";
   private Double snmpUsage;
 
-
   public UsageAttributionValues apiPercentage(Double apiPercentage) {
     this.apiPercentage = apiPercentage;
     return this;
   }
 
-   /**
+  /**
    * The percentage of synthetic API test usage by tag(s).
+   *
    * @return apiPercentage
-  **/
+   */
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The percentage of synthetic API test usage by tag(s).")
   @JsonProperty(JSON_PROPERTY_API_PERCENTAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Double getApiPercentage() {
     return apiPercentage;
   }
 
-
   public void setApiPercentage(Double apiPercentage) {
     this.apiPercentage = apiPercentage;
   }
-
 
   public UsageAttributionValues apiUsage(Double apiUsage) {
     this.apiUsage = apiUsage;
     return this;
   }
 
-   /**
+  /**
    * The synthetic API test usage by tag(s).
+   *
    * @return apiUsage
-  **/
+   */
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The synthetic API test usage by tag(s).")
   @JsonProperty(JSON_PROPERTY_API_USAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Double getApiUsage() {
     return apiUsage;
   }
 
-
   public void setApiUsage(Double apiUsage) {
     this.apiUsage = apiUsage;
   }
-
 
   public UsageAttributionValues apmHostPercentage(Double apmHostPercentage) {
     this.apmHostPercentage = apmHostPercentage;
     return this;
   }
 
-   /**
+  /**
    * The percentage of APM host usage by tag(s).
+   *
    * @return apmHostPercentage
-  **/
+   */
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The percentage of APM host usage by tag(s).")
   @JsonProperty(JSON_PROPERTY_APM_HOST_PERCENTAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Double getApmHostPercentage() {
     return apmHostPercentage;
   }
 
-
   public void setApmHostPercentage(Double apmHostPercentage) {
     this.apmHostPercentage = apmHostPercentage;
   }
-
 
   public UsageAttributionValues apmHostUsage(Double apmHostUsage) {
     this.apmHostUsage = apmHostUsage;
     return this;
   }
 
-   /**
+  /**
    * The APM host usage by tag(s).
+   *
    * @return apmHostUsage
-  **/
+   */
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The APM host usage by tag(s).")
   @JsonProperty(JSON_PROPERTY_APM_HOST_USAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Double getApmHostUsage() {
     return apmHostUsage;
   }
 
-
   public void setApmHostUsage(Double apmHostUsage) {
     this.apmHostUsage = apmHostUsage;
   }
-
 
   public UsageAttributionValues browserPercentage(Double browserPercentage) {
     this.browserPercentage = browserPercentage;
     return this;
   }
 
-   /**
+  /**
    * The percentage of synthetic browser test usage by tag(s).
+   *
    * @return browserPercentage
-  **/
+   */
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The percentage of synthetic browser test usage by tag(s).")
   @JsonProperty(JSON_PROPERTY_BROWSER_PERCENTAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Double getBrowserPercentage() {
     return browserPercentage;
   }
 
-
   public void setBrowserPercentage(Double browserPercentage) {
     this.browserPercentage = browserPercentage;
   }
-
 
   public UsageAttributionValues browserUsage(Double browserUsage) {
     this.browserUsage = browserUsage;
     return this;
   }
 
-   /**
+  /**
    * The synthetic browser test usage by tag(s).
+   *
    * @return browserUsage
-  **/
+   */
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The synthetic browser test usage by tag(s).")
   @JsonProperty(JSON_PROPERTY_BROWSER_USAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Double getBrowserUsage() {
     return browserUsage;
   }
 
-
   public void setBrowserUsage(Double browserUsage) {
     this.browserUsage = browserUsage;
   }
-
 
   public UsageAttributionValues containerPercentage(Double containerPercentage) {
     this.containerPercentage = containerPercentage;
     return this;
   }
 
-   /**
+  /**
    * The percentage of container usage by tag(s).
+   *
    * @return containerPercentage
-  **/
+   */
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The percentage of container usage by tag(s).")
   @JsonProperty(JSON_PROPERTY_CONTAINER_PERCENTAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Double getContainerPercentage() {
     return containerPercentage;
   }
 
-
   public void setContainerPercentage(Double containerPercentage) {
     this.containerPercentage = containerPercentage;
   }
-
 
   public UsageAttributionValues containerUsage(Double containerUsage) {
     this.containerUsage = containerUsage;
     return this;
   }
 
-   /**
+  /**
    * The container usage by tag(s).
+   *
    * @return containerUsage
-  **/
+   */
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The container usage by tag(s).")
   @JsonProperty(JSON_PROPERTY_CONTAINER_USAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Double getContainerUsage() {
     return containerUsage;
   }
 
-
   public void setContainerUsage(Double containerUsage) {
     this.containerUsage = containerUsage;
   }
-
 
   public UsageAttributionValues customTimeseriesPercentage(Double customTimeseriesPercentage) {
     this.customTimeseriesPercentage = customTimeseriesPercentage;
     return this;
   }
 
-   /**
+  /**
    * The percentage of custom metrics usage by tag(s).
+   *
    * @return customTimeseriesPercentage
-  **/
+   */
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The percentage of custom metrics usage by tag(s).")
   @JsonProperty(JSON_PROPERTY_CUSTOM_TIMESERIES_PERCENTAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Double getCustomTimeseriesPercentage() {
     return customTimeseriesPercentage;
   }
 
-
   public void setCustomTimeseriesPercentage(Double customTimeseriesPercentage) {
     this.customTimeseriesPercentage = customTimeseriesPercentage;
   }
-
 
   public UsageAttributionValues customTimeseriesUsage(Double customTimeseriesUsage) {
     this.customTimeseriesUsage = customTimeseriesUsage;
     return this;
   }
 
-   /**
+  /**
    * The custom metrics usage by tag(s).
+   *
    * @return customTimeseriesUsage
-  **/
+   */
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The custom metrics usage by tag(s).")
   @JsonProperty(JSON_PROPERTY_CUSTOM_TIMESERIES_USAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Double getCustomTimeseriesUsage() {
     return customTimeseriesUsage;
   }
-
 
   public void setCustomTimeseriesUsage(Double customTimeseriesUsage) {
     this.customTimeseriesUsage = customTimeseriesUsage;
   }
 
+  public UsageAttributionValues cwsContainerPercentage(Double cwsContainerPercentage) {
+    this.cwsContainerPercentage = cwsContainerPercentage;
+    return this;
+  }
+
+  /**
+   * The percentage of Cloud Workload Security container usage by tag(s)
+   *
+   * @return cwsContainerPercentage
+   */
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The percentage of Cloud Workload Security container usage by tag(s)")
+  @JsonProperty(JSON_PROPERTY_CWS_CONTAINER_PERCENTAGE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Double getCwsContainerPercentage() {
+    return cwsContainerPercentage;
+  }
+
+  public void setCwsContainerPercentage(Double cwsContainerPercentage) {
+    this.cwsContainerPercentage = cwsContainerPercentage;
+  }
+
+  public UsageAttributionValues cwsContainerUsage(Double cwsContainerUsage) {
+    this.cwsContainerUsage = cwsContainerUsage;
+    return this;
+  }
+
+  /**
+   * The Cloud Workload Security container usage by tag(s)
+   *
+   * @return cwsContainerUsage
+   */
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The Cloud Workload Security container usage by tag(s)")
+  @JsonProperty(JSON_PROPERTY_CWS_CONTAINER_USAGE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Double getCwsContainerUsage() {
+    return cwsContainerUsage;
+  }
+
+  public void setCwsContainerUsage(Double cwsContainerUsage) {
+    this.cwsContainerUsage = cwsContainerUsage;
+  }
+
+  public UsageAttributionValues cwsHostPercentage(Double cwsHostPercentage) {
+    this.cwsHostPercentage = cwsHostPercentage;
+    return this;
+  }
+
+  /**
+   * The percentage of Cloud Workload Security host usage by tag(s)
+   *
+   * @return cwsHostPercentage
+   */
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The percentage of Cloud Workload Security host usage by tag(s)")
+  @JsonProperty(JSON_PROPERTY_CWS_HOST_PERCENTAGE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Double getCwsHostPercentage() {
+    return cwsHostPercentage;
+  }
+
+  public void setCwsHostPercentage(Double cwsHostPercentage) {
+    this.cwsHostPercentage = cwsHostPercentage;
+  }
+
+  public UsageAttributionValues cwsHostUsage(Double cwsHostUsage) {
+    this.cwsHostUsage = cwsHostUsage;
+    return this;
+  }
+
+  /**
+   * The Cloud Workload Security host usage by tag(s)
+   *
+   * @return cwsHostUsage
+   */
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The Cloud Workload Security host usage by tag(s)")
+  @JsonProperty(JSON_PROPERTY_CWS_HOST_USAGE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Double getCwsHostUsage() {
+    return cwsHostUsage;
+  }
+
+  public void setCwsHostUsage(Double cwsHostUsage) {
+    this.cwsHostUsage = cwsHostUsage;
+  }
 
   public UsageAttributionValues infraHostPercentage(Double infraHostPercentage) {
     this.infraHostPercentage = infraHostPercentage;
     return this;
   }
 
-   /**
+  /**
    * The percentage of infrastructure host usage by tag(s).
+   *
    * @return infraHostPercentage
-  **/
+   */
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The percentage of infrastructure host usage by tag(s).")
   @JsonProperty(JSON_PROPERTY_INFRA_HOST_PERCENTAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Double getInfraHostPercentage() {
     return infraHostPercentage;
   }
 
-
   public void setInfraHostPercentage(Double infraHostPercentage) {
     this.infraHostPercentage = infraHostPercentage;
   }
-
 
   public UsageAttributionValues infraHostUsage(Double infraHostUsage) {
     this.infraHostUsage = infraHostUsage;
     return this;
   }
 
-   /**
+  /**
    * The infrastructure host usage by tag(s).
+   *
    * @return infraHostUsage
-  **/
+   */
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The infrastructure host usage by tag(s).")
   @JsonProperty(JSON_PROPERTY_INFRA_HOST_USAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Double getInfraHostUsage() {
     return infraHostUsage;
   }
-
 
   public void setInfraHostUsage(Double infraHostUsage) {
     this.infraHostUsage = infraHostUsage;
   }
 
+  public UsageAttributionValues lambdaFunctionsPercentage(Double lambdaFunctionsPercentage) {
+    this.lambdaFunctionsPercentage = lambdaFunctionsPercentage;
+    return this;
+  }
+
+  /**
+   * The percentage of Lambda function usage by tag(s).
+   *
+   * @return lambdaFunctionsPercentage
+   */
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The percentage of Lambda function usage by tag(s).")
+  @JsonProperty(JSON_PROPERTY_LAMBDA_FUNCTIONS_PERCENTAGE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Double getLambdaFunctionsPercentage() {
+    return lambdaFunctionsPercentage;
+  }
+
+  public void setLambdaFunctionsPercentage(Double lambdaFunctionsPercentage) {
+    this.lambdaFunctionsPercentage = lambdaFunctionsPercentage;
+  }
+
+  public UsageAttributionValues lambdaFunctionsUsage(Double lambdaFunctionsUsage) {
+    this.lambdaFunctionsUsage = lambdaFunctionsUsage;
+    return this;
+  }
+
+  /**
+   * The Lambda function usage by tag(s).
+   *
+   * @return lambdaFunctionsUsage
+   */
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The Lambda function usage by tag(s).")
+  @JsonProperty(JSON_PROPERTY_LAMBDA_FUNCTIONS_USAGE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Double getLambdaFunctionsUsage() {
+    return lambdaFunctionsUsage;
+  }
+
+  public void setLambdaFunctionsUsage(Double lambdaFunctionsUsage) {
+    this.lambdaFunctionsUsage = lambdaFunctionsUsage;
+  }
+
+  public UsageAttributionValues lambdaInvocationsPercentage(Double lambdaInvocationsPercentage) {
+    this.lambdaInvocationsPercentage = lambdaInvocationsPercentage;
+    return this;
+  }
+
+  /**
+   * The percentage of Lambda invocation usage by tag(s).
+   *
+   * @return lambdaInvocationsPercentage
+   */
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The percentage of Lambda invocation usage by tag(s).")
+  @JsonProperty(JSON_PROPERTY_LAMBDA_INVOCATIONS_PERCENTAGE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Double getLambdaInvocationsPercentage() {
+    return lambdaInvocationsPercentage;
+  }
+
+  public void setLambdaInvocationsPercentage(Double lambdaInvocationsPercentage) {
+    this.lambdaInvocationsPercentage = lambdaInvocationsPercentage;
+  }
+
+  public UsageAttributionValues lambdaInvocationsUsage(Double lambdaInvocationsUsage) {
+    this.lambdaInvocationsUsage = lambdaInvocationsUsage;
+    return this;
+  }
+
+  /**
+   * The Lambda invocation usage by tag(s).
+   *
+   * @return lambdaInvocationsUsage
+   */
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The Lambda invocation usage by tag(s).")
+  @JsonProperty(JSON_PROPERTY_LAMBDA_INVOCATIONS_USAGE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Double getLambdaInvocationsUsage() {
+    return lambdaInvocationsUsage;
+  }
+
+  public void setLambdaInvocationsUsage(Double lambdaInvocationsUsage) {
+    this.lambdaInvocationsUsage = lambdaInvocationsUsage;
+  }
 
   public UsageAttributionValues lambdaPercentage(Double lambdaPercentage) {
     this.lambdaPercentage = lambdaPercentage;
     return this;
   }
 
-   /**
-   * The percentage of lambda function usage by tag(s).
+  /**
+   * The percentage of Lambda function usage by tag(s). **Note** this field is deprecated. Use
+   * lambda_functions_percentage instead.
+   *
    * @return lambdaPercentage
-  **/
+   */
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "The percentage of lambda function usage by tag(s).")
+  @ApiModelProperty(
+      value =
+          "The percentage of Lambda function usage by tag(s).  **Note** this field is deprecated."
+              + " Use lambda_functions_percentage instead.")
   @JsonProperty(JSON_PROPERTY_LAMBDA_PERCENTAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Double getLambdaPercentage() {
     return lambdaPercentage;
   }
 
-
   public void setLambdaPercentage(Double lambdaPercentage) {
     this.lambdaPercentage = lambdaPercentage;
   }
-
 
   public UsageAttributionValues lambdaUsage(Double lambdaUsage) {
     this.lambdaUsage = lambdaUsage;
     return this;
   }
 
-   /**
-   * The lambda function usage by tag(s).
+  /**
+   * The Lambda function usage by tag(s). **Note** this field is deprecated. Use
+   * lambda_functions_usage instead.
+   *
    * @return lambdaUsage
-  **/
+   */
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "The lambda function usage by tag(s).")
+  @ApiModelProperty(
+      value =
+          "The Lambda function usage by tag(s).  **Note** this field is deprecated. Use"
+              + " lambda_functions_usage instead.")
   @JsonProperty(JSON_PROPERTY_LAMBDA_USAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Double getLambdaUsage() {
     return lambdaUsage;
   }
 
-
   public void setLambdaUsage(Double lambdaUsage) {
     this.lambdaUsage = lambdaUsage;
   }
-
 
   public UsageAttributionValues npmHostPercentage(Double npmHostPercentage) {
     this.npmHostPercentage = npmHostPercentage;
     return this;
   }
 
-   /**
+  /**
    * The percentage of network host usage by tag(s).
+   *
    * @return npmHostPercentage
-  **/
+   */
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The percentage of network host usage by tag(s).")
   @JsonProperty(JSON_PROPERTY_NPM_HOST_PERCENTAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Double getNpmHostPercentage() {
     return npmHostPercentage;
   }
 
-
   public void setNpmHostPercentage(Double npmHostPercentage) {
     this.npmHostPercentage = npmHostPercentage;
   }
-
 
   public UsageAttributionValues npmHostUsage(Double npmHostUsage) {
     this.npmHostUsage = npmHostUsage;
     return this;
   }
 
-   /**
+  /**
    * The network host usage by tag(s).
+   *
    * @return npmHostUsage
-  **/
+   */
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The network host usage by tag(s).")
   @JsonProperty(JSON_PROPERTY_NPM_HOST_USAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Double getNpmHostUsage() {
     return npmHostUsage;
   }
-
 
   public void setNpmHostUsage(Double npmHostUsage) {
     this.npmHostUsage = npmHostUsage;
   }
 
+  public UsageAttributionValues profiledContainersPercentage(Double profiledContainersPercentage) {
+    this.profiledContainersPercentage = profiledContainersPercentage;
+    return this;
+  }
+
+  /**
+   * The percentage of profiled containers usage by tag(s).
+   *
+   * @return profiledContainersPercentage
+   */
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The percentage of profiled containers usage by tag(s).")
+  @JsonProperty(JSON_PROPERTY_PROFILED_CONTAINERS_PERCENTAGE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Double getProfiledContainersPercentage() {
+    return profiledContainersPercentage;
+  }
+
+  public void setProfiledContainersPercentage(Double profiledContainersPercentage) {
+    this.profiledContainersPercentage = profiledContainersPercentage;
+  }
+
+  public UsageAttributionValues profiledContainersUsage(Double profiledContainersUsage) {
+    this.profiledContainersUsage = profiledContainersUsage;
+    return this;
+  }
+
+  /**
+   * The profiled container usage by tag(s).
+   *
+   * @return profiledContainersUsage
+   */
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The profiled container usage by tag(s).")
+  @JsonProperty(JSON_PROPERTY_PROFILED_CONTAINERS_USAGE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Double getProfiledContainersUsage() {
+    return profiledContainersUsage;
+  }
+
+  public void setProfiledContainersUsage(Double profiledContainersUsage) {
+    this.profiledContainersUsage = profiledContainersUsage;
+  }
+
+  public UsageAttributionValues profiledHostsPercentage(Double profiledHostsPercentage) {
+    this.profiledHostsPercentage = profiledHostsPercentage;
+    return this;
+  }
+
+  /**
+   * The percentage of profiled hosts usage by tag(s).
+   *
+   * @return profiledHostsPercentage
+   */
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The percentage of profiled hosts usage by tag(s).")
+  @JsonProperty(JSON_PROPERTY_PROFILED_HOSTS_PERCENTAGE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Double getProfiledHostsPercentage() {
+    return profiledHostsPercentage;
+  }
+
+  public void setProfiledHostsPercentage(Double profiledHostsPercentage) {
+    this.profiledHostsPercentage = profiledHostsPercentage;
+  }
+
+  public UsageAttributionValues profiledHostsUsage(Double profiledHostsUsage) {
+    this.profiledHostsUsage = profiledHostsUsage;
+    return this;
+  }
+
+  /**
+   * The profiled host usage by tag(s).
+   *
+   * @return profiledHostsUsage
+   */
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The profiled host usage by tag(s).")
+  @JsonProperty(JSON_PROPERTY_PROFILED_HOSTS_USAGE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Double getProfiledHostsUsage() {
+    return profiledHostsUsage;
+  }
+
+  public void setProfiledHostsUsage(Double profiledHostsUsage) {
+    this.profiledHostsUsage = profiledHostsUsage;
+  }
 
   public UsageAttributionValues snmpPercentage(Double snmpPercentage) {
     this.snmpPercentage = snmpPercentage;
     return this;
   }
 
-   /**
+  /**
    * The percentage of network device usage by tag(s).
+   *
    * @return snmpPercentage
-  **/
+   */
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The percentage of network device usage by tag(s).")
   @JsonProperty(JSON_PROPERTY_SNMP_PERCENTAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Double getSnmpPercentage() {
     return snmpPercentage;
   }
 
-
   public void setSnmpPercentage(Double snmpPercentage) {
     this.snmpPercentage = snmpPercentage;
   }
-
 
   public UsageAttributionValues snmpUsage(Double snmpUsage) {
     this.snmpUsage = snmpUsage;
     return this;
   }
 
-   /**
+  /**
    * The network device usage by tag(s).
+   *
    * @return snmpUsage
-  **/
+   */
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The network device usage by tag(s).")
   @JsonProperty(JSON_PROPERTY_SNMP_USAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Double getSnmpUsage() {
     return snmpUsage;
   }
-
 
   public void setSnmpUsage(Double snmpUsage) {
     this.snmpUsage = snmpUsage;
   }
 
-
-  /**
-   * Return true if this UsageAttributionValues object is equal to o.
-   */
+  /** Return true if this UsageAttributionValues object is equal to o. */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -551,31 +825,80 @@ public class UsageAttributionValues {
       return false;
     }
     UsageAttributionValues usageAttributionValues = (UsageAttributionValues) o;
-    return Objects.equals(this.apiPercentage, usageAttributionValues.apiPercentage) &&
-        Objects.equals(this.apiUsage, usageAttributionValues.apiUsage) &&
-        Objects.equals(this.apmHostPercentage, usageAttributionValues.apmHostPercentage) &&
-        Objects.equals(this.apmHostUsage, usageAttributionValues.apmHostUsage) &&
-        Objects.equals(this.browserPercentage, usageAttributionValues.browserPercentage) &&
-        Objects.equals(this.browserUsage, usageAttributionValues.browserUsage) &&
-        Objects.equals(this.containerPercentage, usageAttributionValues.containerPercentage) &&
-        Objects.equals(this.containerUsage, usageAttributionValues.containerUsage) &&
-        Objects.equals(this.customTimeseriesPercentage, usageAttributionValues.customTimeseriesPercentage) &&
-        Objects.equals(this.customTimeseriesUsage, usageAttributionValues.customTimeseriesUsage) &&
-        Objects.equals(this.infraHostPercentage, usageAttributionValues.infraHostPercentage) &&
-        Objects.equals(this.infraHostUsage, usageAttributionValues.infraHostUsage) &&
-        Objects.equals(this.lambdaPercentage, usageAttributionValues.lambdaPercentage) &&
-        Objects.equals(this.lambdaUsage, usageAttributionValues.lambdaUsage) &&
-        Objects.equals(this.npmHostPercentage, usageAttributionValues.npmHostPercentage) &&
-        Objects.equals(this.npmHostUsage, usageAttributionValues.npmHostUsage) &&
-        Objects.equals(this.snmpPercentage, usageAttributionValues.snmpPercentage) &&
-        Objects.equals(this.snmpUsage, usageAttributionValues.snmpUsage);
+    return Objects.equals(this.apiPercentage, usageAttributionValues.apiPercentage)
+        && Objects.equals(this.apiUsage, usageAttributionValues.apiUsage)
+        && Objects.equals(this.apmHostPercentage, usageAttributionValues.apmHostPercentage)
+        && Objects.equals(this.apmHostUsage, usageAttributionValues.apmHostUsage)
+        && Objects.equals(this.browserPercentage, usageAttributionValues.browserPercentage)
+        && Objects.equals(this.browserUsage, usageAttributionValues.browserUsage)
+        && Objects.equals(this.containerPercentage, usageAttributionValues.containerPercentage)
+        && Objects.equals(this.containerUsage, usageAttributionValues.containerUsage)
+        && Objects.equals(
+            this.customTimeseriesPercentage, usageAttributionValues.customTimeseriesPercentage)
+        && Objects.equals(this.customTimeseriesUsage, usageAttributionValues.customTimeseriesUsage)
+        && Objects.equals(
+            this.cwsContainerPercentage, usageAttributionValues.cwsContainerPercentage)
+        && Objects.equals(this.cwsContainerUsage, usageAttributionValues.cwsContainerUsage)
+        && Objects.equals(this.cwsHostPercentage, usageAttributionValues.cwsHostPercentage)
+        && Objects.equals(this.cwsHostUsage, usageAttributionValues.cwsHostUsage)
+        && Objects.equals(this.infraHostPercentage, usageAttributionValues.infraHostPercentage)
+        && Objects.equals(this.infraHostUsage, usageAttributionValues.infraHostUsage)
+        && Objects.equals(
+            this.lambdaFunctionsPercentage, usageAttributionValues.lambdaFunctionsPercentage)
+        && Objects.equals(this.lambdaFunctionsUsage, usageAttributionValues.lambdaFunctionsUsage)
+        && Objects.equals(
+            this.lambdaInvocationsPercentage, usageAttributionValues.lambdaInvocationsPercentage)
+        && Objects.equals(
+            this.lambdaInvocationsUsage, usageAttributionValues.lambdaInvocationsUsage)
+        && Objects.equals(this.lambdaPercentage, usageAttributionValues.lambdaPercentage)
+        && Objects.equals(this.lambdaUsage, usageAttributionValues.lambdaUsage)
+        && Objects.equals(this.npmHostPercentage, usageAttributionValues.npmHostPercentage)
+        && Objects.equals(this.npmHostUsage, usageAttributionValues.npmHostUsage)
+        && Objects.equals(
+            this.profiledContainersPercentage, usageAttributionValues.profiledContainersPercentage)
+        && Objects.equals(
+            this.profiledContainersUsage, usageAttributionValues.profiledContainersUsage)
+        && Objects.equals(
+            this.profiledHostsPercentage, usageAttributionValues.profiledHostsPercentage)
+        && Objects.equals(this.profiledHostsUsage, usageAttributionValues.profiledHostsUsage)
+        && Objects.equals(this.snmpPercentage, usageAttributionValues.snmpPercentage)
+        && Objects.equals(this.snmpUsage, usageAttributionValues.snmpUsage);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(apiPercentage, apiUsage, apmHostPercentage, apmHostUsage, browserPercentage, browserUsage, containerPercentage, containerUsage, customTimeseriesPercentage, customTimeseriesUsage, infraHostPercentage, infraHostUsage, lambdaPercentage, lambdaUsage, npmHostPercentage, npmHostUsage, snmpPercentage, snmpUsage);
+    return Objects.hash(
+        apiPercentage,
+        apiUsage,
+        apmHostPercentage,
+        apmHostUsage,
+        browserPercentage,
+        browserUsage,
+        containerPercentage,
+        containerUsage,
+        customTimeseriesPercentage,
+        customTimeseriesUsage,
+        cwsContainerPercentage,
+        cwsContainerUsage,
+        cwsHostPercentage,
+        cwsHostUsage,
+        infraHostPercentage,
+        infraHostUsage,
+        lambdaFunctionsPercentage,
+        lambdaFunctionsUsage,
+        lambdaInvocationsPercentage,
+        lambdaInvocationsUsage,
+        lambdaPercentage,
+        lambdaUsage,
+        npmHostPercentage,
+        npmHostUsage,
+        profiledContainersPercentage,
+        profiledContainersUsage,
+        profiledHostsPercentage,
+        profiledHostsUsage,
+        snmpPercentage,
+        snmpUsage);
   }
-
 
   @Override
   public String toString() {
@@ -587,16 +910,52 @@ public class UsageAttributionValues {
     sb.append("    apmHostUsage: ").append(toIndentedString(apmHostUsage)).append("\n");
     sb.append("    browserPercentage: ").append(toIndentedString(browserPercentage)).append("\n");
     sb.append("    browserUsage: ").append(toIndentedString(browserUsage)).append("\n");
-    sb.append("    containerPercentage: ").append(toIndentedString(containerPercentage)).append("\n");
+    sb.append("    containerPercentage: ")
+        .append(toIndentedString(containerPercentage))
+        .append("\n");
     sb.append("    containerUsage: ").append(toIndentedString(containerUsage)).append("\n");
-    sb.append("    customTimeseriesPercentage: ").append(toIndentedString(customTimeseriesPercentage)).append("\n");
-    sb.append("    customTimeseriesUsage: ").append(toIndentedString(customTimeseriesUsage)).append("\n");
-    sb.append("    infraHostPercentage: ").append(toIndentedString(infraHostPercentage)).append("\n");
+    sb.append("    customTimeseriesPercentage: ")
+        .append(toIndentedString(customTimeseriesPercentage))
+        .append("\n");
+    sb.append("    customTimeseriesUsage: ")
+        .append(toIndentedString(customTimeseriesUsage))
+        .append("\n");
+    sb.append("    cwsContainerPercentage: ")
+        .append(toIndentedString(cwsContainerPercentage))
+        .append("\n");
+    sb.append("    cwsContainerUsage: ").append(toIndentedString(cwsContainerUsage)).append("\n");
+    sb.append("    cwsHostPercentage: ").append(toIndentedString(cwsHostPercentage)).append("\n");
+    sb.append("    cwsHostUsage: ").append(toIndentedString(cwsHostUsage)).append("\n");
+    sb.append("    infraHostPercentage: ")
+        .append(toIndentedString(infraHostPercentage))
+        .append("\n");
     sb.append("    infraHostUsage: ").append(toIndentedString(infraHostUsage)).append("\n");
+    sb.append("    lambdaFunctionsPercentage: ")
+        .append(toIndentedString(lambdaFunctionsPercentage))
+        .append("\n");
+    sb.append("    lambdaFunctionsUsage: ")
+        .append(toIndentedString(lambdaFunctionsUsage))
+        .append("\n");
+    sb.append("    lambdaInvocationsPercentage: ")
+        .append(toIndentedString(lambdaInvocationsPercentage))
+        .append("\n");
+    sb.append("    lambdaInvocationsUsage: ")
+        .append(toIndentedString(lambdaInvocationsUsage))
+        .append("\n");
     sb.append("    lambdaPercentage: ").append(toIndentedString(lambdaPercentage)).append("\n");
     sb.append("    lambdaUsage: ").append(toIndentedString(lambdaUsage)).append("\n");
     sb.append("    npmHostPercentage: ").append(toIndentedString(npmHostPercentage)).append("\n");
     sb.append("    npmHostUsage: ").append(toIndentedString(npmHostUsage)).append("\n");
+    sb.append("    profiledContainersPercentage: ")
+        .append(toIndentedString(profiledContainersPercentage))
+        .append("\n");
+    sb.append("    profiledContainersUsage: ")
+        .append(toIndentedString(profiledContainersUsage))
+        .append("\n");
+    sb.append("    profiledHostsPercentage: ")
+        .append(toIndentedString(profiledHostsPercentage))
+        .append("\n");
+    sb.append("    profiledHostsUsage: ").append(toIndentedString(profiledHostsUsage)).append("\n");
     sb.append("    snmpPercentage: ").append(toIndentedString(snmpPercentage)).append("\n");
     sb.append("    snmpUsage: ").append(toIndentedString(snmpUsage)).append("\n");
     sb.append("}");
@@ -604,8 +963,7 @@ public class UsageAttributionValues {
   }
 
   /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
+   * Convert the given object to string with each line indented by 4 spaces (except the first line).
    */
   private String toIndentedString(Object o) {
     if (o == null) {
@@ -613,6 +971,4 @@ public class UsageAttributionValues {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
-

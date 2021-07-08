@@ -2,74 +2,60 @@
 
 All URIs are relative to *https://api.datadoghq.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
+Method        | HTTP request | Description
+------------- | ------------ | ------------
 [**createGlobalVariable**](SyntheticsApi.md#createGlobalVariable) | **POST** /api/v1/synthetics/variables | Create a global variable
 [**createPrivateLocation**](SyntheticsApi.md#createPrivateLocation) | **POST** /api/v1/synthetics/private-locations | Create a private location
-[**createTest**](SyntheticsApi.md#createTest) | **POST** /api/v1/synthetics/tests | Create a test
+[**createSyntheticsAPITest**](SyntheticsApi.md#createSyntheticsAPITest) | **POST** /api/v1/synthetics/tests/api | Create an API test
+[**createSyntheticsBrowserTest**](SyntheticsApi.md#createSyntheticsBrowserTest) | **POST** /api/v1/synthetics/tests/browser | Create a browser test
 [**deleteGlobalVariable**](SyntheticsApi.md#deleteGlobalVariable) | **DELETE** /api/v1/synthetics/variables/{variable_id} | Delete a global variable
 [**deletePrivateLocation**](SyntheticsApi.md#deletePrivateLocation) | **DELETE** /api/v1/synthetics/private-locations/{location_id} | Delete a private location
 [**deleteTests**](SyntheticsApi.md#deleteTests) | **POST** /api/v1/synthetics/tests/delete | Delete tests
 [**editGlobalVariable**](SyntheticsApi.md#editGlobalVariable) | **PUT** /api/v1/synthetics/variables/{variable_id} | Edit a global variable
-[**getAPITestLatestResults**](SyntheticsApi.md#getAPITestLatestResults) | **GET** /api/v1/synthetics/tests/{public_id}/results | Get the test&#39;s latest results summaries (API)
-[**getAPITestResult**](SyntheticsApi.md#getAPITestResult) | **GET** /api/v1/synthetics/tests/{public_id}/results/{result_id} | Get a test result (API)
-[**getBrowserTest**](SyntheticsApi.md#getBrowserTest) | **GET** /api/v1/synthetics/tests/browser/{public_id} | Get a test configuration (browser)
-[**getBrowserTestLatestResults**](SyntheticsApi.md#getBrowserTestLatestResults) | **GET** /api/v1/synthetics/tests/browser/{public_id}/results | Get the test&#39;s latest results summaries (browser)
-[**getBrowserTestResult**](SyntheticsApi.md#getBrowserTestResult) | **GET** /api/v1/synthetics/tests/browser/{public_id}/results/{result_id} | Get a test result (browser)
+[**getAPITest**](SyntheticsApi.md#getAPITest) | **GET** /api/v1/synthetics/tests/api/{public_id} | Get an API test
+[**getAPITestLatestResults**](SyntheticsApi.md#getAPITestLatestResults) | **GET** /api/v1/synthetics/tests/{public_id}/results | Get an API test&#39;s latest results summaries
+[**getAPITestResult**](SyntheticsApi.md#getAPITestResult) | **GET** /api/v1/synthetics/tests/{public_id}/results/{result_id} | Get an API test result
+[**getBrowserTest**](SyntheticsApi.md#getBrowserTest) | **GET** /api/v1/synthetics/tests/browser/{public_id} | Get a browser test
+[**getBrowserTestLatestResults**](SyntheticsApi.md#getBrowserTestLatestResults) | **GET** /api/v1/synthetics/tests/browser/{public_id}/results | Get a browser test&#39;s latest results summaries
+[**getBrowserTestResult**](SyntheticsApi.md#getBrowserTestResult) | **GET** /api/v1/synthetics/tests/browser/{public_id}/results/{result_id} | Get a browser test result
 [**getGlobalVariable**](SyntheticsApi.md#getGlobalVariable) | **GET** /api/v1/synthetics/variables/{variable_id} | Get a global variable
 [**getPrivateLocation**](SyntheticsApi.md#getPrivateLocation) | **GET** /api/v1/synthetics/private-locations/{location_id} | Get a private location
-[**getTest**](SyntheticsApi.md#getTest) | **GET** /api/v1/synthetics/tests/{public_id} | Get a test configuration (API)
+[**getTest**](SyntheticsApi.md#getTest) | **GET** /api/v1/synthetics/tests/{public_id} | Get a test configuration
+[**listGlobalVariables**](SyntheticsApi.md#listGlobalVariables) | **GET** /api/v1/synthetics/variables | Get all global variables
 [**listLocations**](SyntheticsApi.md#listLocations) | **GET** /api/v1/synthetics/locations | Get all locations (public and private)
 [**listTests**](SyntheticsApi.md#listTests) | **GET** /api/v1/synthetics/tests | Get the list of all tests
-[**triggerCITests**](SyntheticsApi.md#triggerCITests) | **POST** /api/v1/synthetics/tests/trigger/ci | Trigger some Synthetics tests for CI
+[**triggerCITests**](SyntheticsApi.md#triggerCITests) | **POST** /api/v1/synthetics/tests/trigger/ci | Trigger tests from CI/CD pipelines
+[**updateAPITest**](SyntheticsApi.md#updateAPITest) | **PUT** /api/v1/synthetics/tests/api/{public_id} | Edit an API test
+[**updateBrowserTest**](SyntheticsApi.md#updateBrowserTest) | **PUT** /api/v1/synthetics/tests/browser/{public_id} | Edit a browser test
 [**updatePrivateLocation**](SyntheticsApi.md#updatePrivateLocation) | **PUT** /api/v1/synthetics/private-locations/{location_id} | Edit a private location
-[**updateTest**](SyntheticsApi.md#updateTest) | **PUT** /api/v1/synthetics/tests/{public_id} | Edit a test
 [**updateTestPauseStatus**](SyntheticsApi.md#updateTestPauseStatus) | **PUT** /api/v1/synthetics/tests/{public_id}/status | Pause or start a test
 
 
 
 ## createGlobalVariable
 
-> SyntheticsGlobalVariable createGlobalVariable().body(body).execute();
-
-Create a global variable
+> SyntheticsGlobalVariable createGlobalVariable(body);
 
 Create a Synthetics global variable.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.SyntheticsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         SyntheticsApi apiInstance = new SyntheticsApi(defaultClient);
         SyntheticsGlobalVariable body = new SyntheticsGlobalVariable(); // SyntheticsGlobalVariable | Details of the global variable to create.
         try {
-            SyntheticsGlobalVariable result = apiInstance.createGlobalVariable()
-                .body(body)
-                .execute();
+            SyntheticsGlobalVariable result = apiInstance.createGlobalVariable(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling SyntheticsApi#createGlobalVariable");
@@ -112,46 +98,28 @@ Name | Type | Description  | Notes
 
 ## createPrivateLocation
 
-> SyntheticsPrivateLocationCreationResponse createPrivateLocation().body(body).execute();
-
-Create a private location
+> SyntheticsPrivateLocationCreationResponse createPrivateLocation(body);
 
 Create a new Synthetics private location.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.SyntheticsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         SyntheticsApi apiInstance = new SyntheticsApi(defaultClient);
         SyntheticsPrivateLocation body = new SyntheticsPrivateLocation(); // SyntheticsPrivateLocation | Details of the private location to create.
         try {
-            SyntheticsPrivateLocationCreationResponse result = apiInstance.createPrivateLocation()
-                .body(body)
-                .execute();
+            SyntheticsPrivateLocationCreationResponse result = apiInstance.createPrivateLocation(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling SyntheticsApi#createPrivateLocation");
@@ -192,51 +160,33 @@ Name | Type | Description  | Notes
 | **404** | Private locations are not activated for the user |  -  |
 
 
-## createTest
+## createSyntheticsAPITest
 
-> SyntheticsTestDetails createTest().body(body).execute();
+> SyntheticsAPITest createSyntheticsAPITest(body);
 
-Create a test
-
-Create a Synthetic test.
+Create a Synthetic API test.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.SyntheticsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         SyntheticsApi apiInstance = new SyntheticsApi(defaultClient);
-        SyntheticsTestDetails body = new SyntheticsTestDetails(); // SyntheticsTestDetails | Details of the test to create.
+        SyntheticsAPITest body = new SyntheticsAPITest(); // SyntheticsAPITest | Details of the test to create.
         try {
-            SyntheticsTestDetails result = apiInstance.createTest()
-                .body(body)
-                .execute();
+            SyntheticsAPITest result = apiInstance.createSyntheticsAPITest(body);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling SyntheticsApi#createTest");
+            System.err.println("Exception when calling SyntheticsApi#createSyntheticsAPITest");
             System.err.println("Status code: " + e.getCode());
             System.err.println("Reason: " + e.getResponseBody());
             System.err.println("Response headers: " + e.getResponseHeaders());
@@ -251,11 +201,76 @@ public class Example {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**SyntheticsTestDetails**](SyntheticsTestDetails.md)| Details of the test to create. |
+ **body** | [**SyntheticsAPITest**](SyntheticsAPITest.md)| Details of the test to create. |
 
 ### Return type
 
-[**SyntheticsTestDetails**](SyntheticsTestDetails.md)
+[**SyntheticsAPITest**](SyntheticsAPITest.md)
+
+### Authorization
+
+[apiKeyAuth](README.md#apiKeyAuth), [appKeyAuth](README.md#appKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK - Returns the created test details. |  -  |
+| **400** | - JSON format is wrong - Creation failed |  -  |
+| **402** | Test quota is reached |  -  |
+| **403** | Forbidden |  -  |
+
+
+## createSyntheticsBrowserTest
+
+> SyntheticsBrowserTest createSyntheticsBrowserTest(body);
+
+Create a Synthetic browser test.
+
+### Example
+
+```java
+import java.util.*;
+import com.datadog.api.v1.client.ApiClient;
+import com.datadog.api.v1.client.ApiException;
+import com.datadog.api.v1.client.Configuration;
+import com.datadog.api.v1.client.model.*;
+import com.datadog.api.v1.client.api.SyntheticsApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+        SyntheticsApi apiInstance = new SyntheticsApi(defaultClient);
+        SyntheticsBrowserTest body = new SyntheticsBrowserTest(); // SyntheticsBrowserTest | Details of the test to create.
+        try {
+            SyntheticsBrowserTest result = apiInstance.createSyntheticsBrowserTest(body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling SyntheticsApi#createSyntheticsBrowserTest");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**SyntheticsBrowserTest**](SyntheticsBrowserTest.md)| Details of the test to create. |
+
+### Return type
+
+[**SyntheticsBrowserTest**](SyntheticsBrowserTest.md)
 
 ### Authorization
 
@@ -277,45 +292,28 @@ Name | Type | Description  | Notes
 
 ## deleteGlobalVariable
 
-> deleteGlobalVariable(variableId).execute();
-
-Delete a global variable
+> deleteGlobalVariable(variableId);
 
 Delete a Synthetics global variable.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.SyntheticsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         SyntheticsApi apiInstance = new SyntheticsApi(defaultClient);
         String variableId = "variableId_example"; // String | The ID of the global variable.
         try {
-            apiInstance.deleteGlobalVariable(variableId)
-                .execute();
+            apiInstance.deleteGlobalVariable(variableId);
         } catch (ApiException e) {
             System.err.println("Exception when calling SyntheticsApi#deleteGlobalVariable");
             System.err.println("Status code: " + e.getCode());
@@ -358,45 +356,28 @@ null (empty response body)
 
 ## deletePrivateLocation
 
-> deletePrivateLocation(locationId).execute();
-
-Delete a private location
+> deletePrivateLocation(locationId);
 
 Delete a Synthetics private location.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.SyntheticsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         SyntheticsApi apiInstance = new SyntheticsApi(defaultClient);
         String locationId = "locationId_example"; // String | The ID of the private location.
         try {
-            apiInstance.deletePrivateLocation(locationId)
-                .execute();
+            apiInstance.deletePrivateLocation(locationId);
         } catch (ApiException e) {
             System.err.println("Exception when calling SyntheticsApi#deletePrivateLocation");
             System.err.println("Status code: " + e.getCode());
@@ -437,46 +418,28 @@ null (empty response body)
 
 ## deleteTests
 
-> SyntheticsDeleteTestsResponse deleteTests().body(body).execute();
-
-Delete tests
+> SyntheticsDeleteTestsResponse deleteTests(body);
 
 Delete multiple Synthetic tests by ID.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.SyntheticsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         SyntheticsApi apiInstance = new SyntheticsApi(defaultClient);
         SyntheticsDeleteTestsPayload body = new SyntheticsDeleteTestsPayload(); // SyntheticsDeleteTestsPayload | Public ID list of the Synthetic tests to be deleted.
         try {
-            SyntheticsDeleteTestsResponse result = apiInstance.deleteTests()
-                .body(body)
-                .execute();
+            SyntheticsDeleteTestsResponse result = apiInstance.deleteTests(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling SyntheticsApi#deleteTests");
@@ -520,47 +483,29 @@ Name | Type | Description  | Notes
 
 ## editGlobalVariable
 
-> SyntheticsGlobalVariable editGlobalVariable(variableId).body(body).execute();
-
-Edit a global variable
+> SyntheticsGlobalVariable editGlobalVariable(variableId, body);
 
 Edit a Synthetics global variable.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.SyntheticsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         SyntheticsApi apiInstance = new SyntheticsApi(defaultClient);
         String variableId = "variableId_example"; // String | The ID of the global variable.
         SyntheticsGlobalVariable body = new SyntheticsGlobalVariable(); // SyntheticsGlobalVariable | Details of the global variable to update.
         try {
-            SyntheticsGlobalVariable result = apiInstance.editGlobalVariable(variableId)
-                .body(body)
-                .execute();
+            SyntheticsGlobalVariable result = apiInstance.editGlobalVariable(variableId, body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling SyntheticsApi#editGlobalVariable");
@@ -602,41 +547,90 @@ Name | Type | Description  | Notes
 | **403** | Forbidden |  -  |
 
 
-## getAPITestLatestResults
+## getAPITest
 
-> SyntheticsGetAPITestLatestResultsResponse getAPITestLatestResults(publicId).fromTs(fromTs).toTs(toTs).probeDc(probeDc).execute();
+> SyntheticsAPITest getAPITest(publicId);
 
-Get the test&#39;s latest results summaries (API)
-
-Get the last 50 test results summaries for a given Synthetics API test.
+Get the detailed configuration associated with
+a Synthetic API test.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.SyntheticsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
+
+        SyntheticsApi apiInstance = new SyntheticsApi(defaultClient);
+        String publicId = "publicId_example"; // String | The public ID of the test to get details from.
+        try {
+            SyntheticsAPITest result = apiInstance.getAPITest(publicId);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling SyntheticsApi#getAPITest");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
         }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
+    }
+}
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **publicId** | **String**| The public ID of the test to get details from. |
+
+### Return type
+
+[**SyntheticsAPITest**](SyntheticsAPITest.md)
+
+### Authorization
+
+[apiKeyAuth](README.md#apiKeyAuth), [appKeyAuth](README.md#appKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **403** | Forbidden |  -  |
+| **404** | - Synthetic Monitoring is not activated for the user - Test is not owned by the user |  -  |
+
+
+## getAPITestLatestResults
+
+> SyntheticsGetAPITestLatestResultsResponse getAPITestLatestResults(publicId, parameters);
+
+Get the last 50 test results summaries for a given Synthetics API test.
+
+### Example
+
+```java
+import java.util.*;
+import com.datadog.api.v1.client.ApiClient;
+import com.datadog.api.v1.client.ApiException;
+import com.datadog.api.v1.client.Configuration;
+import com.datadog.api.v1.client.model.*;
+import com.datadog.api.v1.client.api.SyntheticsApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
 
         SyntheticsApi apiInstance = new SyntheticsApi(defaultClient);
         String publicId = "publicId_example"; // String | The public ID of the test for which to search results for.
@@ -644,11 +638,10 @@ public class Example {
         Long toTs = 56L; // Long | Timestamp up to which to query results.
         List<String> probeDc = Arrays.asList(); // List<String> | Locations for which to query results.
         try {
-            SyntheticsGetAPITestLatestResultsResponse result = apiInstance.getAPITestLatestResults(publicId)
+	    SyntheticsGetAPITestLatestResultsResponse result = apiInstance.getAPITestLatestResults(publicId, new SyntheticsApi.GetAPITestLatestResultsOptionalParameters()
                 .fromTs(fromTs)
                 .toTs(toTs)
-                .probeDc(probeDc)
-                .execute();
+                .probeDc(probeDc));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling SyntheticsApi#getAPITestLatestResults");
@@ -694,46 +687,29 @@ Name | Type | Description  | Notes
 
 ## getAPITestResult
 
-> SyntheticsAPITestResultFull getAPITestResult(publicId, resultId).execute();
-
-Get a test result (API)
+> SyntheticsAPITestResultFull getAPITestResult(publicId, resultId);
 
 Get a specific full result from a given (API) Synthetic test.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.SyntheticsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         SyntheticsApi apiInstance = new SyntheticsApi(defaultClient);
         String publicId = "publicId_example"; // String | The public ID of the API test to which the target result belongs.
         String resultId = "resultId_example"; // String | The ID of the result to get.
         try {
-            SyntheticsAPITestResultFull result = apiInstance.getAPITestResult(publicId, resultId)
-                .execute();
+            SyntheticsAPITestResultFull result = apiInstance.getAPITestResult(publicId, resultId);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling SyntheticsApi#getAPITestResult");
@@ -777,9 +753,7 @@ Name | Type | Description  | Notes
 
 ## getBrowserTest
 
-> SyntheticsTestDetails getBrowserTest(publicId).execute();
-
-Get a test configuration (browser)
+> SyntheticsBrowserTest getBrowserTest(publicId);
 
 Get the detailed configuration (including steps) associated with
 a Synthetic browser test.
@@ -787,36 +761,21 @@ a Synthetic browser test.
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.SyntheticsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         SyntheticsApi apiInstance = new SyntheticsApi(defaultClient);
         String publicId = "publicId_example"; // String | The public ID of the test to get details from.
         try {
-            SyntheticsTestDetails result = apiInstance.getBrowserTest(publicId)
-                .execute();
+            SyntheticsBrowserTest result = apiInstance.getBrowserTest(publicId);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling SyntheticsApi#getBrowserTest");
@@ -838,7 +797,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SyntheticsTestDetails**](SyntheticsTestDetails.md)
+[**SyntheticsBrowserTest**](SyntheticsBrowserTest.md)
 
 ### Authorization
 
@@ -859,39 +818,23 @@ Name | Type | Description  | Notes
 
 ## getBrowserTestLatestResults
 
-> SyntheticsGetBrowserTestLatestResultsResponse getBrowserTestLatestResults(publicId).fromTs(fromTs).toTs(toTs).probeDc(probeDc).execute();
-
-Get the test&#39;s latest results summaries (browser)
+> SyntheticsGetBrowserTestLatestResultsResponse getBrowserTestLatestResults(publicId, parameters);
 
 Get the last 50 test results summaries for a given Synthetics Browser test.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.SyntheticsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         SyntheticsApi apiInstance = new SyntheticsApi(defaultClient);
         String publicId = "publicId_example"; // String | The public ID of the browser test for which to search results for.
@@ -899,11 +842,10 @@ public class Example {
         Long toTs = 56L; // Long | Timestamp up to which to query results.
         List<String> probeDc = Arrays.asList(); // List<String> | Locations for which to query results.
         try {
-            SyntheticsGetBrowserTestLatestResultsResponse result = apiInstance.getBrowserTestLatestResults(publicId)
+	    SyntheticsGetBrowserTestLatestResultsResponse result = apiInstance.getBrowserTestLatestResults(publicId, new SyntheticsApi.GetBrowserTestLatestResultsOptionalParameters()
                 .fromTs(fromTs)
                 .toTs(toTs)
-                .probeDc(probeDc)
-                .execute();
+                .probeDc(probeDc));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling SyntheticsApi#getBrowserTestLatestResults");
@@ -949,46 +891,29 @@ Name | Type | Description  | Notes
 
 ## getBrowserTestResult
 
-> SyntheticsBrowserTestResultFull getBrowserTestResult(publicId, resultId).execute();
-
-Get a test result (browser)
+> SyntheticsBrowserTestResultFull getBrowserTestResult(publicId, resultId);
 
 Get a specific full result from a given (browser) Synthetic test.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.SyntheticsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         SyntheticsApi apiInstance = new SyntheticsApi(defaultClient);
         String publicId = "publicId_example"; // String | The public ID of the browser test to which the target result belongs.
         String resultId = "resultId_example"; // String | The ID of the result to get.
         try {
-            SyntheticsBrowserTestResultFull result = apiInstance.getBrowserTestResult(publicId, resultId)
-                .execute();
+            SyntheticsBrowserTestResultFull result = apiInstance.getBrowserTestResult(publicId, resultId);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling SyntheticsApi#getBrowserTestResult");
@@ -1032,45 +957,28 @@ Name | Type | Description  | Notes
 
 ## getGlobalVariable
 
-> SyntheticsGlobalVariable getGlobalVariable(variableId).execute();
-
-Get a global variable
+> SyntheticsGlobalVariable getGlobalVariable(variableId);
 
 Get the detailed configuration of a global variable.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.SyntheticsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         SyntheticsApi apiInstance = new SyntheticsApi(defaultClient);
         String variableId = "variableId_example"; // String | The ID of the global variable.
         try {
-            SyntheticsGlobalVariable result = apiInstance.getGlobalVariable(variableId)
-                .execute();
+            SyntheticsGlobalVariable result = apiInstance.getGlobalVariable(variableId);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling SyntheticsApi#getGlobalVariable");
@@ -1113,45 +1021,28 @@ Name | Type | Description  | Notes
 
 ## getPrivateLocation
 
-> SyntheticsPrivateLocation getPrivateLocation(locationId).execute();
-
-Get a private location
+> SyntheticsPrivateLocation getPrivateLocation(locationId);
 
 Get a Synthetics private location.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.SyntheticsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         SyntheticsApi apiInstance = new SyntheticsApi(defaultClient);
         String locationId = "locationId_example"; // String | The ID of the private location.
         try {
-            SyntheticsPrivateLocation result = apiInstance.getPrivateLocation(locationId)
-                .execute();
+            SyntheticsPrivateLocation result = apiInstance.getPrivateLocation(locationId);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling SyntheticsApi#getPrivateLocation");
@@ -1193,45 +1084,28 @@ Name | Type | Description  | Notes
 
 ## getTest
 
-> SyntheticsTestDetails getTest(publicId).execute();
-
-Get a test configuration (API)
+> SyntheticsTestDetails getTest(publicId);
 
 Get the detailed configuration associated with a Synthetics test.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.SyntheticsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         SyntheticsApi apiInstance = new SyntheticsApi(defaultClient);
         String publicId = "publicId_example"; // String | The public ID of the test to get details from.
         try {
-            SyntheticsTestDetails result = apiInstance.getTest(publicId)
-                .execute();
+            SyntheticsTestDetails result = apiInstance.getTest(publicId);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling SyntheticsApi#getTest");
@@ -1272,11 +1146,68 @@ Name | Type | Description  | Notes
 | **404** | - Synthetic is not activated for the user - Test is not owned by the user |  -  |
 
 
+## listGlobalVariables
+
+> SyntheticsListGlobalVariablesResponse listGlobalVariables();
+
+Get the list of all Synthetics global variables.
+
+### Example
+
+```java
+import java.util.*;
+import com.datadog.api.v1.client.ApiClient;
+import com.datadog.api.v1.client.ApiException;
+import com.datadog.api.v1.client.Configuration;
+import com.datadog.api.v1.client.model.*;
+import com.datadog.api.v1.client.api.SyntheticsApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+        SyntheticsApi apiInstance = new SyntheticsApi(defaultClient);
+        try {
+            SyntheticsListGlobalVariablesResponse result = apiInstance.listGlobalVariables();
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling SyntheticsApi#listGlobalVariables");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**SyntheticsListGlobalVariablesResponse**](SyntheticsListGlobalVariablesResponse.md)
+
+### Authorization
+
+[apiKeyAuth](README.md#apiKeyAuth), [appKeyAuth](README.md#appKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **403** | Forbidden |  -  |
+
+
 ## listLocations
 
-> SyntheticsLocations listLocations().execute();
-
-Get all locations (public and private)
+> SyntheticsLocations listLocations();
 
 Get the list of public and private locations available for Synthetic
 tests. No arguments required.
@@ -1284,35 +1215,20 @@ tests. No arguments required.
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.SyntheticsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         SyntheticsApi apiInstance = new SyntheticsApi(defaultClient);
         try {
-            SyntheticsLocations result = apiInstance.listLocations()
-                .execute();
+            SyntheticsLocations result = apiInstance.listLocations();
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling SyntheticsApi#listLocations");
@@ -1350,44 +1266,27 @@ This endpoint does not need any parameter.
 
 ## listTests
 
-> SyntheticsListTestsResponse listTests().execute();
-
-Get the list of all tests
+> SyntheticsListTestsResponse listTests();
 
 Get the list of all Synthetic tests.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.SyntheticsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         SyntheticsApi apiInstance = new SyntheticsApi(defaultClient);
         try {
-            SyntheticsListTestsResponse result = apiInstance.listTests()
-                .execute();
+            SyntheticsListTestsResponse result = apiInstance.listTests();
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling SyntheticsApi#listTests");
@@ -1427,46 +1326,28 @@ This endpoint does not need any parameter.
 
 ## triggerCITests
 
-> SyntheticsTriggerCITestsResponse triggerCITests().body(body).execute();
-
-Trigger some Synthetics tests for CI
+> SyntheticsTriggerCITestsResponse triggerCITests(body);
 
 Trigger a set of Synthetics tests for continuous integration.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.SyntheticsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         SyntheticsApi apiInstance = new SyntheticsApi(defaultClient);
         SyntheticsCITestBody body = new SyntheticsCITestBody(); // SyntheticsCITestBody | Details of the test to trigger.
         try {
-            SyntheticsTriggerCITestsResponse result = apiInstance.triggerCITests()
-                .body(body)
-                .execute();
+            SyntheticsTriggerCITestsResponse result = apiInstance.triggerCITests(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling SyntheticsApi#triggerCITests");
@@ -1506,49 +1387,165 @@ Name | Type | Description  | Notes
 | **400** | JSON format is wrong |  -  |
 
 
-## updatePrivateLocation
+## updateAPITest
 
-> SyntheticsPrivateLocation updatePrivateLocation(locationId).body(body).execute();
+> SyntheticsAPITest updateAPITest(publicId, body);
 
-Edit a private location
-
-Edit a Synthetics private location.
+Edit the configuration of a Synthetic API test.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.SyntheticsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
+
+        SyntheticsApi apiInstance = new SyntheticsApi(defaultClient);
+        String publicId = "publicId_example"; // String | The public ID of the test to get details from.
+        SyntheticsAPITest body = new SyntheticsAPITest(); // SyntheticsAPITest | New test details to be saved.
+        try {
+            SyntheticsAPITest result = apiInstance.updateAPITest(publicId, body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling SyntheticsApi#updateAPITest");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
         }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
+    }
+}
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **publicId** | **String**| The public ID of the test to get details from. |
+ **body** | [**SyntheticsAPITest**](SyntheticsAPITest.md)| New test details to be saved. |
+
+### Return type
+
+[**SyntheticsAPITest**](SyntheticsAPITest.md)
+
+### Authorization
+
+[apiKeyAuth](README.md#apiKeyAuth), [appKeyAuth](README.md#appKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | - JSON format is wrong - Updating sub-type is forbidden |  -  |
+| **403** | Forbidden |  -  |
+| **404** | - Synthetic Monitoring is not activated for the user - Test is not owned by the user - Test can&#39;t be found |  -  |
+
+
+## updateBrowserTest
+
+> SyntheticsBrowserTest updateBrowserTest(publicId, body);
+
+Edit the configuration of a Synthetic browser test.
+
+### Example
+
+```java
+import java.util.*;
+import com.datadog.api.v1.client.ApiClient;
+import com.datadog.api.v1.client.ApiException;
+import com.datadog.api.v1.client.Configuration;
+import com.datadog.api.v1.client.model.*;
+import com.datadog.api.v1.client.api.SyntheticsApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+        SyntheticsApi apiInstance = new SyntheticsApi(defaultClient);
+        String publicId = "publicId_example"; // String | The public ID of the test to get details from.
+        SyntheticsBrowserTest body = new SyntheticsBrowserTest(); // SyntheticsBrowserTest | New test details to be saved.
+        try {
+            SyntheticsBrowserTest result = apiInstance.updateBrowserTest(publicId, body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling SyntheticsApi#updateBrowserTest");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **publicId** | **String**| The public ID of the test to get details from. |
+ **body** | [**SyntheticsBrowserTest**](SyntheticsBrowserTest.md)| New test details to be saved. |
+
+### Return type
+
+[**SyntheticsBrowserTest**](SyntheticsBrowserTest.md)
+
+### Authorization
+
+[apiKeyAuth](README.md#apiKeyAuth), [appKeyAuth](README.md#appKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | - JSON format is wrong - Updating sub-type is forbidden |  -  |
+| **403** | Forbidden |  -  |
+| **404** | - Synthetic Monitoring is not activated for the user - Test is not owned by the user - Test can&#39;t be found |  -  |
+
+
+## updatePrivateLocation
+
+> SyntheticsPrivateLocation updatePrivateLocation(locationId, body);
+
+Edit a Synthetics private location.
+
+### Example
+
+```java
+import java.util.*;
+import com.datadog.api.v1.client.ApiClient;
+import com.datadog.api.v1.client.ApiException;
+import com.datadog.api.v1.client.Configuration;
+import com.datadog.api.v1.client.model.*;
+import com.datadog.api.v1.client.api.SyntheticsApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
 
         SyntheticsApi apiInstance = new SyntheticsApi(defaultClient);
         String locationId = "locationId_example"; // String | The ID of the private location.
         SyntheticsPrivateLocation body = new SyntheticsPrivateLocation(); // SyntheticsPrivateLocation | Details of the private location to be updated.
         try {
-            SyntheticsPrivateLocation result = apiInstance.updatePrivateLocation(locationId)
-                .body(body)
-                .execute();
+            SyntheticsPrivateLocation result = apiInstance.updatePrivateLocation(locationId, body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling SyntheticsApi#updatePrivateLocation");
@@ -1589,134 +1586,31 @@ Name | Type | Description  | Notes
 | **404** | - Private locations are not activated for the user - Private location does not exist |  -  |
 
 
-## updateTest
-
-> SyntheticsTestDetails updateTest(publicId).body(body).execute();
-
-Edit a test
-
-Edit the configuration of a Synthetic test.
-
-### Example
-
-```java
-// Import classes:
-import java.util.*;
-import com.datadog.api.v1.client.ApiClient;
-import com.datadog.api.v1.client.ApiException;
-import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
-import com.datadog.api.v1.client.model.*;
-import com.datadog.api.v1.client.api.SyntheticsApi;
-
-public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
-
-        SyntheticsApi apiInstance = new SyntheticsApi(defaultClient);
-        String publicId = "publicId_example"; // String | The public ID of the test to get details from.
-        SyntheticsTestDetails body = new SyntheticsTestDetails(); // SyntheticsTestDetails | New test details to be saved.
-        try {
-            SyntheticsTestDetails result = apiInstance.updateTest(publicId)
-                .body(body)
-                .execute();
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling SyntheticsApi#updateTest");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
-    }
-}
-```
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **publicId** | **String**| The public ID of the test to get details from. |
- **body** | [**SyntheticsTestDetails**](SyntheticsTestDetails.md)| New test details to be saved. |
-
-### Return type
-
-[**SyntheticsTestDetails**](SyntheticsTestDetails.md)
-
-### Authorization
-
-[apiKeyAuth](README.md#apiKeyAuth), [appKeyAuth](README.md#appKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | OK |  -  |
-| **400** | - JSON format is wrong - Updating sub-type is forbidden |  -  |
-| **403** | Forbidden |  -  |
-| **404** | - Synthetic is not activated for the user - Test is not owned by the user - Test can&#39;t be found |  -  |
-
-
 ## updateTestPauseStatus
 
-> Boolean updateTestPauseStatus(publicId).body(body).execute();
-
-Pause or start a test
+> Boolean updateTestPauseStatus(publicId, body);
 
 Pause or start a Synthetics test by changing the status.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.SyntheticsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         SyntheticsApi apiInstance = new SyntheticsApi(defaultClient);
         String publicId = "publicId_example"; // String | The public ID of the Synthetic test to update.
         SyntheticsUpdateTestPauseStatusPayload body = new SyntheticsUpdateTestPauseStatusPayload(); // SyntheticsUpdateTestPauseStatusPayload | Status to set the given Synthetic test to.
         try {
-            Boolean result = apiInstance.updateTestPauseStatus(publicId)
-                .body(body)
-                .execute();
+            Boolean result = apiInstance.updateTestPauseStatus(publicId, body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling SyntheticsApi#updateTestPauseStatus");

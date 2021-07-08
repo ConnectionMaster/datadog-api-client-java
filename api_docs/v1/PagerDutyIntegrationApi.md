@@ -2,8 +2,8 @@
 
 All URIs are relative to *https://api.datadoghq.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
+Method        | HTTP request | Description
+------------- | ------------ | ------------
 [**createPagerDutyIntegrationService**](PagerDutyIntegrationApi.md#createPagerDutyIntegrationService) | **POST** /api/v1/integration/pagerduty/configuration/services | Create a new service object
 [**deletePagerDutyIntegrationService**](PagerDutyIntegrationApi.md#deletePagerDutyIntegrationService) | **DELETE** /api/v1/integration/pagerduty/configuration/services/{service_name} | Delete a single service object
 [**getPagerDutyIntegrationService**](PagerDutyIntegrationApi.md#getPagerDutyIntegrationService) | **GET** /api/v1/integration/pagerduty/configuration/services/{service_name} | Get a single service object
@@ -13,46 +13,28 @@ Method | HTTP request | Description
 
 ## createPagerDutyIntegrationService
 
-> PagerDutyServiceName createPagerDutyIntegrationService().body(body).execute();
-
-Create a new service object
+> PagerDutyServiceName createPagerDutyIntegrationService(body);
 
 Create a new service object in the PagerDuty integration.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.PagerDutyIntegrationApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         PagerDutyIntegrationApi apiInstance = new PagerDutyIntegrationApi(defaultClient);
         PagerDutyService body = new PagerDutyService(); // PagerDutyService | Create a new service object request body.
         try {
-            PagerDutyServiceName result = apiInstance.createPagerDutyIntegrationService()
-                .body(body)
-                .execute();
+            PagerDutyServiceName result = apiInstance.createPagerDutyIntegrationService(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling PagerDutyIntegrationApi#createPagerDutyIntegrationService");
@@ -95,45 +77,28 @@ Name | Type | Description  | Notes
 
 ## deletePagerDutyIntegrationService
 
-> deletePagerDutyIntegrationService(serviceName).execute();
-
-Delete a single service object
+> deletePagerDutyIntegrationService(serviceName);
 
 Delete a single service object in the Datadog-PagerDuty integration.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.PagerDutyIntegrationApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         PagerDutyIntegrationApi apiInstance = new PagerDutyIntegrationApi(defaultClient);
         String serviceName = "serviceName_example"; // String | The service name
         try {
-            apiInstance.deletePagerDutyIntegrationService(serviceName)
-                .execute();
+            apiInstance.deletePagerDutyIntegrationService(serviceName);
         } catch (ApiException e) {
             System.err.println("Exception when calling PagerDutyIntegrationApi#deletePagerDutyIntegrationService");
             System.err.println("Status code: " + e.getCode());
@@ -175,45 +140,28 @@ null (empty response body)
 
 ## getPagerDutyIntegrationService
 
-> PagerDutyServiceName getPagerDutyIntegrationService(serviceName).execute();
-
-Get a single service object
+> PagerDutyServiceName getPagerDutyIntegrationService(serviceName);
 
 Get service name in the Datadog-PagerDuty integration.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.PagerDutyIntegrationApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         PagerDutyIntegrationApi apiInstance = new PagerDutyIntegrationApi(defaultClient);
         String serviceName = "serviceName_example"; // String | The service name.
         try {
-            PagerDutyServiceName result = apiInstance.getPagerDutyIntegrationService(serviceName)
-                .execute();
+            PagerDutyServiceName result = apiInstance.getPagerDutyIntegrationService(serviceName);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling PagerDutyIntegrationApi#getPagerDutyIntegrationService");
@@ -256,47 +204,29 @@ Name | Type | Description  | Notes
 
 ## updatePagerDutyIntegrationService
 
-> updatePagerDutyIntegrationService(serviceName).body(body).execute();
-
-Update a single service object
+> updatePagerDutyIntegrationService(serviceName, body);
 
 Update a single service object in the Datadog-PagerDuty integration.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.PagerDutyIntegrationApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         PagerDutyIntegrationApi apiInstance = new PagerDutyIntegrationApi(defaultClient);
         String serviceName = "serviceName_example"; // String | The service name
         PagerDutyServiceKey body = new PagerDutyServiceKey(); // PagerDutyServiceKey | Update an existing service object request body.
         try {
-            apiInstance.updatePagerDutyIntegrationService(serviceName)
-                .body(body)
-                .execute();
+            apiInstance.updatePagerDutyIntegrationService(serviceName, body);
         } catch (ApiException e) {
             System.err.println("Exception when calling PagerDutyIntegrationApi#updatePagerDutyIntegrationService");
             System.err.println("Status code: " + e.getCode());

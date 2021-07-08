@@ -2,8 +2,8 @@
 
 All URIs are relative to *https://api.datadoghq.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
+Method        | HTTP request | Description
+------------- | ------------ | ------------
 [**createLogsIndex**](LogsIndexesApi.md#createLogsIndex) | **POST** /api/v1/logs/config/indexes | Create an index
 [**getLogsIndex**](LogsIndexesApi.md#getLogsIndex) | **GET** /api/v1/logs/config/indexes/{name} | Get an index
 [**getLogsIndexOrder**](LogsIndexesApi.md#getLogsIndexOrder) | **GET** /api/v1/logs/config/index-order | Get indexes order
@@ -15,46 +15,28 @@ Method | HTTP request | Description
 
 ## createLogsIndex
 
-> LogsIndex createLogsIndex().body(body).execute();
-
-Create an index
+> LogsIndex createLogsIndex(body);
 
 Creates a new index. Returns the Index object passed in the request body when the request is successful.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.LogsIndexesApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         LogsIndexesApi apiInstance = new LogsIndexesApi(defaultClient);
         LogsIndex body = new LogsIndex(); // LogsIndex | Object containing the new index.
         try {
-            LogsIndex result = apiInstance.createLogsIndex()
-                .body(body)
-                .execute();
+            LogsIndex result = apiInstance.createLogsIndex(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling LogsIndexesApi#createLogsIndex");
@@ -97,45 +79,28 @@ Name | Type | Description  | Notes
 
 ## getLogsIndex
 
-> LogsIndex getLogsIndex(name).execute();
-
-Get an index
+> LogsIndex getLogsIndex(name);
 
 Get one log index from your organization. This endpoint takes no JSON arguments.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.LogsIndexesApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         LogsIndexesApi apiInstance = new LogsIndexesApi(defaultClient);
         String name = "name_example"; // String | Name of the log index.
         try {
-            LogsIndex result = apiInstance.getLogsIndex(name)
-                .execute();
+            LogsIndex result = apiInstance.getLogsIndex(name);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling LogsIndexesApi#getLogsIndex");
@@ -178,44 +143,27 @@ Name | Type | Description  | Notes
 
 ## getLogsIndexOrder
 
-> LogsIndexesOrder getLogsIndexOrder().execute();
-
-Get indexes order
+> LogsIndexesOrder getLogsIndexOrder();
 
 Get the current order of your log indexes. This endpoint takes no JSON arguments.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.LogsIndexesApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         LogsIndexesApi apiInstance = new LogsIndexesApi(defaultClient);
         try {
-            LogsIndexesOrder result = apiInstance.getLogsIndexOrder()
-                .execute();
+            LogsIndexesOrder result = apiInstance.getLogsIndexOrder();
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling LogsIndexesApi#getLogsIndexOrder");
@@ -254,9 +202,7 @@ This endpoint does not need any parameter.
 
 ## listLogIndexes
 
-> LogsIndexListResponse listLogIndexes().execute();
-
-Get all indexes
+> LogsIndexListResponse listLogIndexes();
 
 The Index object describes the configuration of a log index.
 This endpoint returns an array of the `LogIndex` objects of your organization.
@@ -264,35 +210,20 @@ This endpoint returns an array of the `LogIndex` objects of your organization.
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.LogsIndexesApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         LogsIndexesApi apiInstance = new LogsIndexesApi(defaultClient);
         try {
-            LogsIndexListResponse result = apiInstance.listLogIndexes()
-                .execute();
+            LogsIndexListResponse result = apiInstance.listLogIndexes();
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling LogsIndexesApi#listLogIndexes");
@@ -331,9 +262,7 @@ This endpoint does not need any parameter.
 
 ## updateLogsIndex
 
-> LogsIndex updateLogsIndex(name).body(body).execute();
-
-Update an index
+> LogsIndex updateLogsIndex(name, body);
 
 Update an index as identified by its name.
 Returns the Index object passed in the request body when the request is successful.
@@ -344,38 +273,22 @@ your current configuration with the new one sent to your Datadog organization.
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.LogsIndexesApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         LogsIndexesApi apiInstance = new LogsIndexesApi(defaultClient);
         String name = "name_example"; // String | Name of the log index.
         LogsIndexUpdateRequest body = new LogsIndexUpdateRequest(); // LogsIndexUpdateRequest | Object containing the new `LogsIndexUpdateRequest`.
         try {
-            LogsIndex result = apiInstance.updateLogsIndex(name)
-                .body(body)
-                .execute();
+            LogsIndex result = apiInstance.updateLogsIndex(name, body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling LogsIndexesApi#updateLogsIndex");
@@ -420,9 +333,7 @@ Name | Type | Description  | Notes
 
 ## updateLogsIndexOrder
 
-> LogsIndexesOrder updateLogsIndexOrder().body(body).execute();
-
-Update indexes order
+> LogsIndexesOrder updateLogsIndexOrder(body);
 
 This endpoint updates the index order of your organization.
 It returns the index order object passed in the request body when the request is successful.
@@ -430,37 +341,21 @@ It returns the index order object passed in the request body when the request is
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.LogsIndexesApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         LogsIndexesApi apiInstance = new LogsIndexesApi(defaultClient);
         LogsIndexesOrder body = new LogsIndexesOrder(); // LogsIndexesOrder | Object containing the new ordered list of index names
         try {
-            LogsIndexesOrder result = apiInstance.updateLogsIndexOrder()
-                .body(body)
-                .execute();
+            LogsIndexesOrder result = apiInstance.updateLogsIndexOrder(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling LogsIndexesApi#updateLogsIndexOrder");

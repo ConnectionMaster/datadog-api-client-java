@@ -2,8 +2,8 @@
 
 All URIs are relative to *https://api.datadoghq.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
+Method        | HTTP request | Description
+------------- | ------------ | ------------
 [**createChildOrg**](OrganizationsApi.md#createChildOrg) | **POST** /api/v1/org | Create a child organization
 [**getOrg**](OrganizationsApi.md#getOrg) | **GET** /api/v1/org/{public_id} | Get organization information
 [**listOrgs**](OrganizationsApi.md#listOrgs) | **GET** /api/v1/org | List your managed organizations
@@ -14,9 +14,7 @@ Method | HTTP request | Description
 
 ## createChildOrg
 
-> OrganizationCreateResponse createChildOrg().body(body).execute();
-
-Create a child organization
+> OrganizationCreateResponse createChildOrg(body);
 
 Create a child organization.
 
@@ -32,37 +30,21 @@ by using the `org.public_id`, `pi_key.key`, and
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.OrganizationsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         OrganizationsApi apiInstance = new OrganizationsApi(defaultClient);
         OrganizationCreateBody body = new OrganizationCreateBody(); // OrganizationCreateBody | Organization object that needs to be created
         try {
-            OrganizationCreateResponse result = apiInstance.createChildOrg()
-                .body(body)
-                .execute();
+            OrganizationCreateResponse result = apiInstance.createChildOrg(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling OrganizationsApi#createChildOrg");
@@ -105,45 +87,28 @@ Name | Type | Description  | Notes
 
 ## getOrg
 
-> OrganizationResponse getOrg(publicId).execute();
-
-Get organization information
+> OrganizationResponse getOrg(publicId);
 
 Get organization information.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.OrganizationsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         OrganizationsApi apiInstance = new OrganizationsApi(defaultClient);
         String publicId = "abc123"; // String | The `public_id` of the organization you are operating within.
         try {
-            OrganizationResponse result = apiInstance.getOrg(publicId)
-                .execute();
+            OrganizationResponse result = apiInstance.getOrg(publicId);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling OrganizationsApi#getOrg");
@@ -186,44 +151,27 @@ Name | Type | Description  | Notes
 
 ## listOrgs
 
-> OrganizationListResponse listOrgs().execute();
-
-List your managed organizations
+> OrganizationListResponse listOrgs();
 
 List your managed organizations.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.OrganizationsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         OrganizationsApi apiInstance = new OrganizationsApi(defaultClient);
         try {
-            OrganizationListResponse result = apiInstance.listOrgs()
-                .execute();
+            OrganizationListResponse result = apiInstance.listOrgs();
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling OrganizationsApi#listOrgs");
@@ -262,47 +210,29 @@ This endpoint does not need any parameter.
 
 ## updateOrg
 
-> OrganizationResponse updateOrg(publicId).body(body).execute();
-
-Update your organization
+> OrganizationResponse updateOrg(publicId, body);
 
 Update your organization.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.OrganizationsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         OrganizationsApi apiInstance = new OrganizationsApi(defaultClient);
         String publicId = "abc123"; // String | The `public_id` of the organization you are operating within.
         Organization body = new Organization(); // Organization | 
         try {
-            OrganizationResponse result = apiInstance.updateOrg(publicId)
-                .body(body)
-                .execute();
+            OrganizationResponse result = apiInstance.updateOrg(publicId, body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling OrganizationsApi#updateOrg");
@@ -346,9 +276,7 @@ Name | Type | Description  | Notes
 
 ## uploadIdPForOrg
 
-> IdpResponse uploadIdPForOrg(publicId).idpFile(idpFile).execute();
-
-Upload IdP metadata
+> IdpResponse uploadIdPForOrg(publicId, idpFile);
 
 There are a couple of options for updating the Identity Provider (IdP)
 metadata from your SAML IdP.
@@ -361,38 +289,22 @@ metadata from your SAML IdP.
 
 ```java
 import java.io.File;
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.OrganizationsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         OrganizationsApi apiInstance = new OrganizationsApi(defaultClient);
         String publicId = "abc123"; // String | The `public_id` of the organization you are operating with
         File idpFile = new File("/path/to/file"); // File | The path to the XML metadata file you wish to upload.
         try {
-            IdpResponse result = apiInstance.uploadIdPForOrg(publicId)
-                .idpFile(idpFile)
-                .execute();
+            IdpResponse result = apiInstance.uploadIdPForOrg(publicId, idpFile);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling OrganizationsApi#uploadIdPForOrg");

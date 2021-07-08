@@ -3,6 +3,7 @@
 # UsageAttributionValues
 
 Fields in Usage Summary by tag(s).
+
 ## Properties
 
 Name | Type | Description | Notes
@@ -17,12 +18,24 @@ Name | Type | Description | Notes
 **containerUsage** | **Double** | The container usage by tag(s). |  [optional]
 **customTimeseriesPercentage** | **Double** | The percentage of custom metrics usage by tag(s). |  [optional]
 **customTimeseriesUsage** | **Double** | The custom metrics usage by tag(s). |  [optional]
+**cwsContainerPercentage** | **Double** | The percentage of Cloud Workload Security container usage by tag(s) |  [optional]
+**cwsContainerUsage** | **Double** | The Cloud Workload Security container usage by tag(s) |  [optional]
+**cwsHostPercentage** | **Double** | The percentage of Cloud Workload Security host usage by tag(s) |  [optional]
+**cwsHostUsage** | **Double** | The Cloud Workload Security host usage by tag(s) |  [optional]
 **infraHostPercentage** | **Double** | The percentage of infrastructure host usage by tag(s). |  [optional]
 **infraHostUsage** | **Double** | The infrastructure host usage by tag(s). |  [optional]
-**lambdaPercentage** | **Double** | The percentage of lambda function usage by tag(s). |  [optional]
-**lambdaUsage** | **Double** | The lambda function usage by tag(s). |  [optional]
+**lambdaFunctionsPercentage** | **Double** | The percentage of Lambda function usage by tag(s). |  [optional]
+**lambdaFunctionsUsage** | **Double** | The Lambda function usage by tag(s). |  [optional]
+**lambdaInvocationsPercentage** | **Double** | The percentage of Lambda invocation usage by tag(s). |  [optional]
+**lambdaInvocationsUsage** | **Double** | The Lambda invocation usage by tag(s). |  [optional]
+**lambdaPercentage** | **Double** | The percentage of Lambda function usage by tag(s).  **Note** this field is deprecated. Use lambda_functions_percentage instead. |  [optional]
+**lambdaUsage** | **Double** | The Lambda function usage by tag(s).  **Note** this field is deprecated. Use lambda_functions_usage instead. |  [optional]
 **npmHostPercentage** | **Double** | The percentage of network host usage by tag(s). |  [optional]
 **npmHostUsage** | **Double** | The network host usage by tag(s). |  [optional]
+**profiledContainersPercentage** | **Double** | The percentage of profiled containers usage by tag(s). |  [optional]
+**profiledContainersUsage** | **Double** | The profiled container usage by tag(s). |  [optional]
+**profiledHostsPercentage** | **Double** | The percentage of profiled hosts usage by tag(s). |  [optional]
+**profiledHostsUsage** | **Double** | The profiled host usage by tag(s). |  [optional]
 **snmpPercentage** | **Double** | The percentage of network device usage by tag(s). |  [optional]
 **snmpUsage** | **Double** | The network device usage by tag(s). |  [optional]
 

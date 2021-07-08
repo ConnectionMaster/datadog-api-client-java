@@ -1,5 +1,114 @@
 # CHANGELOG
 
+## 1.0.0 / 2021-06-10
+
+* [Added] Add missing fields in usage billable summary keys. See [#861](https://github.com/DataDog/datadog-api-client-java/pull/861).
+* [Added] Add monitor name and priority options. See [#858](https://github.com/DataDog/datadog-api-client-java/pull/858).
+* [Added] Add endpoint to list Synthetics global variables. See [#846](https://github.com/DataDog/datadog-api-client-java/pull/846).
+* [Added] Add monitors search endpoints. See [#842](https://github.com/DataDog/datadog-api-client-java/pull/842).
+* [Added] Add `tag_config_source` to usage attribution response. See [#837](https://github.com/DataDog/datadog-api-client-java/pull/837).
+* [Added] Add endpoints to configure Security Filters. See [#826](https://github.com/DataDog/datadog-api-client-java/pull/826).
+* [Added] Add `active_child` nested downtime object to `Downtime` component for downtime APIs.. See [#820](https://github.com/DataDog/datadog-api-client-java/pull/820).
+* [Added] Add Notebooks API. See [#819](https://github.com/DataDog/datadog-api-client-java/pull/819).
+* [Added] Add `override_label` and `is_hidden` attribute for `WidgetCustomLink`. See [#825](https://github.com/DataDog/datadog-api-client-java/pull/825).
+* [Added] Add CWS to usage metering endpoint. See [#845](https://github.com/DataDog/datadog-api-client-java/pull/845).
+* [Added] Add audit logs to usage endpoints. See [#853](https://github.com/DataDog/datadog-api-client-java/pull/853).
+* [Fixed] Fix type of day/month response attribute in custom metrics usage. See [#856](https://github.com/DataDog/datadog-api-client-java/pull/856).
+* [Fixed] Fix paging attributes of usage attribution endpoints. See [#821](https://github.com/DataDog/datadog-api-client-java/pull/821).
+* [Fixed] Properly mark several synthetics attributes as read only. See [#824](https://github.com/DataDog/datadog-api-client-java/pull/824).
+* [Fixed] Properly mark monitor required fields. See [#836](https://github.com/DataDog/datadog-api-client-java/pull/836).
+* [Fixed] Make `assertions` field optional for multistep synthetics tests, and add `global` config variable type. See [#844](https://github.com/DataDog/datadog-api-client-java/pull/844).
+* [Changed] Rename `compliance` to `CSPM` in usage endpoint. See [#853](https://github.com/DataDog/datadog-api-client-java/pull/853).
+* [Changed] Rename `incident_integration_metadata` to `incident_integrations` to match API. See [#831](https://github.com/DataDog/datadog-api-client-java/pull/831).
+
+## 1.0.0-beta11 / 2021-05-12
+
+* [Added] Add `logs_by_retention` usage property and `GetUsageLogsByRetention` endpoint. See [#809](https://github.com/DataDog/datadog-api-client-java/pull/809).
+* [Added] Add anomaly detection method to `SecurityMonitoringRuleDetectionMethod` enum. See [#808](https://github.com/DataDog/datadog-api-client-java/pull/808).
+* [Added] Add `with_configured_alert_ids` parameter to get a SLO details endpoint. See [#805](https://github.com/DataDog/datadog-api-client-java/pull/805).
+* [Added] Add `setCookie`, `dnsServerPort`,  `allowFailure ` and `isCritical` fields for Synthetics tests. See [#800](https://github.com/DataDog/datadog-api-client-java/pull/800).
+* [Added] Add `metadata` property with pagination info to `SLOList` endpoint response. See [#796](https://github.com/DataDog/datadog-api-client-java/pull/796).
+* [Added] Add new properties to group widget, note widget and image widget. See [#793](https://github.com/DataDog/datadog-api-client-java/pull/793).
+* [Added] Add support for a `rate` metric type in manage metric tags v2 endpoint. See [#791](https://github.com/DataDog/datadog-api-client-java/pull/791).
+* [Added] Add support for ICMP Synthetics tests. See [#788](https://github.com/DataDog/datadog-api-client-java/pull/788).
+* [Added] Add vSphere usage information. See [#783](https://github.com/DataDog/datadog-api-client-java/pull/783).
+* [Added] Mark metric volumes and ingested tags endpoints as stable. See [#779](https://github.com/DataDog/datadog-api-client-java/pull/779).
+* [Added] Add `filter[shared]` query parameter for searching dashboards. See [#772](https://github.com/DataDog/datadog-api-client-java/pull/772).
+* [Added] Add profiling product fields in usage metering endpoint. See [#771](https://github.com/DataDog/datadog-api-client-java/pull/771).
+* [Added] Add `title` and `background_color` properties to dashboard group widget. See [#770](https://github.com/DataDog/datadog-api-client-java/pull/770).
+* [Added] Add `marker`, `xaxis` and `yaxis` properties on distribution widgets. See [#782](https://github.com/DataDog/datadog-api-client-java/pull/782).
+* [Fixed] Remove default value of `is_column_break` layout property of dashboard. See [#816](https://github.com/DataDog/datadog-api-client-java/pull/816).
+* [Changed] Enumerate accepted values for fields parameter in usage attribution requests. See [#813](https://github.com/DataDog/datadog-api-client-java/pull/813).
+* [Changed] Add new value tick interval and remove `request` as required field from synthetics test. See [#810](https://github.com/DataDog/datadog-api-client-java/pull/810).
+* [Deprecated] Deprecate `legend_size` and `show_legend` properties on distribution widgets. See [#782](https://github.com/DataDog/datadog-api-client-java/pull/782).
+* [Removed] Remove deprecated Synthetics methods `CreateTest` and `UpdateTest`. See [#785](https://github.com/DataDog/datadog-api-client-java/pull/785).
+
+## 1.0.0-beta10 / 2021-04-15
+
+* [Added] Add `reflow_type` property to dashboard object. See [#742](https://github.com/DataDog/datadog-api-client-java/pull/742).
+* [Added] Add security track and formulas and functions support for geomap dashboard widget. See [#739](https://github.com/DataDog/datadog-api-client-java/pull/739).
+* [Added] Add intake endpoints. See [#737](https://github.com/DataDog/datadog-api-client-java/pull/737).
+* [Added] Add endpoint for listing all downtimes for the specified monitor. See [#730](https://github.com/DataDog/datadog-api-client-java/pull/730).
+* [Added] Add `modified_at` attribute to user response v2 schema. See [#722](https://github.com/DataDog/datadog-api-client-java/pull/722).
+* [Added] Add default environment loading in clients. See [#721](https://github.com/DataDog/datadog-api-client-java/pull/721).
+* [Added] Add `passed`, `noSavingResponseBody`, `noScreenshot`, and `disableCors` fields to Synthetics. See [#720](https://github.com/DataDog/datadog-api-client-java/pull/720).
+* [Added] Add compliance usage endpoint and compliance host statistics. See [#719](https://github.com/DataDog/datadog-api-client-java/pull/719).
+* [Added] Add tag filter options for `/api/v{1,2}/metrics`. See [#718](https://github.com/DataDog/datadog-api-client-java/pull/718).
+* [Added] Add usage fields for Heroku and OpenTelemetry. See [#715](https://github.com/DataDog/datadog-api-client-java/pull/715).
+* [Added] Add `global_time_target` field to SLO widget. See [#713](https://github.com/DataDog/datadog-api-client-java/pull/713).
+* [Added] Add method to export an API test in Synthetics. See [#712](https://github.com/DataDog/datadog-api-client-java/pull/712).
+* [Added] Add metadata to usage top average metrics response. See [#711](https://github.com/DataDog/datadog-api-client-java/pull/711).
+* [Added] Add median as valid aggregator for formulas and functions. See [#704](https://github.com/DataDog/datadog-api-client-java/pull/704).
+* [Added] Add legend_layout and legend_columns to timeseries widget definition [VIZZ-1211]. See [#698](https://github.com/DataDog/datadog-api-client-java/pull/698).
+* [Added] Update the spec for GetSLOHistory. See [#693](https://github.com/DataDog/datadog-api-client-java/pull/693).
+* [Added] Add support for multistep tests in Synthetics. See [#686](https://github.com/DataDog/datadog-api-client-java/pull/686).
+* [Added] Add core web vitals to browser results in Synthetics. See [#681](https://github.com/DataDog/datadog-api-client-java/pull/681).
+* [Added] Add v2 metric tags and metric volumes endpoints. See [#680](https://github.com/DataDog/datadog-api-client-java/pull/680).
+* [Added] Add new endpoints for browser API tests in Synthetics. See [#677](https://github.com/DataDog/datadog-api-client-java/pull/677).
+* [Added] add groupby_simple_monitor option to monitor spec. See [#675](https://github.com/DataDog/datadog-api-client-java/pull/675).
+* [Added] Allow formula and functions in query value requests. See [#674](https://github.com/DataDog/datadog-api-client-java/pull/674).
+* [Added] Allow formula and functions in toplist requests. See [#673](https://github.com/DataDog/datadog-api-client-java/pull/673).
+* [Added] Generate slack resource for clients. See [#669](https://github.com/DataDog/datadog-api-client-java/pull/669).
+* [Added] Add detectionMethod and newValueOptions fields to security monitoring rules. See [#667](https://github.com/DataDog/datadog-api-client-java/pull/667).
+* [Added] Expose "event-v2 alert" monitor type. See [#666](https://github.com/DataDog/datadog-api-client-java/pull/666).
+* [Added] Add new US3 region. See [#665](https://github.com/DataDog/datadog-api-client-java/pull/665).
+* [Added] Add org_name field to usage attribution response. See [#663](https://github.com/DataDog/datadog-api-client-java/pull/663).
+* [Added] Add profile_metrics_query properties to dashboard widget requests. See [#660](https://github.com/DataDog/datadog-api-client-java/pull/660).
+* [Added] Add geomap widget to dashboards v1. See [#654](https://github.com/DataDog/datadog-api-client-java/pull/654).
+* [Added] Add v2 API for metric tag configuration. See [#653](https://github.com/DataDog/datadog-api-client-java/pull/653).
+* [Added] Add Lambda invocations usage to response. See [#652](https://github.com/DataDog/datadog-api-client-java/pull/652).
+* [Added] Remove unstable flag for logs apis. See [#647](https://github.com/DataDog/datadog-api-client-java/pull/647).
+* [Fixed] Start adding a CI process for releases and switch to Sonatype from Bintray. See [#676](https://github.com/DataDog/datadog-api-client-java/pull/676).
+* [Fixed] Browser Test message required. See [#707](https://github.com/DataDog/datadog-api-client-java/pull/707).
+* [Fixed] Update pom to use proper versioning and remove prefix from SCM tag. See [#668](https://github.com/DataDog/datadog-api-client-java/pull/668).
+* [Fixed] Add missing tlsVersion and minTlsVersion to Synthetics assertion types. See [#661](https://github.com/DataDog/datadog-api-client-java/pull/661).
+* [Fixed] rule: all nested objects in arrays must be defined on top-level. See [#656](https://github.com/DataDog/datadog-api-client-java/pull/656).
+* [Fixed] Change analyzed_spans -> spans in Dashboard. See [#649](https://github.com/DataDog/datadog-api-client-java/pull/649).
+* [Fixed] Fix AWS tag filter delete request. See [#644](https://github.com/DataDog/datadog-api-client-java/pull/644).
+* [Fixed] Remove unnecessary field from TimeSeriesFormulaAndFunctionEventQuery. See [#643](https://github.com/DataDog/datadog-api-client-java/pull/643).
+* [Security] Bump jackson-databind from 2.10.4 to 2.10.5.1. See [#664](https://github.com/DataDog/datadog-api-client-java/pull/664).
+* [Changed] Use a new model for Java APIs. See [#745](https://github.com/DataDog/datadog-api-client-java/pull/745).
+* [Changed] Return correct object in `GetBrowserTest` endpoint. See [#729](https://github.com/DataDog/datadog-api-client-java/pull/729).
+* [Changed] Add agent rules in security monitoring rules queries. See [#714](https://github.com/DataDog/datadog-api-client-java/pull/714).
+* [Changed] Make query name required in Formulas and Functions. See [#685](https://github.com/DataDog/datadog-api-client-java/pull/685).
+* [Changed] Rename objects for formula and functions to be more generic. See [#670](https://github.com/DataDog/datadog-api-client-java/pull/670).
+
+## 1.0.0-beta.9 / 2021-02-04
+
+* [Added] Add restricted roles to monitor update. See [#634](https://github.com/DataDog/datadog-api-client-java/pull/634).
+* [Added] Add endpoint for IoT billing usage. See [#631](https://github.com/DataDog/datadog-api-client-java/pull/631).
+* [Added] Add query parameters for SLO search endpoint. See [#629](https://github.com/DataDog/datadog-api-client-java/pull/629).
+* [Added] Add fields for formula and function query definition and widget formulas. See [#626](https://github.com/DataDog/datadog-api-client-java/pull/626).
+* [Added] Add global_time to time_window slo widget. See [#624](https://github.com/DataDog/datadog-api-client-java/pull/624).
+* [Added] Update required fields in SLO Correction create and update requests . See [#618](https://github.com/DataDog/datadog-api-client-java/pull/618).
+* [Added] Add log index creation (POST). See [#614](https://github.com/DataDog/datadog-api-client-java/pull/614).
+* [Fixed] Fix unit format in SLO history response. See [#639](https://github.com/DataDog/datadog-api-client-java/pull/639).
+* [Fixed] Remove unused downloadFile helpers. See [#637](https://github.com/DataDog/datadog-api-client-java/pull/637).
+* [Fixed] Fix location of restricted roles for Monitors. See [#632](https://github.com/DataDog/datadog-api-client-java/pull/632).
+* [Fixed] Fix paging parameter names for logs aggregate queries. See [#628](https://github.com/DataDog/datadog-api-client-java/pull/628).
+* [Fixed] Add `additionalProperties: false` to synthetics target field. See [#610](https://github.com/DataDog/datadog-api-client-java/pull/610).
+* [Changed] Fix some integer/number formats in Logs and Synthetics endpoints. See [#611](https://github.com/DataDog/datadog-api-client-java/pull/611).
+
 ## 1.0.0-beta.8 / 2021-01-14
 
 * [Added] Add SLO Corrections endpoint. See [#607](https://github.com/DataDog/datadog-api-client-java/pull/607).

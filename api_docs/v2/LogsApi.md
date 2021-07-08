@@ -2,56 +2,38 @@
 
 All URIs are relative to *https://api.datadoghq.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
+Method        | HTTP request | Description
+------------- | ------------ | ------------
 [**aggregateLogs**](LogsApi.md#aggregateLogs) | **POST** /api/v2/logs/analytics/aggregate | Aggregate events
-[**listLogs**](LogsApi.md#listLogs) | **POST** /api/v2/logs/events/search | Get a list of logs
-[**listLogsGet**](LogsApi.md#listLogsGet) | **GET** /api/v2/logs/events | Get a quick list of logs
+[**listLogs**](LogsApi.md#listLogs) | **POST** /api/v2/logs/events/search | Search logs
+[**listLogsGet**](LogsApi.md#listLogsGet) | **GET** /api/v2/logs/events | Get a list of logs
 
 
 
 ## aggregateLogs
 
-> LogsAggregateResponse aggregateLogs().body(body).execute();
-
-Aggregate events
+> LogsAggregateResponse aggregateLogs(body);
 
 The API endpoint to aggregate events into buckets and compute metrics and timeseries.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v2.client.ApiClient;
 import com.datadog.api.v2.client.ApiException;
 import com.datadog.api.v2.client.Configuration;
-import com.datadog.api.v2.client.auth.*;
 import com.datadog.api.v2.client.model.*;
 import com.datadog.api.v2.client.api.LogsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         LogsApi apiInstance = new LogsApi(defaultClient);
         LogsAggregateRequest body = new LogsAggregateRequest(); // LogsAggregateRequest | 
         try {
-            LogsAggregateResponse result = apiInstance.aggregateLogs()
-                .body(body)
-                .execute();
+            LogsAggregateResponse result = apiInstance.aggregateLogs(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling LogsApi#aggregateLogs");
@@ -94,15 +76,12 @@ Name | Type | Description  | Notes
 
 ## listLogs
 
-> LogsListResponse listLogs().body(body).execute();
-
-Get a list of logs
+> LogsListResponse listLogs(parameters);
 
 List endpoint returns logs that match a log search query.
 [Results are paginated][1].
 
-Both this endpoint and the GET endpoint can be used interchangeably when listing
-logs.
+Use this endpoint to build complex logs filtering and search.
 
 **If you are considering archiving logs for your organization,
 consider use of the Datadog archive capabilities instead of the log list API.
@@ -114,37 +93,22 @@ See [Datadog Logs Archive documentation][2].**
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v2.client.ApiClient;
 import com.datadog.api.v2.client.ApiException;
 import com.datadog.api.v2.client.Configuration;
-import com.datadog.api.v2.client.auth.*;
 import com.datadog.api.v2.client.model.*;
 import com.datadog.api.v2.client.api.LogsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         LogsApi apiInstance = new LogsApi(defaultClient);
         LogsListRequest body = new LogsListRequest(); // LogsListRequest | 
         try {
-            LogsListResponse result = apiInstance.listLogs()
-                .body(body)
-                .execute();
+	    LogsListResponse result = apiInstance.listLogs(new LogsApi.ListLogsOptionalParameters()
+                .body(body));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling LogsApi#listLogs");
@@ -187,15 +151,12 @@ Name | Type | Description  | Notes
 
 ## listLogsGet
 
-> LogsListResponse listLogsGet().filterQuery(filterQuery).filterIndex(filterIndex).filterFrom(filterFrom).filterTo(filterTo).sort(sort).pageCursor(pageCursor).pageLimit(pageLimit).execute();
-
-Get a quick list of logs
+> LogsListResponse listLogsGet(parameters);
 
 List endpoint returns logs that match a log search query.
 [Results are paginated][1].
 
-Both this endpoint and the POST endpoint can be used interchangeably when listing
-logs.
+Use this endpoint to see your latest logs.
 
 **If you are considering archiving logs for your organization,
 consider use of the Datadog archive capabilities instead of the log list API.
@@ -208,30 +169,16 @@ See [Datadog Logs Archive documentation][2].**
 
 ```java
 import java.time.OffsetDateTime;
-// Import classes:
 import java.util.*;
 import com.datadog.api.v2.client.ApiClient;
 import com.datadog.api.v2.client.ApiException;
 import com.datadog.api.v2.client.Configuration;
-import com.datadog.api.v2.client.auth.*;
 import com.datadog.api.v2.client.model.*;
 import com.datadog.api.v2.client.api.LogsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         LogsApi apiInstance = new LogsApi(defaultClient);
         String filterQuery = "@datacenter:us @role:db"; // String | Search query following logs syntax.
@@ -242,15 +189,14 @@ public class Example {
         String pageCursor = "eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ=="; // String | List following results with a cursor provided in the previous query.
         Integer pageLimit = 10; // Integer | Maximum number of logs in the response.
         try {
-            LogsListResponse result = apiInstance.listLogsGet()
+	    LogsListResponse result = apiInstance.listLogsGet(new LogsApi.ListLogsGetOptionalParameters()
                 .filterQuery(filterQuery)
                 .filterIndex(filterIndex)
                 .filterFrom(filterFrom)
                 .filterTo(filterTo)
                 .sort(sort)
                 .pageCursor(pageCursor)
-                .pageLimit(pageLimit)
-                .execute();
+                .pageLimit(pageLimit));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling LogsApi#listLogsGet");

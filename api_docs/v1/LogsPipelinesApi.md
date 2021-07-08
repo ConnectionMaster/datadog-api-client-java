@@ -2,8 +2,8 @@
 
 All URIs are relative to *https://api.datadoghq.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
+Method        | HTTP request | Description
+------------- | ------------ | ------------
 [**createLogsPipeline**](LogsPipelinesApi.md#createLogsPipeline) | **POST** /api/v1/logs/config/pipelines | Create a pipeline
 [**deleteLogsPipeline**](LogsPipelinesApi.md#deleteLogsPipeline) | **DELETE** /api/v1/logs/config/pipelines/{pipeline_id} | Delete a pipeline
 [**getLogsPipeline**](LogsPipelinesApi.md#getLogsPipeline) | **GET** /api/v1/logs/config/pipelines/{pipeline_id} | Get a pipeline
@@ -16,46 +16,28 @@ Method | HTTP request | Description
 
 ## createLogsPipeline
 
-> LogsPipeline createLogsPipeline().body(body).execute();
-
-Create a pipeline
+> LogsPipeline createLogsPipeline(body);
 
 Create a pipeline in your organization.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.LogsPipelinesApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         LogsPipelinesApi apiInstance = new LogsPipelinesApi(defaultClient);
         LogsPipeline body = new LogsPipeline(); // LogsPipeline | Definition of the new pipeline.
         try {
-            LogsPipeline result = apiInstance.createLogsPipeline()
-                .body(body)
-                .execute();
+            LogsPipeline result = apiInstance.createLogsPipeline(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling LogsPipelinesApi#createLogsPipeline");
@@ -98,9 +80,7 @@ Name | Type | Description  | Notes
 
 ## deleteLogsPipeline
 
-> deleteLogsPipeline(pipelineId).execute();
-
-Delete a pipeline
+> deleteLogsPipeline(pipelineId);
 
 Delete a given pipeline from your organization.
 This endpoint takes no JSON arguments.
@@ -108,36 +88,21 @@ This endpoint takes no JSON arguments.
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.LogsPipelinesApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         LogsPipelinesApi apiInstance = new LogsPipelinesApi(defaultClient);
         String pipelineId = "pipelineId_example"; // String | ID of the pipeline to delete.
         try {
-            apiInstance.deleteLogsPipeline(pipelineId)
-                .execute();
+            apiInstance.deleteLogsPipeline(pipelineId);
         } catch (ApiException e) {
             System.err.println("Exception when calling LogsPipelinesApi#deleteLogsPipeline");
             System.err.println("Status code: " + e.getCode());
@@ -179,9 +144,7 @@ null (empty response body)
 
 ## getLogsPipeline
 
-> LogsPipeline getLogsPipeline(pipelineId).execute();
-
-Get a pipeline
+> LogsPipeline getLogsPipeline(pipelineId);
 
 Get a specific pipeline from your organization.
 This endpoint takes no JSON arguments.
@@ -189,36 +152,21 @@ This endpoint takes no JSON arguments.
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.LogsPipelinesApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         LogsPipelinesApi apiInstance = new LogsPipelinesApi(defaultClient);
         String pipelineId = "pipelineId_example"; // String | ID of the pipeline to get.
         try {
-            LogsPipeline result = apiInstance.getLogsPipeline(pipelineId)
-                .execute();
+            LogsPipeline result = apiInstance.getLogsPipeline(pipelineId);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling LogsPipelinesApi#getLogsPipeline");
@@ -261,9 +209,7 @@ Name | Type | Description  | Notes
 
 ## getLogsPipelineOrder
 
-> LogsPipelinesOrder getLogsPipelineOrder().execute();
-
-Get pipeline order
+> LogsPipelinesOrder getLogsPipelineOrder();
 
 Get the current order of your pipelines.
 This endpoint takes no JSON arguments.
@@ -271,35 +217,20 @@ This endpoint takes no JSON arguments.
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.LogsPipelinesApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         LogsPipelinesApi apiInstance = new LogsPipelinesApi(defaultClient);
         try {
-            LogsPipelinesOrder result = apiInstance.getLogsPipelineOrder()
-                .execute();
+            LogsPipelinesOrder result = apiInstance.getLogsPipelineOrder();
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling LogsPipelinesApi#getLogsPipelineOrder");
@@ -338,9 +269,7 @@ This endpoint does not need any parameter.
 
 ## listLogsPipelines
 
-> List&lt;LogsPipeline&gt; listLogsPipelines().execute();
-
-Get all pipelines
+> List&lt;LogsPipeline&gt; listLogsPipelines();
 
 Get all pipelines from your organization.
 This endpoint takes no JSON arguments.
@@ -348,35 +277,20 @@ This endpoint takes no JSON arguments.
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.LogsPipelinesApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         LogsPipelinesApi apiInstance = new LogsPipelinesApi(defaultClient);
         try {
-            List<LogsPipeline> result = apiInstance.listLogsPipelines()
-                .execute();
+            List<LogsPipeline> result = apiInstance.listLogsPipelines();
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling LogsPipelinesApi#listLogsPipelines");
@@ -415,9 +329,7 @@ This endpoint does not need any parameter.
 
 ## updateLogsPipeline
 
-> LogsPipeline updateLogsPipeline(pipelineId).body(body).execute();
-
-Update a pipeline
+> LogsPipeline updateLogsPipeline(pipelineId, body);
 
 Update a given pipeline configuration to change it’s processors or their order.
 
@@ -427,38 +339,22 @@ your current configuration with the new one sent to your Datadog organization.
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.LogsPipelinesApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         LogsPipelinesApi apiInstance = new LogsPipelinesApi(defaultClient);
         String pipelineId = "pipelineId_example"; // String | ID of the pipeline to delete.
         LogsPipeline body = new LogsPipeline(); // LogsPipeline | New definition of the pipeline.
         try {
-            LogsPipeline result = apiInstance.updateLogsPipeline(pipelineId)
-                .body(body)
-                .execute();
+            LogsPipeline result = apiInstance.updateLogsPipeline(pipelineId, body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling LogsPipelinesApi#updateLogsPipeline");
@@ -502,9 +398,7 @@ Name | Type | Description  | Notes
 
 ## updateLogsPipelineOrder
 
-> LogsPipelinesOrder updateLogsPipelineOrder().body(body).execute();
-
-Update pipeline order
+> LogsPipelinesOrder updateLogsPipelineOrder(body);
 
 Update the order of your pipelines. Since logs are processed sequentially, reordering a pipeline may change
 the structure and content of the data processed by other pipelines and their processors.
@@ -515,37 +409,21 @@ with the new one sent to your Datadog organization.
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.LogsPipelinesApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         LogsPipelinesApi apiInstance = new LogsPipelinesApi(defaultClient);
         LogsPipelinesOrder body = new LogsPipelinesOrder(); // LogsPipelinesOrder | Object containing the new ordered list of pipeline IDs.
         try {
-            LogsPipelinesOrder result = apiInstance.updateLogsPipelineOrder()
-                .body(body)
-                .execute();
+            LogsPipelinesOrder result = apiInstance.updateLogsPipelineOrder(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling LogsPipelinesApi#updateLogsPipelineOrder");

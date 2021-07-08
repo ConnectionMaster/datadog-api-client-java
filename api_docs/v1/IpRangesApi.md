@@ -2,24 +2,21 @@
 
 All URIs are relative to *https://api.datadoghq.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
+Method        | HTTP request | Description
+------------- | ------------ | ------------
 [**getIPRanges**](IpRangesApi.md#getIPRanges) | **GET** / | List IP Ranges
 
 
 
 ## getIPRanges
 
-> IPRanges getIPRanges().execute();
-
-List IP Ranges
+> IPRanges getIPRanges();
 
 Get information about Datadog IP ranges.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
@@ -30,21 +27,10 @@ import com.datadog.api.v1.client.api.IpRangesApi;
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        defaultClient.configureApiKeys(secrets);
 
         IpRangesApi apiInstance = new IpRangesApi(defaultClient);
         try {
-            IPRanges result = apiInstance.getIPRanges()
-                .execute();
+            IPRanges result = apiInstance.getIPRanges();
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling IpRangesApi#getIPRanges");

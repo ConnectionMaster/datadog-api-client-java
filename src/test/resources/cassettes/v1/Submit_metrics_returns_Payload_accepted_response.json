@@ -1,0 +1,57 @@
+[
+  {
+    "httpRequest": {
+      "body": {
+        "type": "JSON",
+        "json": "{\"series\": [{\"metric\": \"system.load.1\", \"points\": [[1623932501.0, 1.1]], \"tags\": [\"test:TestSubmitmetricsreturnsPayloadacceptedresponse1623932501\"], \"type\": \"gauge\"}]}"
+      },
+      "headers": {
+        "JAVA-TEST-NAME": [
+          "Submit_metrics_returns_Payload_accepted_response"
+        ]
+      },
+      "method": "POST",
+      "path": "/api/v1/series",
+      "keepAlive": false,
+      "secure": true
+    },
+    "httpResponse": {
+      "body": "{\"status\": \"ok\"}",
+      "headers": {
+        "Date": [
+          "Thu, 17 Jun 2021 12:21:42 GMT"
+        ],
+        "Content-Type": [
+          "text/json"
+        ],
+        "Content-Length": [
+          "16"
+        ],
+        "Connection": [
+          "close"
+        ],
+        "X-Content-Type-Options": [
+          "nosniff"
+        ],
+        "Strict-Transport-Security": [
+          "max-age=15724800;"
+        ],
+        "Content-Security-Policy": [
+          "frame-ancestors 'self'; report-uri https://api.datadoghq.com/csp-report"
+        ],
+        "X-Frame-Options": [
+          "SAMEORIGIN"
+        ]
+      },
+      "statusCode": 202,
+      "reasonPhrase": "Accepted"
+    },
+    "times": {
+      "remainingTimes": 1
+    },
+    "timeToLive": {
+      "unlimited": true
+    },
+    "id": "dad73a08-7e0c-a1cd-154f-a853488795f1"
+  }
+]

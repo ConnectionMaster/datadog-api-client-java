@@ -1,33 +1,36 @@
-@endpoint(logs)
+@endpoint(logs) @endpoint(logs-v1)
 Feature: Logs
-  Search your logs and send them to your Datadog platform over HTTP. Limits
-  per HTTP request are:  - Maximum content size per payload (uncompressed):
-  5MB - Maximum size for a single log: 1MB - Maximum array size if sending
-  multiple logs in an array: 1000 entries  Any log exceeding 1MB is accepted
-  and truncated by Datadog: - For a single log request, the API truncates
-  the log at 1MB and returns a 2xx. - For a multi-logs request, the API
-  processes all logs, truncates only logs larger than 1MB, and returns a
-  2xx.  Datadog recommends sending your logs compressed. Add the `Content-
-  Encoding: gzip` header to the request when sending compressed logs.  The
-  status codes answered by the HTTP API are: - 200: OK - 400: Bad request
-  (likely an issue in the payload formatting) - 403: Permission issue
-  (likely using an invalid API Key) - 413: Payload too large (batch is above
-  5MB uncompressed) - 5xx: Internal error, request should be retried after
-  some time
+  Search your logs and send them to your Datadog platform over HTTP.
 
   Background:
     Given a valid "apiKeyAuth" key in the system
-    And a valid "appKeyAuth" key in the system
     And an instance of "Logs" API
-    And new "ListLogs" request
-    And body {}
 
   @generated @skip
-  Scenario: Get a list of logs returns "Bad Request" response
+  Scenario: Search logs returns "Bad Request" response
+    Given a valid "appKeyAuth" key in the system
+    And new "ListLogs" request
+    And body with value {"index": "retention-3,retention-15", "limit": null, "query": "service:web* AND @http.status_code:[200 TO 299]", "sort": "asc", "startAt": null, "time": {"from": "2020-02-02T02:02:02Z", "timezone": null, "to": "2020-02-02T20:20:20Z"}}
     When the request is sent
     Then the response status is 400 Bad Request
 
   @generated @skip
-  Scenario: Get a list of logs returns "OK" response
+  Scenario: Search logs returns "OK" response
+    Given a valid "appKeyAuth" key in the system
+    And new "ListLogs" request
+    And body with value {"index": "retention-3,retention-15", "limit": null, "query": "service:web* AND @http.status_code:[200 TO 299]", "sort": "asc", "startAt": null, "time": {"from": "2020-02-02T02:02:02Z", "timezone": null, "to": "2020-02-02T20:20:20Z"}}
     When the request is sent
     Then the response status is 200 OK
+
+  Scenario: Send logs returns "Response from server (always 200 empty JSON)." response
+    Given new "SubmitLog" request
+    And body with value [{"message": "{{ unique }}", "ddtags": "host:{{ unique_alnum }}"}]
+    When the request is sent
+    Then the response status is 200 Response from server (always 200 empty JSON).
+
+  @generated @skip
+  Scenario: Send logs returns "unexpected error" response
+    Given new "SubmitLog" request
+    And body with value [{"ddsource": "nginx", "ddtags": "env:staging,version:5.1", "hostname": "i-012345678", "message": "2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World", "service": "payment"}]
+    When the request is sent
+    Then the response status is 400 unexpected error

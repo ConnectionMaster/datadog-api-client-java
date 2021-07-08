@@ -2,8 +2,8 @@
 
 All URIs are relative to *https://api.datadoghq.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
+Method        | HTTP request | Description
+------------- | ------------ | ------------
 [**createDashboardList**](DashboardListsApi.md#createDashboardList) | **POST** /api/v1/dashboard/lists/manual | Create a dashboard list
 [**deleteDashboardList**](DashboardListsApi.md#deleteDashboardList) | **DELETE** /api/v1/dashboard/lists/manual/{list_id} | Delete a dashboard list
 [**getDashboardList**](DashboardListsApi.md#getDashboardList) | **GET** /api/v1/dashboard/lists/manual/{list_id} | Get a dashboard list
@@ -14,46 +14,28 @@ Method | HTTP request | Description
 
 ## createDashboardList
 
-> DashboardList createDashboardList().body(body).execute();
-
-Create a dashboard list
+> DashboardList createDashboardList(body);
 
 Create an empty dashboard list.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.DashboardListsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         DashboardListsApi apiInstance = new DashboardListsApi(defaultClient);
         DashboardList body = new DashboardList(); // DashboardList | Create a dashboard list request body.
         try {
-            DashboardList result = apiInstance.createDashboardList()
-                .body(body)
-                .execute();
+            DashboardList result = apiInstance.createDashboardList(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling DashboardListsApi#createDashboardList");
@@ -96,45 +78,28 @@ Name | Type | Description  | Notes
 
 ## deleteDashboardList
 
-> DashboardListDeleteResponse deleteDashboardList(listId).execute();
-
-Delete a dashboard list
+> DashboardListDeleteResponse deleteDashboardList(listId);
 
 Delete a dashboard list.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.DashboardListsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         DashboardListsApi apiInstance = new DashboardListsApi(defaultClient);
         Long listId = 56L; // Long | ID of the dashboard list to delete.
         try {
-            DashboardListDeleteResponse result = apiInstance.deleteDashboardList(listId)
-                .execute();
+            DashboardListDeleteResponse result = apiInstance.deleteDashboardList(listId);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling DashboardListsApi#deleteDashboardList");
@@ -177,45 +142,28 @@ Name | Type | Description  | Notes
 
 ## getDashboardList
 
-> DashboardList getDashboardList(listId).execute();
-
-Get a dashboard list
+> DashboardList getDashboardList(listId);
 
 Fetch an existing dashboard list's definition.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.DashboardListsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         DashboardListsApi apiInstance = new DashboardListsApi(defaultClient);
         Long listId = 56L; // Long | ID of the dashboard list to fetch.
         try {
-            DashboardList result = apiInstance.getDashboardList(listId)
-                .execute();
+            DashboardList result = apiInstance.getDashboardList(listId);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling DashboardListsApi#getDashboardList");
@@ -258,44 +206,27 @@ Name | Type | Description  | Notes
 
 ## listDashboardLists
 
-> DashboardListListResponse listDashboardLists().execute();
-
-Get all dashboard lists
+> DashboardListListResponse listDashboardLists();
 
 Fetch all of your existing dashboard list definitions.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.DashboardListsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         DashboardListsApi apiInstance = new DashboardListsApi(defaultClient);
         try {
-            DashboardListListResponse result = apiInstance.listDashboardLists()
-                .execute();
+            DashboardListListResponse result = apiInstance.listDashboardLists();
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling DashboardListsApi#listDashboardLists");
@@ -334,47 +265,29 @@ This endpoint does not need any parameter.
 
 ## updateDashboardList
 
-> DashboardList updateDashboardList(listId).body(body).execute();
-
-Update a dashboard list
+> DashboardList updateDashboardList(listId, body);
 
 Update the name of a dashboard list.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.DashboardListsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         DashboardListsApi apiInstance = new DashboardListsApi(defaultClient);
         Long listId = 56L; // Long | ID of the dashboard list to update.
         DashboardList body = new DashboardList(); // DashboardList | Update a dashboard list request body.
         try {
-            DashboardList result = apiInstance.updateDashboardList(listId)
-                .body(body)
-                .execute();
+            DashboardList result = apiInstance.updateDashboardList(listId, body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling DashboardListsApi#updateDashboardList");

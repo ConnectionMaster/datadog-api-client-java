@@ -2,8 +2,8 @@
 
 All URIs are relative to *https://api.datadoghq.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
+Method        | HTTP request | Description
+------------- | ------------ | ------------
 [**createLogsMetric**](LogsMetricsApi.md#createLogsMetric) | **POST** /api/v2/logs/config/metrics | Create a log-based metric
 [**deleteLogsMetric**](LogsMetricsApi.md#deleteLogsMetric) | **DELETE** /api/v2/logs/config/metrics/{metric_id} | Delete a log-based metric
 [**getLogsMetric**](LogsMetricsApi.md#getLogsMetric) | **GET** /api/v2/logs/config/metrics/{metric_id} | Get a log-based metric
@@ -14,9 +14,7 @@ Method | HTTP request | Description
 
 ## createLogsMetric
 
-> LogsMetricResponse createLogsMetric().body(body).execute();
-
-Create a log-based metric
+> LogsMetricResponse createLogsMetric(body);
 
 Create a metric based on your ingested logs in your organization.
 Returns the log-based metric object from the request body when the request is successful.
@@ -24,37 +22,21 @@ Returns the log-based metric object from the request body when the request is su
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v2.client.ApiClient;
 import com.datadog.api.v2.client.ApiException;
 import com.datadog.api.v2.client.Configuration;
-import com.datadog.api.v2.client.auth.*;
 import com.datadog.api.v2.client.model.*;
 import com.datadog.api.v2.client.api.LogsMetricsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         LogsMetricsApi apiInstance = new LogsMetricsApi(defaultClient);
         LogsMetricCreateRequest body = new LogsMetricCreateRequest(); // LogsMetricCreateRequest | The definition of the new log-based metric.
         try {
-            LogsMetricResponse result = apiInstance.createLogsMetric()
-                .body(body)
-                .execute();
+            LogsMetricResponse result = apiInstance.createLogsMetric(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling LogsMetricsApi#createLogsMetric");
@@ -99,45 +81,28 @@ Name | Type | Description  | Notes
 
 ## deleteLogsMetric
 
-> deleteLogsMetric(metricId).execute();
-
-Delete a log-based metric
+> deleteLogsMetric(metricId);
 
 Delete a specific log-based metric from your organization.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v2.client.ApiClient;
 import com.datadog.api.v2.client.ApiException;
 import com.datadog.api.v2.client.Configuration;
-import com.datadog.api.v2.client.auth.*;
 import com.datadog.api.v2.client.model.*;
 import com.datadog.api.v2.client.api.LogsMetricsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         LogsMetricsApi apiInstance = new LogsMetricsApi(defaultClient);
         String metricId = "metricId_example"; // String | The name of the log-based metric.
         try {
-            apiInstance.deleteLogsMetric(metricId)
-                .execute();
+            apiInstance.deleteLogsMetric(metricId);
         } catch (ApiException e) {
             System.err.println("Exception when calling LogsMetricsApi#deleteLogsMetric");
             System.err.println("Status code: " + e.getCode());
@@ -180,45 +145,28 @@ null (empty response body)
 
 ## getLogsMetric
 
-> LogsMetricResponse getLogsMetric(metricId).execute();
-
-Get a log-based metric
+> LogsMetricResponse getLogsMetric(metricId);
 
 Get a specific log-based metric from your organization.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v2.client.ApiClient;
 import com.datadog.api.v2.client.ApiException;
 import com.datadog.api.v2.client.Configuration;
-import com.datadog.api.v2.client.auth.*;
 import com.datadog.api.v2.client.model.*;
 import com.datadog.api.v2.client.api.LogsMetricsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         LogsMetricsApi apiInstance = new LogsMetricsApi(defaultClient);
         String metricId = "metricId_example"; // String | The name of the log-based metric.
         try {
-            LogsMetricResponse result = apiInstance.getLogsMetric(metricId)
-                .execute();
+            LogsMetricResponse result = apiInstance.getLogsMetric(metricId);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling LogsMetricsApi#getLogsMetric");
@@ -262,44 +210,27 @@ Name | Type | Description  | Notes
 
 ## listLogsMetrics
 
-> LogsMetricsResponse listLogsMetrics().execute();
-
-Get all log-based metrics
+> LogsMetricsResponse listLogsMetrics();
 
 Get the list of configured log-based metrics with their definitions.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v2.client.ApiClient;
 import com.datadog.api.v2.client.ApiException;
 import com.datadog.api.v2.client.Configuration;
-import com.datadog.api.v2.client.auth.*;
 import com.datadog.api.v2.client.model.*;
 import com.datadog.api.v2.client.api.LogsMetricsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         LogsMetricsApi apiInstance = new LogsMetricsApi(defaultClient);
         try {
-            LogsMetricsResponse result = apiInstance.listLogsMetrics()
-                .execute();
+            LogsMetricsResponse result = apiInstance.listLogsMetrics();
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling LogsMetricsApi#listLogsMetrics");
@@ -339,9 +270,7 @@ This endpoint does not need any parameter.
 
 ## updateLogsMetric
 
-> LogsMetricResponse updateLogsMetric(metricId).body(body).execute();
-
-Update a log-based metric
+> LogsMetricResponse updateLogsMetric(metricId, body);
 
 Update a specific log-based metric from your organization.
 Returns the log-based metric object from the request body when the request is successful.
@@ -349,38 +278,22 @@ Returns the log-based metric object from the request body when the request is su
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v2.client.ApiClient;
 import com.datadog.api.v2.client.ApiException;
 import com.datadog.api.v2.client.Configuration;
-import com.datadog.api.v2.client.auth.*;
 import com.datadog.api.v2.client.model.*;
 import com.datadog.api.v2.client.api.LogsMetricsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         LogsMetricsApi apiInstance = new LogsMetricsApi(defaultClient);
         String metricId = "metricId_example"; // String | The name of the log-based metric.
         LogsMetricUpdateRequest body = new LogsMetricUpdateRequest(); // LogsMetricUpdateRequest | New definition of the log-based metric.
         try {
-            LogsMetricResponse result = apiInstance.updateLogsMetric(metricId)
-                .body(body)
-                .execute();
+            LogsMetricResponse result = apiInstance.updateLogsMetric(metricId, body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling LogsMetricsApi#updateLogsMetric");

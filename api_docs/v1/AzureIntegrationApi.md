@@ -2,8 +2,8 @@
 
 All URIs are relative to *https://api.datadoghq.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
+Method        | HTTP request | Description
+------------- | ------------ | ------------
 [**createAzureIntegration**](AzureIntegrationApi.md#createAzureIntegration) | **POST** /api/v1/integration/azure | Create an Azure integration
 [**deleteAzureIntegration**](AzureIntegrationApi.md#deleteAzureIntegration) | **DELETE** /api/v1/integration/azure | Delete an Azure integration
 [**listAzureIntegration**](AzureIntegrationApi.md#listAzureIntegration) | **GET** /api/v1/integration/azure | List all Azure integrations
@@ -14,9 +14,7 @@ Method | HTTP request | Description
 
 ## createAzureIntegration
 
-> Object createAzureIntegration().body(body).execute();
-
-Create an Azure integration
+> Object createAzureIntegration(body);
 
 Create a Datadog-Azure integration.
 
@@ -29,37 +27,21 @@ current configuration with the new one sent to your Datadog organization.
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.AzureIntegrationApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         AzureIntegrationApi apiInstance = new AzureIntegrationApi(defaultClient);
         AzureAccount body = new AzureAccount(); // AzureAccount | Create a Datadog-Azure integration for your Datadog account request body.
         try {
-            Object result = apiInstance.createAzureIntegration()
-                .body(body)
-                .execute();
+            Object result = apiInstance.createAzureIntegration(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling AzureIntegrationApi#createAzureIntegration");
@@ -102,46 +84,28 @@ Name | Type | Description  | Notes
 
 ## deleteAzureIntegration
 
-> Object deleteAzureIntegration().body(body).execute();
-
-Delete an Azure integration
+> Object deleteAzureIntegration(body);
 
 Delete a given Datadog-Azure integration from your Datadog account.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.AzureIntegrationApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         AzureIntegrationApi apiInstance = new AzureIntegrationApi(defaultClient);
         AzureAccount body = new AzureAccount(); // AzureAccount | Delete a given Datadog-Azure integration request body.
         try {
-            Object result = apiInstance.deleteAzureIntegration()
-                .body(body)
-                .execute();
+            Object result = apiInstance.deleteAzureIntegration(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling AzureIntegrationApi#deleteAzureIntegration");
@@ -184,44 +148,27 @@ Name | Type | Description  | Notes
 
 ## listAzureIntegration
 
-> List&lt;AzureAccount&gt; listAzureIntegration().execute();
-
-List all Azure integrations
+> List&lt;AzureAccount&gt; listAzureIntegration();
 
 List all Datadog-Azure integrations configured in your Datadog account.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.AzureIntegrationApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         AzureIntegrationApi apiInstance = new AzureIntegrationApi(defaultClient);
         try {
-            List<AzureAccount> result = apiInstance.listAzureIntegration()
-                .execute();
+            List<AzureAccount> result = apiInstance.listAzureIntegration();
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling AzureIntegrationApi#listAzureIntegration");
@@ -261,46 +208,28 @@ This endpoint does not need any parameter.
 
 ## updateAzureHostFilters
 
-> Object updateAzureHostFilters().body(body).execute();
-
-Update Azure integration host filters
+> Object updateAzureHostFilters(body);
 
 Update the defined list of host filters for a given Datadog-Azure integration.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.AzureIntegrationApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         AzureIntegrationApi apiInstance = new AzureIntegrationApi(defaultClient);
         AzureAccount body = new AzureAccount(); // AzureAccount | Update a Datadog-Azure integration's host filters request body.
         try {
-            Object result = apiInstance.updateAzureHostFilters()
-                .body(body)
-                .execute();
+            Object result = apiInstance.updateAzureHostFilters(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling AzureIntegrationApi#updateAzureHostFilters");
@@ -343,9 +272,7 @@ Name | Type | Description  | Notes
 
 ## updateAzureIntegration
 
-> Object updateAzureIntegration().body(body).execute();
-
-Update an Azure integration
+> Object updateAzureIntegration(body);
 
 Update a Datadog-Azure integration. Requires an existing `tenant_name` and `client_id`.
 Any other fields supplied will overwrite existing values. To overwrite `tenant_name` or `client_id`,
@@ -354,37 +281,21 @@ use `new_tenant_name` and `new_client_id`. To leave a field unchanged, do not su
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.AzureIntegrationApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         AzureIntegrationApi apiInstance = new AzureIntegrationApi(defaultClient);
         AzureAccount body = new AzureAccount(); // AzureAccount | Update a Datadog-Azure integration request body.
         try {
-            Object result = apiInstance.updateAzureIntegration()
-                .body(body)
-                .execute();
+            Object result = apiInstance.updateAzureIntegration(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling AzureIntegrationApi#updateAzureIntegration");

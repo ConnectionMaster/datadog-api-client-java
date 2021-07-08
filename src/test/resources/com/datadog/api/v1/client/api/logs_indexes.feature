@@ -1,4 +1,4 @@
-@endpoint(logs-indexes)
+@endpoint(logs-indexes) @endpoint(logs-indexes-v1)
 Feature: Logs Indexes
   Manage configuration of [log
   indexes](https://docs.datadoghq.com/logs/indexes/). You need an API and
@@ -11,89 +11,78 @@ Feature: Logs Indexes
 
   @generated @skip
   Scenario: Create an index returns "Invalid Parameter Error" response
-    Given operation "CreateLogsIndex" enabled
-    And new "CreateLogsIndex" request
-    And body {}
+    Given new "CreateLogsIndex" request
+    And body with value {"daily_limit": 300000000, "exclusion_filters": [{"filter": {"query": "*", "sample_rate": 1}, "is_enabled": null, "name": "payment"}], "filter": {"query": "source:python"}, "name": "main", "num_retention_days": 15}
     When the request is sent
     Then the response status is 400 Invalid Parameter Error
 
   @generated @skip
   Scenario: Create an index returns "OK" response
-    Given operation "CreateLogsIndex" enabled
-    And new "CreateLogsIndex" request
-    And body {}
+    Given new "CreateLogsIndex" request
+    And body with value {"daily_limit": 300000000, "exclusion_filters": [{"filter": {"query": "*", "sample_rate": 1}, "is_enabled": null, "name": "payment"}], "filter": {"query": "source:python"}, "name": "main", "num_retention_days": 15}
     When the request is sent
     Then the response status is 200 OK
 
   @generated @skip
   Scenario: Get all indexes returns "OK" response
-    Given operation "ListLogIndexes" enabled
-    And new "ListLogIndexes" request
+    Given new "ListLogIndexes" request
     When the request is sent
     Then the response status is 200 OK
 
   @generated @skip
   Scenario: Get an index returns "Not Found" response
-    Given operation "GetLogsIndex" enabled
-    And new "GetLogsIndex" request
+    Given new "GetLogsIndex" request
     And request contains "name" parameter from "<PATH>"
     When the request is sent
     Then the response status is 404 Not Found
 
   @generated @skip
   Scenario: Get an index returns "OK" response
-    Given operation "GetLogsIndex" enabled
-    And new "GetLogsIndex" request
+    Given new "GetLogsIndex" request
     And request contains "name" parameter from "<PATH>"
     When the request is sent
     Then the response status is 200 OK
 
   @generated @skip
   Scenario: Get indexes order returns "OK" response
-    Given operation "GetLogsIndexOrder" enabled
-    And new "GetLogsIndexOrder" request
+    Given new "GetLogsIndexOrder" request
     When the request is sent
     Then the response status is 200 OK
 
   @generated @skip
   Scenario: Update an index returns "Invalid Parameter Error" response
-    Given operation "UpdateLogsIndex" enabled
-    And new "UpdateLogsIndex" request
+    Given new "UpdateLogsIndex" request
     And request contains "name" parameter from "<PATH>"
-    And body {}
+    And body with value {"daily_limit": null, "disable_daily_limit": null, "exclusion_filters": [{"filter": {"query": "*", "sample_rate": 1}, "is_enabled": null, "name": "payment"}], "filter": {"query": "source:python"}, "num_retention_days": null}
     When the request is sent
     Then the response status is 400 Invalid Parameter Error
 
   @generated @skip
   Scenario: Update an index returns "OK" response
-    Given operation "UpdateLogsIndex" enabled
-    And new "UpdateLogsIndex" request
+    Given new "UpdateLogsIndex" request
     And request contains "name" parameter from "<PATH>"
-    And body {}
+    And body with value {"daily_limit": null, "disable_daily_limit": null, "exclusion_filters": [{"filter": {"query": "*", "sample_rate": 1}, "is_enabled": null, "name": "payment"}], "filter": {"query": "source:python"}, "num_retention_days": null}
     When the request is sent
     Then the response status is 200 OK
 
   @generated @skip
   Scenario: Update an index returns "Too Many Requests" response
-    Given operation "UpdateLogsIndex" enabled
-    And new "UpdateLogsIndex" request
+    Given new "UpdateLogsIndex" request
     And request contains "name" parameter from "<PATH>"
-    And body {}
+    And body with value {"daily_limit": null, "disable_daily_limit": null, "exclusion_filters": [{"filter": {"query": "*", "sample_rate": 1}, "is_enabled": null, "name": "payment"}], "filter": {"query": "source:python"}, "num_retention_days": null}
     When the request is sent
     Then the response status is 429 Too Many Requests
 
   @generated @skip
   Scenario: Update indexes order returns "Bad Request" response
-    Given operation "UpdateLogsIndexOrder" enabled
-    And new "UpdateLogsIndexOrder" request
-    And body {}
+    Given new "UpdateLogsIndexOrder" request
+    And body with value {"index_names": ["main", "payments", "web"]}
     When the request is sent
     Then the response status is 400 Bad Request
 
   @generated @skip
   Scenario: Update indexes order returns "OK" response
-    Given operation "UpdateLogsIndexOrder" enabled
-    And new "UpdateLogsIndexOrder" request
-    And body {}
+    Given new "UpdateLogsIndexOrder" request
+    And body with value {"index_names": ["main", "payments", "web"]}
     When the request is sent
     Then the response status is 200 OK

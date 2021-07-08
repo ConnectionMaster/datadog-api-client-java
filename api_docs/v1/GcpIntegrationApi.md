@@ -2,8 +2,8 @@
 
 All URIs are relative to *https://api.datadoghq.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
+Method        | HTTP request | Description
+------------- | ------------ | ------------
 [**createGCPIntegration**](GcpIntegrationApi.md#createGCPIntegration) | **POST** /api/v1/integration/gcp | Create a GCP integration
 [**deleteGCPIntegration**](GcpIntegrationApi.md#deleteGCPIntegration) | **DELETE** /api/v1/integration/gcp | Delete a GCP integration
 [**listGCPIntegration**](GcpIntegrationApi.md#listGCPIntegration) | **GET** /api/v1/integration/gcp | List all GCP integrations
@@ -13,46 +13,28 @@ Method | HTTP request | Description
 
 ## createGCPIntegration
 
-> Object createGCPIntegration().body(body).execute();
-
-Create a GCP integration
+> Object createGCPIntegration(body);
 
 Create a Datadog-GCP integration.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.GcpIntegrationApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         GcpIntegrationApi apiInstance = new GcpIntegrationApi(defaultClient);
         GCPAccount body = new GCPAccount(); // GCPAccount | Create a Datadog-GCP integration.
         try {
-            Object result = apiInstance.createGCPIntegration()
-                .body(body)
-                .execute();
+            Object result = apiInstance.createGCPIntegration(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling GcpIntegrationApi#createGCPIntegration");
@@ -95,46 +77,28 @@ Name | Type | Description  | Notes
 
 ## deleteGCPIntegration
 
-> Object deleteGCPIntegration().body(body).execute();
-
-Delete a GCP integration
+> Object deleteGCPIntegration(body);
 
 Delete a given Datadog-GCP integration.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.GcpIntegrationApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         GcpIntegrationApi apiInstance = new GcpIntegrationApi(defaultClient);
         GCPAccount body = new GCPAccount(); // GCPAccount | Delete a given Datadog-GCP integration.
         try {
-            Object result = apiInstance.deleteGCPIntegration()
-                .body(body)
-                .execute();
+            Object result = apiInstance.deleteGCPIntegration(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling GcpIntegrationApi#deleteGCPIntegration");
@@ -177,44 +141,27 @@ Name | Type | Description  | Notes
 
 ## listGCPIntegration
 
-> List&lt;GCPAccount&gt; listGCPIntegration().execute();
-
-List all GCP integrations
+> List&lt;GCPAccount&gt; listGCPIntegration();
 
 List all Datadog-GCP integrations configured in your Datadog account.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.GcpIntegrationApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         GcpIntegrationApi apiInstance = new GcpIntegrationApi(defaultClient);
         try {
-            List<GCPAccount> result = apiInstance.listGCPIntegration()
-                .execute();
+            List<GCPAccount> result = apiInstance.listGCPIntegration();
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling GcpIntegrationApi#listGCPIntegration");
@@ -254,9 +201,7 @@ This endpoint does not need any parameter.
 
 ## updateGCPIntegration
 
-> Object updateGCPIntegration().body(body).execute();
-
-Update a GCP integration
+> Object updateGCPIntegration(body);
 
 Update a Datadog-GCP integrations host_filters and/or auto-mute.
 Requires a `project_id` and `client_email`, however these fields cannot be updated.
@@ -266,37 +211,21 @@ The unspecified fields will keep their original values.
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.GcpIntegrationApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         GcpIntegrationApi apiInstance = new GcpIntegrationApi(defaultClient);
         GCPAccount body = new GCPAccount(); // GCPAccount | Update a Datadog-GCP integration.
         try {
-            Object result = apiInstance.updateGCPIntegration()
-                .body(body)
-                .execute();
+            Object result = apiInstance.updateGCPIntegration(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling GcpIntegrationApi#updateGCPIntegration");

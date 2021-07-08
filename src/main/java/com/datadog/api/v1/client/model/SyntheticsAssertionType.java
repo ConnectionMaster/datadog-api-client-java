@@ -8,41 +8,40 @@
  * Do not edit the class manually.
  */
 
-
 package com.datadog.api.v1.client.model;
-
-import java.util.Objects;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import io.swagger.annotations.ApiModel;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.datadog.api.v1.client.JSON;
-
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-/**
- * Type of the assertion.
- */
+/** Type of the assertion. */
 public enum SyntheticsAssertionType {
-  
   BODY("body"),
-  
+
   HEADER("header"),
-  
+
   STATUS_CODE("statusCode"),
-  
+
   CERTIFICATE("certificate"),
-  
+
   RESPONSE_TIME("responseTime"),
-  
+
   PROPERTY("property"),
-  
+
   RECORD_EVERY("recordEvery"),
-  
-  RECORD_SOME("recordSome");
+
+  RECORD_SOME("recordSome"),
+
+  TLS_VERSION("tlsVersion"),
+
+  MIN_TLS_VERSION("minTlsVersion"),
+
+  LATENCY("latency"),
+
+  PACKET_LOSS_PERCENTAGE("packetLossPercentage"),
+
+  PACKETS_RECEIVED("packetsReceived"),
+
+  NETWORK_HOP("networkHop");
 
   private String value;
 
@@ -70,4 +69,3 @@ public enum SyntheticsAssertionType {
     throw new IllegalArgumentException("Unexpected value '" + value + "'");
   }
 }
-

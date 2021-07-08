@@ -1,4 +1,4 @@
-@endpoint(service-level-objectives)
+@endpoint(service-level-objectives) @endpoint(service-level-objectives-v1)
 Feature: Service Level Objectives
   [Service Level Objectives](https://docs.datadoghq.com/monitors/service_lev
   el_objectives/#configuration) (or SLOs) are a key part of the site
@@ -16,14 +16,14 @@ Feature: Service Level Objectives
   @generated @skip
   Scenario: Bulk Delete SLO Timeframes returns "Bad Request" response
     Given new "DeleteSLOTimeframeInBulk" request
-    And body {}
+    And body with value {"id1": ["7d", "30d"], "id2": ["7d", "30d"]}
     When the request is sent
     Then the response status is 400 Bad Request
 
   @generated @skip
   Scenario: Bulk Delete SLO Timeframes returns "OK" response
     Given new "DeleteSLOTimeframeInBulk" request
-    And body {}
+    And body with value {"id1": ["7d", "30d"], "id2": ["7d", "30d"]}
     When the request is sent
     Then the response status is 200 OK
 
@@ -45,50 +45,65 @@ Feature: Service Level Objectives
     When the request is sent
     Then the response status is 200 OK
 
-  @generated @skip
-  Scenario: Create a SLO object returns "Bad Request" response
+  Scenario: Create an SLO object returns "Bad Request" response
     Given new "CreateSLO" request
-    And body {}
+    And body with value {"type":"monitor","name":"{{ unique }}","thresholds":[{"target":95.0,"target_display":"95.0","timeframe":"7d","warning":98,"warning_display":"98.0"}]}
     When the request is sent
     Then the response status is 400 Bad Request
 
-  @generated @skip
-  Scenario: Create a SLO object returns "OK" response
+  Scenario: Create an SLO object returns "OK" response
     Given new "CreateSLO" request
-    And body {}
+    And body with value {"type":"metric","description":"string","groups":["env:test","role:mysql"],"monitor_ids":[],"name":"{{ unique }}","query":{"denominator":"sum:httpservice.hits{!code:3xx}.as_count()","numerator":"sum:httpservice.hits{code:2xx}.as_count()"},"tags":["env:prod","app:core"],"thresholds":[{"target":95.0,"target_display":"95.0","timeframe":"7d","warning":98,"warning_display":"98.0"}]}
     When the request is sent
     Then the response status is 200 OK
 
   @generated @skip
-  Scenario: Delete a SLO returns "Conflict" response
+  Scenario: Delete an SLO returns "Conflict" response
     Given new "DeleteSLO" request
     And request contains "slo_id" parameter from "<PATH>"
     When the request is sent
     Then the response status is 409 Conflict
 
-  @generated @skip
-  Scenario: Delete a SLO returns "Not found" response
+  Scenario: Delete an SLO returns "Not found" response
     Given new "DeleteSLO" request
-    And request contains "slo_id" parameter from "<PATH>"
+    And request contains "slo_id" parameter with value "{{ unique_lower_alnum }}"
     When the request is sent
     Then the response status is 404 Not found
 
-  @generated @skip
-  Scenario: Delete a SLO returns "OK" response
-    Given new "DeleteSLO" request
-    And request contains "slo_id" parameter from "<PATH>"
+  Scenario: Delete an SLO returns "OK" response
+    Given there is a valid "slo" in the system
+    And new "DeleteSLO" request
+    And request contains "slo_id" parameter from "slo.data[0].id"
     When the request is sent
     Then the response status is 200 OK
 
   @generated @skip
-  Scenario: Get a SLO's details returns "Not found" response
+  Scenario: Get all SLOs returns "Bad Request" response
+    Given new "ListSLOs" request
+    When the request is sent
+    Then the response status is 400 Bad Request
+
+  @generated @skip
+  Scenario: Get all SLOs returns "Not Found" response
+    Given new "ListSLOs" request
+    When the request is sent
+    Then the response status is 404 Not Found
+
+  @generated @skip
+  Scenario: Get all SLOs returns "OK" response
+    Given new "ListSLOs" request
+    When the request is sent
+    Then the response status is 200 OK
+
+  @generated @skip
+  Scenario: Get an SLO's details returns "Not found" response
     Given new "GetSLO" request
     And request contains "slo_id" parameter from "<PATH>"
     When the request is sent
     Then the response status is 404 Not found
 
   @generated @skip
-  Scenario: Get a SLO's details returns "OK" response
+  Scenario: Get an SLO's details returns "OK" response
     Given new "GetSLO" request
     And request contains "slo_id" parameter from "<PATH>"
     When the request is sent
@@ -118,44 +133,26 @@ Feature: Service Level Objectives
     When the request is sent
     Then the response status is 200 OK
 
-  @generated @skip
-  Scenario: Search SLOs returns "Bad Request" response
-    Given new "ListSLOs" request
+  Scenario: Update an SLO returns "Bad Request" response
+    Given new "UpdateSLO" request
+    And there is a valid "slo" in the system
+    And request contains "slo_id" parameter from "slo.data[0].id"
+    And body with value {"type":"monitor","name":"{{ unique }}","thresholds":[{"target":95.0,"target_display":"95.0","timeframe":"7d","warning":98,"warning_display":"98.0"}]}
     When the request is sent
     Then the response status is 400 Bad Request
 
   @generated @skip
-  Scenario: Search SLOs returns "Not Found" response
-    Given new "ListSLOs" request
+  Scenario: Update an SLO returns "Not Found" response
+    Given new "UpdateSLO" request
+    And request contains "slo_id" parameter from "<PATH>"
+    And body with value null
     When the request is sent
     Then the response status is 404 Not Found
 
   @generated @skip
-  Scenario: Search SLOs returns "OK" response
-    Given new "ListSLOs" request
-    When the request is sent
-    Then the response status is 200 OK
-
-  @generated @skip
-  Scenario: Update a SLO returns "Bad Request" response
+  Scenario: Update an SLO returns "OK" response
     Given new "UpdateSLO" request
     And request contains "slo_id" parameter from "<PATH>"
-    And body {}
-    When the request is sent
-    Then the response status is 400 Bad Request
-
-  @generated @skip
-  Scenario: Update a SLO returns "Not Found" response
-    Given new "UpdateSLO" request
-    And request contains "slo_id" parameter from "<PATH>"
-    And body {}
-    When the request is sent
-    Then the response status is 404 Not Found
-
-  @generated @skip
-  Scenario: Update a SLO returns "OK" response
-    Given new "UpdateSLO" request
-    And request contains "slo_id" parameter from "<PATH>"
-    And body {}
+    And body with value null
     When the request is sent
     Then the response status is 200 OK

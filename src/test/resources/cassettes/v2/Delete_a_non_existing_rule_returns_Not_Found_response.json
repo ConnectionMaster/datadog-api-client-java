@@ -1,0 +1,65 @@
+[
+  {
+    "httpRequest": {
+      "headers": {
+        "JAVA-TEST-NAME": [
+          "Delete_a_non_existing_rule_returns_Not_Found_response"
+        ]
+      },
+      "method": "DELETE",
+      "path": "/api/v2/security_monitoring/rules/ThisRuleIdProbablyDoesntExist",
+      "keepAlive": false,
+      "secure": true
+    },
+    "httpResponse": {
+      "body": "{\"message\": \"The resource could not be found.<br /><br />\\n\\n\\n\", \"code\": \"404 Not Found\", \"title\": \"Not Found\"}",
+      "headers": {
+        "Date": [
+          "Thu, 15 Apr 2021 13:02:49 GMT"
+        ],
+        "Content-Type": [
+          "application/json"
+        ],
+        "Content-Length": [
+          "112"
+        ],
+        "Connection": [
+          "close"
+        ],
+        "Vary": [
+          "Accept-Encoding"
+        ],
+        "Pragma": [
+          "no-cache"
+        ],
+        "Cache-Control": [
+          "no-cache"
+        ],
+        "X-Dd-Version": [
+          "35.4318655"
+        ],
+        "X-Content-Type-Options": [
+          "nosniff"
+        ],
+        "Strict-Transport-Security": [
+          "max-age=15724800;"
+        ],
+        "Content-Security-Policy": [
+          "frame-ancestors 'self'; report-uri https://api.datadoghq.com/csp-report"
+        ],
+        "X-Frame-Options": [
+          "SAMEORIGIN"
+        ]
+      },
+      "statusCode": 404,
+      "reasonPhrase": "Not Found"
+    },
+    "times": {
+      "remainingTimes": 1
+    },
+    "timeToLive": {
+      "unlimited": true
+    },
+    "id": "49fce5e8-074d-4372-1da0-0156a7ea9999"
+  }
+]

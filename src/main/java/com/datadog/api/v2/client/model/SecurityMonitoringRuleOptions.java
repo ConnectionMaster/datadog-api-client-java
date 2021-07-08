@@ -8,38 +8,29 @@
  * Do not edit the class manually.
  */
 
-
 package com.datadog.api.v2.client.model;
 
-import java.util.Objects;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.datadog.api.v2.client.model.SecurityMonitoringRuleEvaluationWindow;
-import com.datadog.api.v2.client.model.SecurityMonitoringRuleKeepAlive;
-import com.datadog.api.v2.client.model.SecurityMonitoringRuleMaxSignalDuration;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.datadog.api.v2.client.JSON;
+import java.util.Objects;
 
-
-/**
- * Options on rules.
- */
+/** Options on rules. */
 @ApiModel(description = "Options on rules.")
 @JsonPropertyOrder({
+  SecurityMonitoringRuleOptions.JSON_PROPERTY_DETECTION_METHOD,
   SecurityMonitoringRuleOptions.JSON_PROPERTY_EVALUATION_WINDOW,
   SecurityMonitoringRuleOptions.JSON_PROPERTY_KEEP_ALIVE,
-  SecurityMonitoringRuleOptions.JSON_PROPERTY_MAX_SIGNAL_DURATION
+  SecurityMonitoringRuleOptions.JSON_PROPERTY_MAX_SIGNAL_DURATION,
+  SecurityMonitoringRuleOptions.JSON_PROPERTY_NEW_VALUE_OPTIONS
 })
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class SecurityMonitoringRuleOptions {
+  public static final String JSON_PROPERTY_DETECTION_METHOD = "detectionMethod";
+  private SecurityMonitoringRuleDetectionMethod detectionMethod;
+
   public static final String JSON_PROPERTY_EVALUATION_WINDOW = "evaluationWindow";
   private SecurityMonitoringRuleEvaluationWindow evaluationWindow;
 
@@ -49,82 +40,124 @@ public class SecurityMonitoringRuleOptions {
   public static final String JSON_PROPERTY_MAX_SIGNAL_DURATION = "maxSignalDuration";
   private SecurityMonitoringRuleMaxSignalDuration maxSignalDuration;
 
+  public static final String JSON_PROPERTY_NEW_VALUE_OPTIONS = "newValueOptions";
+  private SecurityMonitoringRuleNewValueOptions newValueOptions;
 
-  public SecurityMonitoringRuleOptions evaluationWindow(SecurityMonitoringRuleEvaluationWindow evaluationWindow) {
+  public SecurityMonitoringRuleOptions detectionMethod(
+      SecurityMonitoringRuleDetectionMethod detectionMethod) {
+    this.detectionMethod = detectionMethod;
+    return this;
+  }
+
+  /**
+   * Get detectionMethod
+   *
+   * @return detectionMethod
+   */
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+  @JsonProperty(JSON_PROPERTY_DETECTION_METHOD)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public SecurityMonitoringRuleDetectionMethod getDetectionMethod() {
+    return detectionMethod;
+  }
+
+  public void setDetectionMethod(SecurityMonitoringRuleDetectionMethod detectionMethod) {
+    this.detectionMethod = detectionMethod;
+  }
+
+  public SecurityMonitoringRuleOptions evaluationWindow(
+      SecurityMonitoringRuleEvaluationWindow evaluationWindow) {
     this.evaluationWindow = evaluationWindow;
     return this;
   }
 
-   /**
+  /**
    * Get evaluationWindow
+   *
    * @return evaluationWindow
-  **/
+   */
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
   @JsonProperty(JSON_PROPERTY_EVALUATION_WINDOW)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public SecurityMonitoringRuleEvaluationWindow getEvaluationWindow() {
     return evaluationWindow;
   }
 
-
   public void setEvaluationWindow(SecurityMonitoringRuleEvaluationWindow evaluationWindow) {
     this.evaluationWindow = evaluationWindow;
   }
-
 
   public SecurityMonitoringRuleOptions keepAlive(SecurityMonitoringRuleKeepAlive keepAlive) {
     this.keepAlive = keepAlive;
     return this;
   }
 
-   /**
+  /**
    * Get keepAlive
+   *
    * @return keepAlive
-  **/
+   */
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
   @JsonProperty(JSON_PROPERTY_KEEP_ALIVE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public SecurityMonitoringRuleKeepAlive getKeepAlive() {
     return keepAlive;
   }
-
 
   public void setKeepAlive(SecurityMonitoringRuleKeepAlive keepAlive) {
     this.keepAlive = keepAlive;
   }
 
-
-  public SecurityMonitoringRuleOptions maxSignalDuration(SecurityMonitoringRuleMaxSignalDuration maxSignalDuration) {
+  public SecurityMonitoringRuleOptions maxSignalDuration(
+      SecurityMonitoringRuleMaxSignalDuration maxSignalDuration) {
     this.maxSignalDuration = maxSignalDuration;
     return this;
   }
 
-   /**
+  /**
    * Get maxSignalDuration
+   *
    * @return maxSignalDuration
-  **/
+   */
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
   @JsonProperty(JSON_PROPERTY_MAX_SIGNAL_DURATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public SecurityMonitoringRuleMaxSignalDuration getMaxSignalDuration() {
     return maxSignalDuration;
   }
-
 
   public void setMaxSignalDuration(SecurityMonitoringRuleMaxSignalDuration maxSignalDuration) {
     this.maxSignalDuration = maxSignalDuration;
   }
 
+  public SecurityMonitoringRuleOptions newValueOptions(
+      SecurityMonitoringRuleNewValueOptions newValueOptions) {
+    this.newValueOptions = newValueOptions;
+    return this;
+  }
 
   /**
-   * Return true if this SecurityMonitoringRuleOptions object is equal to o.
+   * Get newValueOptions
+   *
+   * @return newValueOptions
    */
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+  @JsonProperty(JSON_PROPERTY_NEW_VALUE_OPTIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public SecurityMonitoringRuleNewValueOptions getNewValueOptions() {
+    return newValueOptions;
+  }
+
+  public void setNewValueOptions(SecurityMonitoringRuleNewValueOptions newValueOptions) {
+    this.newValueOptions = newValueOptions;
+  }
+
+  /** Return true if this SecurityMonitoringRuleOptions object is equal to o. */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -134,31 +167,34 @@ public class SecurityMonitoringRuleOptions {
       return false;
     }
     SecurityMonitoringRuleOptions securityMonitoringRuleOptions = (SecurityMonitoringRuleOptions) o;
-    return Objects.equals(this.evaluationWindow, securityMonitoringRuleOptions.evaluationWindow) &&
-        Objects.equals(this.keepAlive, securityMonitoringRuleOptions.keepAlive) &&
-        Objects.equals(this.maxSignalDuration, securityMonitoringRuleOptions.maxSignalDuration);
+    return Objects.equals(this.detectionMethod, securityMonitoringRuleOptions.detectionMethod)
+        && Objects.equals(this.evaluationWindow, securityMonitoringRuleOptions.evaluationWindow)
+        && Objects.equals(this.keepAlive, securityMonitoringRuleOptions.keepAlive)
+        && Objects.equals(this.maxSignalDuration, securityMonitoringRuleOptions.maxSignalDuration)
+        && Objects.equals(this.newValueOptions, securityMonitoringRuleOptions.newValueOptions);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(evaluationWindow, keepAlive, maxSignalDuration);
+    return Objects.hash(
+        detectionMethod, evaluationWindow, keepAlive, maxSignalDuration, newValueOptions);
   }
-
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class SecurityMonitoringRuleOptions {\n");
+    sb.append("    detectionMethod: ").append(toIndentedString(detectionMethod)).append("\n");
     sb.append("    evaluationWindow: ").append(toIndentedString(evaluationWindow)).append("\n");
     sb.append("    keepAlive: ").append(toIndentedString(keepAlive)).append("\n");
     sb.append("    maxSignalDuration: ").append(toIndentedString(maxSignalDuration)).append("\n");
+    sb.append("    newValueOptions: ").append(toIndentedString(newValueOptions)).append("\n");
     sb.append("}");
     return sb.toString();
   }
 
   /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
+   * Convert the given object to string with each line indented by 4 spaces (except the first line).
    */
   private String toIndentedString(Object o) {
     if (o == null) {
@@ -166,6 +202,4 @@ public class SecurityMonitoringRuleOptions {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
-

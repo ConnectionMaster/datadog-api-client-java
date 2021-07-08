@@ -2,8 +2,8 @@
 
 All URIs are relative to *https://api.datadoghq.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
+Method        | HTTP request | Description
+------------- | ------------ | ------------
 [**createHostTags**](TagsApi.md#createHostTags) | **POST** /api/v1/tags/hosts/{host_name} | Add tags to a host
 [**deleteHostTags**](TagsApi.md#deleteHostTags) | **DELETE** /api/v1/tags/hosts/{host_name} | Remove host tags
 [**getHostTags**](TagsApi.md#getHostTags) | **GET** /api/v1/tags/hosts/{host_name} | Get host tags
@@ -14,9 +14,7 @@ Method | HTTP request | Description
 
 ## createHostTags
 
-> HostTags createHostTags(hostName).body(body).source(source).execute();
-
-Add tags to a host
+> HostTags createHostTags(hostName, body, parameters);
 
 This endpoint allows you to add new tags to a host,
 optionally specifying where these tags come from.
@@ -24,40 +22,24 @@ optionally specifying where these tags come from.
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.TagsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         TagsApi apiInstance = new TagsApi(defaultClient);
         String hostName = "hostName_example"; // String | This endpoint allows you to add new tags to a host, optionally specifying where the tags came from.
         HostTags body = new HostTags(); // HostTags | Update host tags request body.
         String source = "chef"; // String | The source of the tags. [Complete list of source attribute values](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).
         try {
-            HostTags result = apiInstance.createHostTags(hostName)
-                .body(body)
-                .source(source)
-                .execute();
+	    HostTags result = apiInstance.createHostTags(hostName, body, new TagsApi.CreateHostTagsOptionalParameters()
+                .source(source));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling TagsApi#createHostTags");
@@ -102,9 +84,7 @@ Name | Type | Description  | Notes
 
 ## deleteHostTags
 
-> deleteHostTags(hostName).source(source).execute();
-
-Remove host tags
+> deleteHostTags(hostName, parameters);
 
 This endpoint allows you to remove all user-assigned tags
 for a single host.
@@ -112,38 +92,23 @@ for a single host.
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.TagsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         TagsApi apiInstance = new TagsApi(defaultClient);
         String hostName = "hostName_example"; // String | This endpoint allows you to remove all user-assigned tags for a single host.
         String source = "source_example"; // String | The source of the tags (e.g. chef, puppet). [Complete list of source attribute values](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).
         try {
-            apiInstance.deleteHostTags(hostName)
-                .source(source)
-                .execute();
+	    apiInstance.deleteHostTags(hostName, new TagsApi.DeleteHostTagsOptionalParameters()
+                .source(source));
         } catch (ApiException e) {
             System.err.println("Exception when calling TagsApi#deleteHostTags");
             System.err.println("Status code: " + e.getCode());
@@ -186,47 +151,30 @@ null (empty response body)
 
 ## getHostTags
 
-> HostTags getHostTags(hostName).source(source).execute();
-
-Get host tags
+> HostTags getHostTags(hostName, parameters);
 
 Return the list of tags that apply to a given host.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.TagsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         TagsApi apiInstance = new TagsApi(defaultClient);
         String hostName = "hostName_example"; // String | When specified, filters list of tags to those tags with the specified source.
         String source = "source_example"; // String | Source to filter.
         try {
-            HostTags result = apiInstance.getHostTags(hostName)
-                .source(source)
-                .execute();
+	    HostTags result = apiInstance.getHostTags(hostName, new TagsApi.GetHostTagsOptionalParameters()
+                .source(source));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling TagsApi#getHostTags");
@@ -270,46 +218,29 @@ Name | Type | Description  | Notes
 
 ## listHostTags
 
-> TagToHosts listHostTags().source(source).execute();
-
-Get Tags
+> TagToHosts listHostTags(parameters);
 
 Return a mapping of tags to hosts for your whole infrastructure.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.TagsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         TagsApi apiInstance = new TagsApi(defaultClient);
         String source = "source_example"; // String | When specified, filters host list to those tags with the specified source.
         try {
-            TagToHosts result = apiInstance.listHostTags()
-                .source(source)
-                .execute();
+	    TagToHosts result = apiInstance.listHostTags(new TagsApi.ListHostTagsOptionalParameters()
+                .source(source));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling TagsApi#listHostTags");
@@ -352,9 +283,7 @@ Name | Type | Description  | Notes
 
 ## updateHostTags
 
-> HostTags updateHostTags(hostName).body(body).source(source).execute();
-
-Update host tags
+> HostTags updateHostTags(hostName, body, parameters);
 
 This endpoint allows you to update/replace all tags in
 an integration source with those supplied in the request.
@@ -362,40 +291,24 @@ an integration source with those supplied in the request.
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v1.client.ApiClient;
 import com.datadog.api.v1.client.ApiException;
 import com.datadog.api.v1.client.Configuration;
-import com.datadog.api.v1.client.auth.*;
 import com.datadog.api.v1.client.model.*;
 import com.datadog.api.v1.client.api.TagsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         TagsApi apiInstance = new TagsApi(defaultClient);
         String hostName = "hostName_example"; // String | This endpoint allows you to update/replace all in an integration source with those supplied in the request.
         HostTags body = new HostTags(); // HostTags | Add tags to host
         String source = "source_example"; // String | The source of the tags (e.g. chef, puppet). [Complete list of source attribute values](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value)
         try {
-            HostTags result = apiInstance.updateHostTags(hostName)
-                .body(body)
-                .source(source)
-                .execute();
+	    HostTags result = apiInstance.updateHostTags(hostName, body, new TagsApi.UpdateHostTagsOptionalParameters()
+                .source(source));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling TagsApi#updateHostTags");

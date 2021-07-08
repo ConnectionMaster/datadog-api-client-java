@@ -2,8 +2,8 @@
 
 All URIs are relative to *https://api.datadoghq.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
+Method        | HTTP request | Description
+------------- | ------------ | ------------
 [**createIncidentService**](IncidentServicesApi.md#createIncidentService) | **POST** /api/v2/services | Create a new incident service
 [**deleteIncidentService**](IncidentServicesApi.md#deleteIncidentService) | **DELETE** /api/v2/services/{service_id} | Delete an existing incident service
 [**getIncidentService**](IncidentServicesApi.md#getIncidentService) | **GET** /api/v2/services/{service_id} | Get details of an incident service
@@ -14,46 +14,28 @@ Method | HTTP request | Description
 
 ## createIncidentService
 
-> IncidentServiceResponse createIncidentService().body(body).execute();
-
-Create a new incident service
+> IncidentServiceResponse createIncidentService(body);
 
 Creates a new incident service.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v2.client.ApiClient;
 import com.datadog.api.v2.client.ApiException;
 import com.datadog.api.v2.client.Configuration;
-import com.datadog.api.v2.client.auth.*;
 import com.datadog.api.v2.client.model.*;
 import com.datadog.api.v2.client.api.IncidentServicesApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         IncidentServicesApi apiInstance = new IncidentServicesApi(defaultClient);
         IncidentServiceCreateRequest body = new IncidentServiceCreateRequest(); // IncidentServiceCreateRequest | Incident Service Payload.
         try {
-            IncidentServiceResponse result = apiInstance.createIncidentService()
-                .body(body)
-                .execute();
+            IncidentServiceResponse result = apiInstance.createIncidentService(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling IncidentServicesApi#createIncidentService");
@@ -98,45 +80,28 @@ Name | Type | Description  | Notes
 
 ## deleteIncidentService
 
-> deleteIncidentService(serviceId).execute();
-
-Delete an existing incident service
+> deleteIncidentService(serviceId);
 
 Deletes an existing incident service.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v2.client.ApiClient;
 import com.datadog.api.v2.client.ApiException;
 import com.datadog.api.v2.client.Configuration;
-import com.datadog.api.v2.client.auth.*;
 import com.datadog.api.v2.client.model.*;
 import com.datadog.api.v2.client.api.IncidentServicesApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         IncidentServicesApi apiInstance = new IncidentServicesApi(defaultClient);
         String serviceId = "serviceId_example"; // String | The ID of the incident service.
         try {
-            apiInstance.deleteIncidentService(serviceId)
-                .execute();
+            apiInstance.deleteIncidentService(serviceId);
         } catch (ApiException e) {
             System.err.println("Exception when calling IncidentServicesApi#deleteIncidentService");
             System.err.println("Status code: " + e.getCode());
@@ -180,9 +145,7 @@ null (empty response body)
 
 ## getIncidentService
 
-> IncidentServiceResponse getIncidentService(serviceId).include(include).execute();
-
-Get details of an incident service
+> IncidentServiceResponse getIncidentService(serviceId, parameters);
 
 Get details of an incident service. If the `include[users]` query parameter is provided,
 the included attribute will contain the users related to these incident services.
@@ -190,38 +153,23 @@ the included attribute will contain the users related to these incident services
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v2.client.ApiClient;
 import com.datadog.api.v2.client.ApiException;
 import com.datadog.api.v2.client.Configuration;
-import com.datadog.api.v2.client.auth.*;
 import com.datadog.api.v2.client.model.*;
 import com.datadog.api.v2.client.api.IncidentServicesApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         IncidentServicesApi apiInstance = new IncidentServicesApi(defaultClient);
         String serviceId = "serviceId_example"; // String | The ID of the incident service.
         IncidentRelatedObject include = IncidentRelatedObject.fromValue("users"); // IncidentRelatedObject | Specifies which types of related objects should be included in the response.
         try {
-            IncidentServiceResponse result = apiInstance.getIncidentService(serviceId)
-                .include(include)
-                .execute();
+	    IncidentServiceResponse result = apiInstance.getIncidentService(serviceId, new IncidentServicesApi.GetIncidentServiceOptionalParameters()
+                .include(include));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling IncidentServicesApi#getIncidentService");
@@ -267,52 +215,35 @@ Name | Type | Description  | Notes
 
 ## listIncidentServices
 
-> IncidentServicesResponse listIncidentServices().include(include).pageSize(pageSize).pageOffset(pageOffset).filter(filter).execute();
-
-Get a list of all incident services
+> IncidentServicesResponse listIncidentServices(parameters);
 
 Get all incident services uploaded for the requesting user's organization. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these incident services.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v2.client.ApiClient;
 import com.datadog.api.v2.client.ApiException;
 import com.datadog.api.v2.client.Configuration;
-import com.datadog.api.v2.client.auth.*;
 import com.datadog.api.v2.client.model.*;
 import com.datadog.api.v2.client.api.IncidentServicesApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         IncidentServicesApi apiInstance = new IncidentServicesApi(defaultClient);
         IncidentRelatedObject include = IncidentRelatedObject.fromValue("users"); // IncidentRelatedObject | Specifies which types of related objects should be included in the response.
-        Long pageSize = 10l; // Long | Size for a given page.
-        Long pageOffset = 0l; // Long | Specific offset to use as the beginning of the returned page.
+        Long pageSize = 10L; // Long | Size for a given page.
+        Long pageOffset = 0L; // Long | Specific offset to use as the beginning of the returned page.
         String filter = "ExampleServiceName"; // String | A search query that filters services by name.
         try {
-            IncidentServicesResponse result = apiInstance.listIncidentServices()
+	    IncidentServicesResponse result = apiInstance.listIncidentServices(new IncidentServicesApi.ListIncidentServicesOptionalParameters()
                 .include(include)
                 .pageSize(pageSize)
                 .pageOffset(pageOffset)
-                .filter(filter)
-                .execute();
+                .filter(filter));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling IncidentServicesApi#listIncidentServices");
@@ -331,8 +262,8 @@ public class Example {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **include** | **IncidentRelatedObject**| Specifies which types of related objects should be included in the response. | [optional] [enum: users]
- **pageSize** | **Long**| Size for a given page. | [optional] [default to 10l]
- **pageOffset** | **Long**| Specific offset to use as the beginning of the returned page. | [optional] [default to 0l]
+ **pageSize** | **Long**| Size for a given page. | [optional] [default to 10]
+ **pageOffset** | **Long**| Specific offset to use as the beginning of the returned page. | [optional] [default to 0]
  **filter** | **String**| A search query that filters services by name. | [optional]
 
 ### Return type
@@ -360,47 +291,29 @@ Name | Type | Description  | Notes
 
 ## updateIncidentService
 
-> IncidentServiceResponse updateIncidentService(serviceId).body(body).execute();
-
-Update an existing incident service
+> IncidentServiceResponse updateIncidentService(serviceId, body);
 
 Updates an existing incident service. Only provide the attributes which should be updated as this request is a partial update.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v2.client.ApiClient;
 import com.datadog.api.v2.client.ApiException;
 import com.datadog.api.v2.client.Configuration;
-import com.datadog.api.v2.client.auth.*;
 import com.datadog.api.v2.client.model.*;
 import com.datadog.api.v2.client.api.IncidentServicesApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         IncidentServicesApi apiInstance = new IncidentServicesApi(defaultClient);
         String serviceId = "serviceId_example"; // String | The ID of the incident service.
         IncidentServiceUpdateRequest body = new IncidentServiceUpdateRequest(); // IncidentServiceUpdateRequest | Incident Service Payload.
         try {
-            IncidentServiceResponse result = apiInstance.updateIncidentService(serviceId)
-                .body(body)
-                .execute();
+            IncidentServiceResponse result = apiInstance.updateIncidentService(serviceId, body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling IncidentServicesApi#updateIncidentService");

@@ -2,8 +2,8 @@
 
 All URIs are relative to *https://api.datadoghq.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
+Method        | HTTP request | Description
+------------- | ------------ | ------------
 [**createIncidentTeam**](IncidentTeamsApi.md#createIncidentTeam) | **POST** /api/v2/teams | Create a new incident team
 [**deleteIncidentTeam**](IncidentTeamsApi.md#deleteIncidentTeam) | **DELETE** /api/v2/teams/{team_id} | Delete an existing incident team
 [**getIncidentTeam**](IncidentTeamsApi.md#getIncidentTeam) | **GET** /api/v2/teams/{team_id} | Get details of an incident team
@@ -14,46 +14,28 @@ Method | HTTP request | Description
 
 ## createIncidentTeam
 
-> IncidentTeamResponse createIncidentTeam().body(body).execute();
-
-Create a new incident team
+> IncidentTeamResponse createIncidentTeam(body);
 
 Creates a new incident team.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v2.client.ApiClient;
 import com.datadog.api.v2.client.ApiException;
 import com.datadog.api.v2.client.Configuration;
-import com.datadog.api.v2.client.auth.*;
 import com.datadog.api.v2.client.model.*;
 import com.datadog.api.v2.client.api.IncidentTeamsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         IncidentTeamsApi apiInstance = new IncidentTeamsApi(defaultClient);
         IncidentTeamCreateRequest body = new IncidentTeamCreateRequest(); // IncidentTeamCreateRequest | Incident Team Payload.
         try {
-            IncidentTeamResponse result = apiInstance.createIncidentTeam()
-                .body(body)
-                .execute();
+            IncidentTeamResponse result = apiInstance.createIncidentTeam(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling IncidentTeamsApi#createIncidentTeam");
@@ -98,45 +80,28 @@ Name | Type | Description  | Notes
 
 ## deleteIncidentTeam
 
-> deleteIncidentTeam(teamId).execute();
-
-Delete an existing incident team
+> deleteIncidentTeam(teamId);
 
 Deletes an existing incident team.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v2.client.ApiClient;
 import com.datadog.api.v2.client.ApiException;
 import com.datadog.api.v2.client.Configuration;
-import com.datadog.api.v2.client.auth.*;
 import com.datadog.api.v2.client.model.*;
 import com.datadog.api.v2.client.api.IncidentTeamsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         IncidentTeamsApi apiInstance = new IncidentTeamsApi(defaultClient);
         String teamId = "teamId_example"; // String | The ID of the incident team.
         try {
-            apiInstance.deleteIncidentTeam(teamId)
-                .execute();
+            apiInstance.deleteIncidentTeam(teamId);
         } catch (ApiException e) {
             System.err.println("Exception when calling IncidentTeamsApi#deleteIncidentTeam");
             System.err.println("Status code: " + e.getCode());
@@ -180,9 +145,7 @@ null (empty response body)
 
 ## getIncidentTeam
 
-> IncidentTeamResponse getIncidentTeam(teamId).include(include).execute();
-
-Get details of an incident team
+> IncidentTeamResponse getIncidentTeam(teamId, parameters);
 
 Get details of an incident team. If the `include[users]` query parameter is provided,
 the included attribute will contain the users related to these incident teams.
@@ -190,38 +153,23 @@ the included attribute will contain the users related to these incident teams.
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v2.client.ApiClient;
 import com.datadog.api.v2.client.ApiException;
 import com.datadog.api.v2.client.Configuration;
-import com.datadog.api.v2.client.auth.*;
 import com.datadog.api.v2.client.model.*;
 import com.datadog.api.v2.client.api.IncidentTeamsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         IncidentTeamsApi apiInstance = new IncidentTeamsApi(defaultClient);
         String teamId = "teamId_example"; // String | The ID of the incident team.
         IncidentRelatedObject include = IncidentRelatedObject.fromValue("users"); // IncidentRelatedObject | Specifies which types of related objects should be included in the response.
         try {
-            IncidentTeamResponse result = apiInstance.getIncidentTeam(teamId)
-                .include(include)
-                .execute();
+	    IncidentTeamResponse result = apiInstance.getIncidentTeam(teamId, new IncidentTeamsApi.GetIncidentTeamOptionalParameters()
+                .include(include));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling IncidentTeamsApi#getIncidentTeam");
@@ -267,52 +215,35 @@ Name | Type | Description  | Notes
 
 ## listIncidentTeams
 
-> IncidentTeamsResponse listIncidentTeams().include(include).pageSize(pageSize).pageOffset(pageOffset).filter(filter).execute();
-
-Get a list of all incident teams
+> IncidentTeamsResponse listIncidentTeams(parameters);
 
 Get all incident teams for the requesting user's organization. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these incident teams.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v2.client.ApiClient;
 import com.datadog.api.v2.client.ApiException;
 import com.datadog.api.v2.client.Configuration;
-import com.datadog.api.v2.client.auth.*;
 import com.datadog.api.v2.client.model.*;
 import com.datadog.api.v2.client.api.IncidentTeamsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         IncidentTeamsApi apiInstance = new IncidentTeamsApi(defaultClient);
         IncidentRelatedObject include = IncidentRelatedObject.fromValue("users"); // IncidentRelatedObject | Specifies which types of related objects should be included in the response.
-        Long pageSize = 10l; // Long | Size for a given page.
-        Long pageOffset = 0l; // Long | Specific offset to use as the beginning of the returned page.
+        Long pageSize = 10L; // Long | Size for a given page.
+        Long pageOffset = 0L; // Long | Specific offset to use as the beginning of the returned page.
         String filter = "ExampleTeamName"; // String | A search query that filters teams by name.
         try {
-            IncidentTeamsResponse result = apiInstance.listIncidentTeams()
+	    IncidentTeamsResponse result = apiInstance.listIncidentTeams(new IncidentTeamsApi.ListIncidentTeamsOptionalParameters()
                 .include(include)
                 .pageSize(pageSize)
                 .pageOffset(pageOffset)
-                .filter(filter)
-                .execute();
+                .filter(filter));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling IncidentTeamsApi#listIncidentTeams");
@@ -331,8 +262,8 @@ public class Example {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **include** | **IncidentRelatedObject**| Specifies which types of related objects should be included in the response. | [optional] [enum: users]
- **pageSize** | **Long**| Size for a given page. | [optional] [default to 10l]
- **pageOffset** | **Long**| Specific offset to use as the beginning of the returned page. | [optional] [default to 0l]
+ **pageSize** | **Long**| Size for a given page. | [optional] [default to 10]
+ **pageOffset** | **Long**| Specific offset to use as the beginning of the returned page. | [optional] [default to 0]
  **filter** | **String**| A search query that filters teams by name. | [optional]
 
 ### Return type
@@ -360,47 +291,29 @@ Name | Type | Description  | Notes
 
 ## updateIncidentTeam
 
-> IncidentTeamResponse updateIncidentTeam(teamId).body(body).execute();
-
-Update an existing incident team
+> IncidentTeamResponse updateIncidentTeam(teamId, body);
 
 Updates an existing incident team. Only provide the attributes which should be updated as this request is a partial update.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v2.client.ApiClient;
 import com.datadog.api.v2.client.ApiException;
 import com.datadog.api.v2.client.Configuration;
-import com.datadog.api.v2.client.auth.*;
 import com.datadog.api.v2.client.model.*;
 import com.datadog.api.v2.client.api.IncidentTeamsApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         IncidentTeamsApi apiInstance = new IncidentTeamsApi(defaultClient);
         String teamId = "teamId_example"; // String | The ID of the incident team.
         IncidentTeamUpdateRequest body = new IncidentTeamUpdateRequest(); // IncidentTeamUpdateRequest | Incident Team Payload.
         try {
-            IncidentTeamResponse result = apiInstance.updateIncidentTeam(teamId)
-                .body(body)
-                .execute();
+            IncidentTeamResponse result = apiInstance.updateIncidentTeam(teamId, body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling IncidentTeamsApi#updateIncidentTeam");

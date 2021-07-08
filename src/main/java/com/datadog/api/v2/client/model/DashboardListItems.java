@@ -8,30 +8,19 @@
  * Do not edit the class manually.
  */
 
-
 package com.datadog.api.v2.client.model;
 
-import java.util.Objects;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.datadog.api.v2.client.model.DashboardListItem;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.datadog.api.v2.client.JSON;
+import java.util.Objects;
 
-
-/**
- * Dashboards within a list.
- */
+/** Dashboards within a list. */
 @ApiModel(description = "Dashboards within a list.")
 @JsonPropertyOrder({
   DashboardListItems.JSON_PROPERTY_DASHBOARDS,
@@ -45,6 +34,14 @@ public class DashboardListItems {
   public static final String JSON_PROPERTY_TOTAL = "total";
   private Long total;
 
+  public DashboardListItems() {}
+
+  @JsonCreator
+  public DashboardListItems(
+      @JsonProperty(required = true, value = JSON_PROPERTY_DASHBOARDS)
+          List<DashboardListItem> dashboards) {
+    this.dashboards = dashboards;
+  }
 
   public DashboardListItems dashboards(List<DashboardListItem> dashboards) {
     this.dashboards = dashboards;
@@ -56,43 +53,39 @@ public class DashboardListItems {
     return this;
   }
 
-   /**
+  /**
    * List of dashboards in the dashboard list.
+   *
    * @return dashboards
-  **/
-  @ApiModelProperty(example = "[]", required = true, value = "List of dashboards in the dashboard list.")
+   */
+  @ApiModelProperty(
+      example = "[]",
+      required = true,
+      value = "List of dashboards in the dashboard list.")
   @JsonProperty(JSON_PROPERTY_DASHBOARDS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
   public List<DashboardListItem> getDashboards() {
     return dashboards;
   }
-
 
   public void setDashboards(List<DashboardListItem> dashboards) {
     this.dashboards = dashboards;
   }
 
-
-   /**
+  /**
    * Number of dashboards in the dashboard list.
+   *
    * @return total
-  **/
+   */
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Number of dashboards in the dashboard list.")
   @JsonProperty(JSON_PROPERTY_TOTAL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Long getTotal() {
     return total;
   }
 
-
-
-
-  /**
-   * Return true if this DashboardListItems object is equal to o.
-   */
+  /** Return true if this DashboardListItems object is equal to o. */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -102,15 +95,14 @@ public class DashboardListItems {
       return false;
     }
     DashboardListItems dashboardListItems = (DashboardListItems) o;
-    return Objects.equals(this.dashboards, dashboardListItems.dashboards) &&
-        Objects.equals(this.total, dashboardListItems.total);
+    return Objects.equals(this.dashboards, dashboardListItems.dashboards)
+        && Objects.equals(this.total, dashboardListItems.total);
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(dashboards, total);
   }
-
 
   @Override
   public String toString() {
@@ -123,8 +115,7 @@ public class DashboardListItems {
   }
 
   /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
+   * Convert the given object to string with each line indented by 4 spaces (except the first line).
    */
   private String toIndentedString(Object o) {
     if (o == null) {
@@ -132,6 +123,4 @@ public class DashboardListItems {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
-

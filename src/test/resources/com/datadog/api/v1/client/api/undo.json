@@ -79,6 +79,12 @@
       "type": "idempotent"
     }
   },
+  "SubmitServiceCheck": {
+    "tag": "Service Checks",
+    "undo": {
+      "type": "safe"
+    }
+  },
   "GetDailyCustomReports": {
     "tag": "Usage Metering",
     "undo": {
@@ -204,6 +210,12 @@
     }
   },
   "ListEvents": {
+    "tag": "Events",
+    "undo": {
+      "type": "safe"
+    }
+  },
+  "CreateEvent": {
     "tag": "Events",
     "undo": {
       "type": "safe"
@@ -437,6 +449,36 @@
       "type": "idempotent"
     }
   },
+  "GetSlackIntegrationChannels": {
+    "tag": "Slack Integration",
+    "undo": {
+      "type": "safe"
+    }
+  },
+  "CreateSlackIntegrationChannel": {
+    "tag": "Slack Integration",
+    "undo": {
+      "type": "unsafe"
+    }
+  },
+  "RemoveSlackIntegrationChannel": {
+    "tag": "Slack Integration",
+    "undo": {
+      "type": "idempotent"
+    }
+  },
+  "GetSlackIntegrationChannel": {
+    "tag": "Slack Integration",
+    "undo": {
+      "type": "safe"
+    }
+  },
+  "UpdateSlackIntegrationChannel": {
+    "tag": "Slack Integration",
+    "undo": {
+      "type": "idempotent"
+    }
+  },
   "ListLogs": {
     "tag": "Logs",
     "undo": {
@@ -573,6 +615,18 @@
       "type": "safe"
     }
   },
+  "SearchMonitorGroups": {
+    "tag": "Monitors",
+    "undo": {
+      "type": "safe"
+    }
+  },
+  "SearchMonitors": {
+    "tag": "Monitors",
+    "undo": {
+      "type": "safe"
+    }
+  },
   "ValidateMonitor": {
     "tag": "Monitors",
     "undo": {
@@ -597,6 +651,12 @@
       "type": "idempotent"
     }
   },
+  "ListMonitorDowntimes": {
+    "tag": "Downtimes",
+    "undo": {
+      "type": "safe"
+    }
+  },
   "GetMonthlyCustomReports": {
     "tag": "Usage Metering",
     "undo": {
@@ -607,6 +667,43 @@
     "tag": "Usage Metering",
     "undo": {
       "type": "safe"
+    }
+  },
+  "ListNotebooks": {
+    "tag": "Notebooks",
+    "undo": {
+      "type": "safe"
+    }
+  },
+  "CreateNotebook": {
+    "tag": "Notebooks",
+    "undo": {
+      "operationId": "DeleteNotebook",
+      "parameters": [
+        {
+          "name": "notebook_id",
+          "source": "data.id"
+        }
+      ],
+      "type": "unsafe"
+    }
+  },
+  "DeleteNotebook": {
+    "tag": "Notebooks",
+    "undo": {
+      "type": "idempotent"
+    }
+  },
+  "GetNotebook": {
+    "tag": "Notebooks",
+    "undo": {
+      "type": "safe"
+    }
+  },
+  "UpdateNotebook": {
+    "tag": "Notebooks",
+    "undo": {
+      "type": "idempotent"
     }
   },
   "ListOrgs": {
@@ -653,6 +750,12 @@
       "type": "safe"
     }
   },
+  "SubmitMetrics": {
+    "tag": "Metrics",
+    "undo": {
+      "type": "safe"
+    }
+  },
   "ListSLOs": {
     "tag": "Service Level Objectives",
     "undo": {
@@ -666,7 +769,7 @@
       "parameters": [
         {
           "name": "slo_id",
-          "source": "data.id"
+          "source": "data[0].id"
         }
       ],
       "type": "unsafe"
@@ -788,7 +891,32 @@
       "type": "safe"
     }
   },
-  "CreateTest": {
+  "CreateSyntheticsAPITest": {
+    "tag": "Synthetics",
+    "undo": {
+      "operationId": "DeleteTests",
+      "parameters": [
+        {
+          "name": "body",
+          "template": "{\"public_ids\": [\"{{ public_id }}\"]}"
+        }
+      ],
+      "type": "unsafe"
+    }
+  },
+  "GetAPITest": {
+    "tag": "Synthetics",
+    "undo": {
+      "type": "safe"
+    }
+  },
+  "UpdateAPITest": {
+    "tag": "Synthetics",
+    "undo": {
+      "type": "idempotent"
+    }
+  },
+  "CreateSyntheticsBrowserTest": {
     "tag": "Synthetics",
     "undo": {
       "operationId": "TODO",
@@ -800,6 +928,12 @@
     "tag": "Synthetics",
     "undo": {
       "type": "safe"
+    }
+  },
+  "UpdateBrowserTest": {
+    "tag": "Synthetics",
+    "undo": {
+      "type": "idempotent"
     }
   },
   "GetBrowserTestLatestResults": {
@@ -832,12 +966,6 @@
       "type": "safe"
     }
   },
-  "UpdateTest": {
-    "tag": "Synthetics",
-    "undo": {
-      "type": "idempotent"
-    }
-  },
   "GetAPITestLatestResults": {
     "tag": "Synthetics",
     "undo": {
@@ -854,6 +982,12 @@
     "tag": "Synthetics",
     "undo": {
       "type": "idempotent"
+    }
+  },
+  "ListGlobalVariables": {
+    "tag": "Synthetics",
+    "undo": {
+      "type": "safe"
     }
   },
   "CreateGlobalVariable": {
@@ -940,6 +1074,12 @@
       "type": "safe"
     }
   },
+  "GetUsageAuditLogs": {
+    "tag": "Usage Metering",
+    "undo": {
+      "type": "safe"
+    }
+  },
   "GetUsageLambda": {
     "tag": "Usage Metering",
     "undo": {
@@ -947,6 +1087,18 @@
     }
   },
   "GetUsageBillableSummary": {
+    "tag": "Usage Metering",
+    "undo": {
+      "type": "safe"
+    }
+  },
+  "GetUsageCloudSecurityPostureManagement": {
+    "tag": "Usage Metering",
+    "undo": {
+      "type": "safe"
+    }
+  },
+  "GetUsageCWS": {
     "tag": "Usage Metering",
     "undo": {
       "type": "safe"
@@ -982,7 +1134,19 @@
       "type": "safe"
     }
   },
+  "GetUsageInternetOfThings": {
+    "tag": "Usage Metering",
+    "undo": {
+      "type": "safe"
+    }
+  },
   "GetUsageLogs": {
+    "tag": "Usage Metering",
+    "undo": {
+      "type": "safe"
+    }
+  },
+  "GetUsageLogsByRetention": {
     "tag": "Usage Metering",
     "undo": {
       "type": "safe"
@@ -1111,6 +1275,12 @@
   },
   "Validate": {
     "tag": "Authentication",
+    "undo": {
+      "type": "safe"
+    }
+  },
+  "SubmitLog": {
+    "tag": "Logs",
     "undo": {
       "type": "safe"
     }

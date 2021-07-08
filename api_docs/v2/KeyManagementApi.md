@@ -2,14 +2,15 @@
 
 All URIs are relative to *https://api.datadoghq.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
+Method        | HTTP request | Description
+------------- | ------------ | ------------
 [**createAPIKey**](KeyManagementApi.md#createAPIKey) | **POST** /api/v2/api_keys | Create an API key
 [**createCurrentUserApplicationKey**](KeyManagementApi.md#createCurrentUserApplicationKey) | **POST** /api/v2/current_user/application_keys | Create an application key for current user
 [**deleteAPIKey**](KeyManagementApi.md#deleteAPIKey) | **DELETE** /api/v2/api_keys/{api_key_id} | Delete an API key
 [**deleteApplicationKey**](KeyManagementApi.md#deleteApplicationKey) | **DELETE** /api/v2/application_keys/{app_key_id} | Delete an application key
 [**deleteCurrentUserApplicationKey**](KeyManagementApi.md#deleteCurrentUserApplicationKey) | **DELETE** /api/v2/current_user/application_keys/{app_key_id} | Delete an application key owned by current user
 [**getAPIKey**](KeyManagementApi.md#getAPIKey) | **GET** /api/v2/api_keys/{api_key_id} | Get API key
+[**getApplicationKey**](KeyManagementApi.md#getApplicationKey) | **GET** /api/v2/application_keys/{app_key_id} | Get an application key
 [**getCurrentUserApplicationKey**](KeyManagementApi.md#getCurrentUserApplicationKey) | **GET** /api/v2/current_user/application_keys/{app_key_id} | Get one application key owned by current user
 [**listAPIKeys**](KeyManagementApi.md#listAPIKeys) | **GET** /api/v2/api_keys | Get all API keys
 [**listApplicationKeys**](KeyManagementApi.md#listApplicationKeys) | **GET** /api/v2/application_keys | Get all application keys
@@ -22,46 +23,28 @@ Method | HTTP request | Description
 
 ## createAPIKey
 
-> APIKeyResponse createAPIKey().body(body).execute();
-
-Create an API key
+> APIKeyResponse createAPIKey(body);
 
 Create an API key.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v2.client.ApiClient;
 import com.datadog.api.v2.client.ApiException;
 import com.datadog.api.v2.client.Configuration;
-import com.datadog.api.v2.client.auth.*;
 import com.datadog.api.v2.client.model.*;
 import com.datadog.api.v2.client.api.KeyManagementApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         KeyManagementApi apiInstance = new KeyManagementApi(defaultClient);
         APIKeyCreateRequest body = new APIKeyCreateRequest(); // APIKeyCreateRequest | 
         try {
-            APIKeyResponse result = apiInstance.createAPIKey()
-                .body(body)
-                .execute();
+            APIKeyResponse result = apiInstance.createAPIKey(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling KeyManagementApi#createAPIKey");
@@ -104,46 +87,28 @@ Name | Type | Description  | Notes
 
 ## createCurrentUserApplicationKey
 
-> ApplicationKeyResponse createCurrentUserApplicationKey().body(body).execute();
-
-Create an application key for current user
+> ApplicationKeyResponse createCurrentUserApplicationKey(body);
 
 Create an application key for current user
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v2.client.ApiClient;
 import com.datadog.api.v2.client.ApiException;
 import com.datadog.api.v2.client.Configuration;
-import com.datadog.api.v2.client.auth.*;
 import com.datadog.api.v2.client.model.*;
 import com.datadog.api.v2.client.api.KeyManagementApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         KeyManagementApi apiInstance = new KeyManagementApi(defaultClient);
         ApplicationKeyCreateRequest body = new ApplicationKeyCreateRequest(); // ApplicationKeyCreateRequest | 
         try {
-            ApplicationKeyResponse result = apiInstance.createCurrentUserApplicationKey()
-                .body(body)
-                .execute();
+            ApplicationKeyResponse result = apiInstance.createCurrentUserApplicationKey(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling KeyManagementApi#createCurrentUserApplicationKey");
@@ -186,45 +151,28 @@ Name | Type | Description  | Notes
 
 ## deleteAPIKey
 
-> deleteAPIKey(apiKeyId).execute();
-
-Delete an API key
+> deleteAPIKey(apiKeyId);
 
 Delete an API key.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v2.client.ApiClient;
 import com.datadog.api.v2.client.ApiException;
 import com.datadog.api.v2.client.Configuration;
-import com.datadog.api.v2.client.auth.*;
 import com.datadog.api.v2.client.model.*;
 import com.datadog.api.v2.client.api.KeyManagementApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         KeyManagementApi apiInstance = new KeyManagementApi(defaultClient);
         String apiKeyId = "apiKeyId_example"; // String | The ID of the API key.
         try {
-            apiInstance.deleteAPIKey(apiKeyId)
-                .execute();
+            apiInstance.deleteAPIKey(apiKeyId);
         } catch (ApiException e) {
             System.err.println("Exception when calling KeyManagementApi#deleteAPIKey");
             System.err.println("Status code: " + e.getCode());
@@ -266,45 +214,28 @@ null (empty response body)
 
 ## deleteApplicationKey
 
-> deleteApplicationKey(appKeyId).execute();
-
-Delete an application key
+> deleteApplicationKey(appKeyId);
 
 Delete an application key
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v2.client.ApiClient;
 import com.datadog.api.v2.client.ApiException;
 import com.datadog.api.v2.client.Configuration;
-import com.datadog.api.v2.client.auth.*;
 import com.datadog.api.v2.client.model.*;
 import com.datadog.api.v2.client.api.KeyManagementApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         KeyManagementApi apiInstance = new KeyManagementApi(defaultClient);
         String appKeyId = "appKeyId_example"; // String | The ID of the application key.
         try {
-            apiInstance.deleteApplicationKey(appKeyId)
-                .execute();
+            apiInstance.deleteApplicationKey(appKeyId);
         } catch (ApiException e) {
             System.err.println("Exception when calling KeyManagementApi#deleteApplicationKey");
             System.err.println("Status code: " + e.getCode());
@@ -346,45 +277,28 @@ null (empty response body)
 
 ## deleteCurrentUserApplicationKey
 
-> deleteCurrentUserApplicationKey(appKeyId).execute();
-
-Delete an application key owned by current user
+> deleteCurrentUserApplicationKey(appKeyId);
 
 Delete an application key owned by current user
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v2.client.ApiClient;
 import com.datadog.api.v2.client.ApiException;
 import com.datadog.api.v2.client.Configuration;
-import com.datadog.api.v2.client.auth.*;
 import com.datadog.api.v2.client.model.*;
 import com.datadog.api.v2.client.api.KeyManagementApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         KeyManagementApi apiInstance = new KeyManagementApi(defaultClient);
         String appKeyId = "appKeyId_example"; // String | The ID of the application key.
         try {
-            apiInstance.deleteCurrentUserApplicationKey(appKeyId)
-                .execute();
+            apiInstance.deleteCurrentUserApplicationKey(appKeyId);
         } catch (ApiException e) {
             System.err.println("Exception when calling KeyManagementApi#deleteCurrentUserApplicationKey");
             System.err.println("Status code: " + e.getCode());
@@ -426,47 +340,30 @@ null (empty response body)
 
 ## getAPIKey
 
-> APIKeyResponse getAPIKey(apiKeyId).include(include).execute();
-
-Get API key
+> APIKeyResponse getAPIKey(apiKeyId, parameters);
 
 Get an API key.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v2.client.ApiClient;
 import com.datadog.api.v2.client.ApiException;
 import com.datadog.api.v2.client.Configuration;
-import com.datadog.api.v2.client.auth.*;
 import com.datadog.api.v2.client.model.*;
 import com.datadog.api.v2.client.api.KeyManagementApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         KeyManagementApi apiInstance = new KeyManagementApi(defaultClient);
         String apiKeyId = "apiKeyId_example"; // String | The ID of the API key.
         String include = "created_by,modified_by"; // String | Comma separated list of resource paths for related resources to include in the response. Supported resource paths are `created_by` and `modified_by`.
         try {
-            APIKeyResponse result = apiInstance.getAPIKey(apiKeyId)
-                .include(include)
-                .execute();
+	    APIKeyResponse result = apiInstance.getAPIKey(apiKeyId, new KeyManagementApi.GetAPIKeyOptionalParameters()
+                .include(include));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling KeyManagementApi#getAPIKey");
@@ -508,47 +405,98 @@ Name | Type | Description  | Notes
 | **404** | Not Found |  -  |
 
 
-## getCurrentUserApplicationKey
+## getApplicationKey
 
-> ApplicationKeyResponse getCurrentUserApplicationKey(appKeyId).execute();
+> ApplicationKeyResponse getApplicationKey(appKeyId, parameters);
 
-Get one application key owned by current user
-
-Get an application key owned by current user
+Get an application key for your org.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v2.client.ApiClient;
 import com.datadog.api.v2.client.ApiException;
 import com.datadog.api.v2.client.Configuration;
-import com.datadog.api.v2.client.auth.*;
 import com.datadog.api.v2.client.model.*;
 import com.datadog.api.v2.client.api.KeyManagementApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
+
+        KeyManagementApi apiInstance = new KeyManagementApi(defaultClient);
+        String appKeyId = "appKeyId_example"; // String | The ID of the application key.
+        String include = "owned_by"; // String | Resource path for related resources to include in the response. Only `owned_by` is supported.
+        try {
+	    ApplicationKeyResponse result = apiInstance.getApplicationKey(appKeyId, new KeyManagementApi.GetApplicationKeyOptionalParameters()
+                .include(include));
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling KeyManagementApi#getApplicationKey");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
         }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
+    }
+}
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **appKeyId** | **String**| The ID of the application key. |
+ **include** | **String**| Resource path for related resources to include in the response. Only &#x60;owned_by&#x60; is supported. | [optional]
+
+### Return type
+
+[**ApplicationKeyResponse**](ApplicationKeyResponse.md)
+
+### Authorization
+
+[apiKeyAuth](README.md#apiKeyAuth), [appKeyAuth](README.md#appKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | Bad Request |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+
+
+## getCurrentUserApplicationKey
+
+> ApplicationKeyResponse getCurrentUserApplicationKey(appKeyId);
+
+Get an application key owned by current user
+
+### Example
+
+```java
+import java.util.*;
+import com.datadog.api.v2.client.ApiClient;
+import com.datadog.api.v2.client.ApiException;
+import com.datadog.api.v2.client.Configuration;
+import com.datadog.api.v2.client.model.*;
+import com.datadog.api.v2.client.api.KeyManagementApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
 
         KeyManagementApi apiInstance = new KeyManagementApi(defaultClient);
         String appKeyId = "appKeyId_example"; // String | The ID of the application key.
         try {
-            ApplicationKeyResponse result = apiInstance.getCurrentUserApplicationKey(appKeyId)
-                .execute();
+            ApplicationKeyResponse result = apiInstance.getCurrentUserApplicationKey(appKeyId);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling KeyManagementApi#getCurrentUserApplicationKey");
@@ -591,43 +539,27 @@ Name | Type | Description  | Notes
 
 ## listAPIKeys
 
-> APIKeysResponse listAPIKeys().pageSize(pageSize).pageNumber(pageNumber).sort(sort).filter(filter).filterCreatedAtStart(filterCreatedAtStart).filterCreatedAtEnd(filterCreatedAtEnd).filterModifiedAtStart(filterModifiedAtStart).filterModifiedAtEnd(filterModifiedAtEnd).include(include).execute();
-
-Get all API keys
+> APIKeysResponse listAPIKeys(parameters);
 
 List all API keys available for your account.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v2.client.ApiClient;
 import com.datadog.api.v2.client.ApiException;
 import com.datadog.api.v2.client.Configuration;
-import com.datadog.api.v2.client.auth.*;
 import com.datadog.api.v2.client.model.*;
 import com.datadog.api.v2.client.api.KeyManagementApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         KeyManagementApi apiInstance = new KeyManagementApi(defaultClient);
-        Long pageSize = 10l; // Long | Size for a given page.
-        Long pageNumber = 0l; // Long | Specific page number to return.
+        Long pageSize = 10L; // Long | Size for a given page.
+        Long pageNumber = 0L; // Long | Specific page number to return.
         APIKeysSort sort = APIKeysSort.fromValue("created_at"); // APIKeysSort | API key attribute used to sort results. Sort order is ascending by default. In order to specify a descending sort, prefix the attribute with a minus sign.
         String filter = "filter_example"; // String | Filter API keys by the specified string.
         String filterCreatedAtStart = "2020-11-24T18:46:21+00:00"; // String | Only include API keys created on or after the specified date.
@@ -636,7 +568,7 @@ public class Example {
         String filterModifiedAtEnd = "2020-11-24T18:46:21+00:00"; // String | Only include API keys modified on or before the specified date.
         String include = "created_by,modified_by"; // String | Comma separated list of resource paths for related resources to include in the response. Supported resource paths are `created_by` and `modified_by`.
         try {
-            APIKeysResponse result = apiInstance.listAPIKeys()
+	    APIKeysResponse result = apiInstance.listAPIKeys(new KeyManagementApi.ListAPIKeysOptionalParameters()
                 .pageSize(pageSize)
                 .pageNumber(pageNumber)
                 .sort(sort)
@@ -645,8 +577,7 @@ public class Example {
                 .filterCreatedAtEnd(filterCreatedAtEnd)
                 .filterModifiedAtStart(filterModifiedAtStart)
                 .filterModifiedAtEnd(filterModifiedAtEnd)
-                .include(include)
-                .execute();
+                .include(include));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling KeyManagementApi#listAPIKeys");
@@ -664,9 +595,9 @@ public class Example {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pageSize** | **Long**| Size for a given page. | [optional] [default to 10l]
- **pageNumber** | **Long**| Specific page number to return. | [optional] [default to 0l]
- **sort** | **APIKeysSort**| API key attribute used to sort results. Sort order is ascending by default. In order to specify a descending sort, prefix the attribute with a minus sign. | [optional] [default to name] [enum: created_at, -created_at, last4, -last4, modified_at, -modified_at, name, -name]
+ **pageSize** | **Long**| Size for a given page. | [optional] [default to 10]
+ **pageNumber** | **Long**| Specific page number to return. | [optional] [default to 0]
+ **sort** | **APIKeysSort**| API key attribute used to sort results. Sort order is ascending by default. In order to specify a descending sort, prefix the attribute with a minus sign. | [optional] [enum: created_at, -created_at, last4, -last4, modified_at, -modified_at, name, -name]
  **filter** | **String**| Filter API keys by the specified string. | [optional]
  **filterCreatedAtStart** | **String**| Only include API keys created on or after the specified date. | [optional]
  **filterCreatedAtEnd** | **String**| Only include API keys created on or before the specified date. | [optional]
@@ -697,56 +628,39 @@ Name | Type | Description  | Notes
 
 ## listApplicationKeys
 
-> ListApplicationKeysResponse listApplicationKeys().pageSize(pageSize).pageNumber(pageNumber).sort(sort).filter(filter).filterCreatedAtStart(filterCreatedAtStart).filterCreatedAtEnd(filterCreatedAtEnd).execute();
-
-Get all application keys
+> ListApplicationKeysResponse listApplicationKeys(parameters);
 
 List all application keys available for your org
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v2.client.ApiClient;
 import com.datadog.api.v2.client.ApiException;
 import com.datadog.api.v2.client.Configuration;
-import com.datadog.api.v2.client.auth.*;
 import com.datadog.api.v2.client.model.*;
 import com.datadog.api.v2.client.api.KeyManagementApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         KeyManagementApi apiInstance = new KeyManagementApi(defaultClient);
-        Long pageSize = 10l; // Long | Size for a given page.
-        Long pageNumber = 0l; // Long | Specific page number to return.
+        Long pageSize = 10L; // Long | Size for a given page.
+        Long pageNumber = 0L; // Long | Specific page number to return.
         ApplicationKeysSort sort = ApplicationKeysSort.fromValue("created_at"); // ApplicationKeysSort | Application key attribute used to sort results. Sort order is ascending by default. In order to specify a descending sort, prefix the attribute with a minus sign.
         String filter = "filter_example"; // String | Filter application keys by the specified string.
         String filterCreatedAtStart = "2020-11-24T18:46:21+00:00"; // String | Only include application keys created on or after the specified date.
         String filterCreatedAtEnd = "2020-11-24T18:46:21+00:00"; // String | Only include application keys created on or before the specified date.
         try {
-            ListApplicationKeysResponse result = apiInstance.listApplicationKeys()
+	    ListApplicationKeysResponse result = apiInstance.listApplicationKeys(new KeyManagementApi.ListApplicationKeysOptionalParameters()
                 .pageSize(pageSize)
                 .pageNumber(pageNumber)
                 .sort(sort)
                 .filter(filter)
                 .filterCreatedAtStart(filterCreatedAtStart)
-                .filterCreatedAtEnd(filterCreatedAtEnd)
-                .execute();
+                .filterCreatedAtEnd(filterCreatedAtEnd));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling KeyManagementApi#listApplicationKeys");
@@ -764,9 +678,9 @@ public class Example {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pageSize** | **Long**| Size for a given page. | [optional] [default to 10l]
- **pageNumber** | **Long**| Specific page number to return. | [optional] [default to 0l]
- **sort** | **ApplicationKeysSort**| Application key attribute used to sort results. Sort order is ascending by default. In order to specify a descending sort, prefix the attribute with a minus sign. | [optional] [default to name] [enum: created_at, -created_at, last4, -last4, name, -name]
+ **pageSize** | **Long**| Size for a given page. | [optional] [default to 10]
+ **pageNumber** | **Long**| Specific page number to return. | [optional] [default to 0]
+ **sort** | **ApplicationKeysSort**| Application key attribute used to sort results. Sort order is ascending by default. In order to specify a descending sort, prefix the attribute with a minus sign. | [optional] [enum: created_at, -created_at, last4, -last4, name, -name]
  **filter** | **String**| Filter application keys by the specified string. | [optional]
  **filterCreatedAtStart** | **String**| Only include application keys created on or after the specified date. | [optional]
  **filterCreatedAtEnd** | **String**| Only include application keys created on or before the specified date. | [optional]
@@ -795,56 +709,39 @@ Name | Type | Description  | Notes
 
 ## listCurrentUserApplicationKeys
 
-> ListApplicationKeysResponse listCurrentUserApplicationKeys().pageSize(pageSize).pageNumber(pageNumber).sort(sort).filter(filter).filterCreatedAtStart(filterCreatedAtStart).filterCreatedAtEnd(filterCreatedAtEnd).execute();
-
-Get all application keys owned by current user
+> ListApplicationKeysResponse listCurrentUserApplicationKeys(parameters);
 
 List all application keys available for current user
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v2.client.ApiClient;
 import com.datadog.api.v2.client.ApiException;
 import com.datadog.api.v2.client.Configuration;
-import com.datadog.api.v2.client.auth.*;
 import com.datadog.api.v2.client.model.*;
 import com.datadog.api.v2.client.api.KeyManagementApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         KeyManagementApi apiInstance = new KeyManagementApi(defaultClient);
-        Long pageSize = 10l; // Long | Size for a given page.
-        Long pageNumber = 0l; // Long | Specific page number to return.
+        Long pageSize = 10L; // Long | Size for a given page.
+        Long pageNumber = 0L; // Long | Specific page number to return.
         ApplicationKeysSort sort = ApplicationKeysSort.fromValue("created_at"); // ApplicationKeysSort | Application key attribute used to sort results. Sort order is ascending by default. In order to specify a descending sort, prefix the attribute with a minus sign.
         String filter = "filter_example"; // String | Filter application keys by the specified string.
         String filterCreatedAtStart = "2020-11-24T18:46:21+00:00"; // String | Only include application keys created on or after the specified date.
         String filterCreatedAtEnd = "2020-11-24T18:46:21+00:00"; // String | Only include application keys created on or before the specified date.
         try {
-            ListApplicationKeysResponse result = apiInstance.listCurrentUserApplicationKeys()
+	    ListApplicationKeysResponse result = apiInstance.listCurrentUserApplicationKeys(new KeyManagementApi.ListCurrentUserApplicationKeysOptionalParameters()
                 .pageSize(pageSize)
                 .pageNumber(pageNumber)
                 .sort(sort)
                 .filter(filter)
                 .filterCreatedAtStart(filterCreatedAtStart)
-                .filterCreatedAtEnd(filterCreatedAtEnd)
-                .execute();
+                .filterCreatedAtEnd(filterCreatedAtEnd));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling KeyManagementApi#listCurrentUserApplicationKeys");
@@ -862,9 +759,9 @@ public class Example {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pageSize** | **Long**| Size for a given page. | [optional] [default to 10l]
- **pageNumber** | **Long**| Specific page number to return. | [optional] [default to 0l]
- **sort** | **ApplicationKeysSort**| Application key attribute used to sort results. Sort order is ascending by default. In order to specify a descending sort, prefix the attribute with a minus sign. | [optional] [default to name] [enum: created_at, -created_at, last4, -last4, name, -name]
+ **pageSize** | **Long**| Size for a given page. | [optional] [default to 10]
+ **pageNumber** | **Long**| Specific page number to return. | [optional] [default to 0]
+ **sort** | **ApplicationKeysSort**| Application key attribute used to sort results. Sort order is ascending by default. In order to specify a descending sort, prefix the attribute with a minus sign. | [optional] [enum: created_at, -created_at, last4, -last4, name, -name]
  **filter** | **String**| Filter application keys by the specified string. | [optional]
  **filterCreatedAtStart** | **String**| Only include application keys created on or after the specified date. | [optional]
  **filterCreatedAtEnd** | **String**| Only include application keys created on or before the specified date. | [optional]
@@ -893,47 +790,29 @@ Name | Type | Description  | Notes
 
 ## updateAPIKey
 
-> APIKeyResponse updateAPIKey(apiKeyId).body(body).execute();
-
-Edit an API key
+> APIKeyResponse updateAPIKey(apiKeyId, body);
 
 Update an API key.
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v2.client.ApiClient;
 import com.datadog.api.v2.client.ApiException;
 import com.datadog.api.v2.client.Configuration;
-import com.datadog.api.v2.client.auth.*;
 import com.datadog.api.v2.client.model.*;
 import com.datadog.api.v2.client.api.KeyManagementApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         KeyManagementApi apiInstance = new KeyManagementApi(defaultClient);
         String apiKeyId = "apiKeyId_example"; // String | The ID of the API key.
         APIKeyUpdateRequest body = new APIKeyUpdateRequest(); // APIKeyUpdateRequest | 
         try {
-            APIKeyResponse result = apiInstance.updateAPIKey(apiKeyId)
-                .body(body)
-                .execute();
+            APIKeyResponse result = apiInstance.updateAPIKey(apiKeyId, body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling KeyManagementApi#updateAPIKey");
@@ -978,47 +857,29 @@ Name | Type | Description  | Notes
 
 ## updateApplicationKey
 
-> ApplicationKeyResponse updateApplicationKey(appKeyId).body(body).execute();
-
-Edit an application key
+> ApplicationKeyResponse updateApplicationKey(appKeyId, body);
 
 Edit an application key
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v2.client.ApiClient;
 import com.datadog.api.v2.client.ApiException;
 import com.datadog.api.v2.client.Configuration;
-import com.datadog.api.v2.client.auth.*;
 import com.datadog.api.v2.client.model.*;
 import com.datadog.api.v2.client.api.KeyManagementApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         KeyManagementApi apiInstance = new KeyManagementApi(defaultClient);
         String appKeyId = "appKeyId_example"; // String | The ID of the application key.
         ApplicationKeyUpdateRequest body = new ApplicationKeyUpdateRequest(); // ApplicationKeyUpdateRequest | 
         try {
-            ApplicationKeyResponse result = apiInstance.updateApplicationKey(appKeyId)
-                .body(body)
-                .execute();
+            ApplicationKeyResponse result = apiInstance.updateApplicationKey(appKeyId, body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling KeyManagementApi#updateApplicationKey");
@@ -1063,47 +924,29 @@ Name | Type | Description  | Notes
 
 ## updateCurrentUserApplicationKey
 
-> ApplicationKeyResponse updateCurrentUserApplicationKey(appKeyId).body(body).execute();
-
-Edit an application key owned by current user
+> ApplicationKeyResponse updateCurrentUserApplicationKey(appKeyId, body);
 
 Edit an application key owned by current user
 
 ### Example
 
 ```java
-// Import classes:
 import java.util.*;
 import com.datadog.api.v2.client.ApiClient;
 import com.datadog.api.v2.client.ApiException;
 import com.datadog.api.v2.client.Configuration;
-import com.datadog.api.v2.client.auth.*;
 import com.datadog.api.v2.client.model.*;
 import com.datadog.api.v2.client.api.KeyManagementApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        // Configure the Datadog site to send API calls to
-        HashMap<String, String> serverVariables = new HashMap<String, String>();
-        String site = System.getenv("DD_SITE");
-        if (site != null) {
-            serverVariables.put("site", site);
-            defaultClient.setServerVariables(serverVariables);
-        }
-        // Configure API key authorization: 
-        HashMap<String, String> secrets = new HashMap<String, String>();
-        secrets.put("apiKeyAuth", System.getenv("DD_CLIENT_API_KEY"));
-        secrets.put("appKeyAuth", System.getenv("DD_CLIENT_APP_KEY"));
-        defaultClient.configureApiKeys(secrets);
 
         KeyManagementApi apiInstance = new KeyManagementApi(defaultClient);
         String appKeyId = "appKeyId_example"; // String | The ID of the application key.
         ApplicationKeyUpdateRequest body = new ApplicationKeyUpdateRequest(); // ApplicationKeyUpdateRequest | 
         try {
-            ApplicationKeyResponse result = apiInstance.updateCurrentUserApplicationKey(appKeyId)
-                .body(body)
-                .execute();
+            ApplicationKeyResponse result = apiInstance.updateCurrentUserApplicationKey(appKeyId, body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling KeyManagementApi#updateCurrentUserApplicationKey");

@@ -1,0 +1,45 @@
+[
+  {
+    "httpRequest": {
+      "body": {
+        "type": "JSON",
+        "json": "[{\"ddtags\":\"host:TestSendlogsreturnsResponsefromserveralways200emptyJSONresponse1618413148\",\"message\":\"Test-Send_logs_returns_Response_from_server_always_200_empty_JSON_response-1618413148\"}]"
+      },
+      "headers": {
+        "JAVA-TEST-NAME": [
+          "Send_logs_returns_Response_from_server_always_200_empty_JSON_response"
+        ]
+      },
+      "method": "POST",
+      "path": "/v1/input",
+      "keepAlive": false,
+      "secure": true
+    },
+    "httpResponse": {
+      "body": "{}",
+      "headers": {
+        "Date": [
+          "Wed, 14 Apr 2021 15:12:29 GMT"
+        ],
+        "Content-Type": [
+          "application/json"
+        ],
+        "Content-Length": [
+          "2"
+        ],
+        "Connection": [
+          "close"
+        ]
+      },
+      "statusCode": 200,
+      "reasonPhrase": "OK"
+    },
+    "times": {
+      "remainingTimes": 1
+    },
+    "timeToLive": {
+      "unlimited": true
+    },
+    "id": "f1ebe395-b542-0b96-50af-cda6bb8799fb"
+  }
+]

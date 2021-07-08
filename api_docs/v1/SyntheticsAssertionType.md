@@ -21,5 +21,17 @@
 
 * `RECORD_SOME` (value: `"recordSome"`)
 
+* `TLS_VERSION` (value: `"tlsVersion"`)
+
+* `MIN_TLS_VERSION` (value: `"minTlsVersion"`)
+
+* `LATENCY` (value: `"latency"`)
+
+* `PACKET_LOSS_PERCENTAGE` (value: `"packetLossPercentage"`)
+
+* `PACKETS_RECEIVED` (value: `"packetsReceived"`)
+
+* `NETWORK_HOP` (value: `"networkHop"`)
+
 
 

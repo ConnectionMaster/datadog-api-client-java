@@ -6,7 +6,7 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *DashboardListsApi* | [**createDashboardListItems**](DashboardListsApi.md#createDashboardListItems) | **POST** /api/v2/dashboard/lists/manual/{dashboard_list_id}/dashboards | Add Items to a Dashboard List
 *DashboardListsApi* | [**deleteDashboardListItems**](DashboardListsApi.md#deleteDashboardListItems) | **DELETE** /api/v2/dashboard/lists/manual/{dashboard_list_id}/dashboards | Delete items from a dashboard list
-*DashboardListsApi* | [**getDashboardListItems**](DashboardListsApi.md#getDashboardListItems) | **GET** /api/v2/dashboard/lists/manual/{dashboard_list_id}/dashboards | Get a Dashboard List
+*DashboardListsApi* | [**getDashboardListItems**](DashboardListsApi.md#getDashboardListItems) | **GET** /api/v2/dashboard/lists/manual/{dashboard_list_id}/dashboards | Get items of a Dashboard List
 *DashboardListsApi* | [**updateDashboardListItems**](DashboardListsApi.md#updateDashboardListItems) | **PUT** /api/v2/dashboard/lists/manual/{dashboard_list_id}/dashboards | Update items of a dashboard list
 *IncidentServicesApi* | [**createIncidentService**](IncidentServicesApi.md#createIncidentService) | **POST** /api/v2/services | Create a new incident service
 *IncidentServicesApi* | [**deleteIncidentService**](IncidentServicesApi.md#deleteIncidentService) | **DELETE** /api/v2/services/{service_id} | Delete an existing incident service
@@ -29,6 +29,7 @@ Class | Method | HTTP request | Description
 *KeyManagementApi* | [**deleteApplicationKey**](KeyManagementApi.md#deleteApplicationKey) | **DELETE** /api/v2/application_keys/{app_key_id} | Delete an application key
 *KeyManagementApi* | [**deleteCurrentUserApplicationKey**](KeyManagementApi.md#deleteCurrentUserApplicationKey) | **DELETE** /api/v2/current_user/application_keys/{app_key_id} | Delete an application key owned by current user
 *KeyManagementApi* | [**getAPIKey**](KeyManagementApi.md#getAPIKey) | **GET** /api/v2/api_keys/{api_key_id} | Get API key
+*KeyManagementApi* | [**getApplicationKey**](KeyManagementApi.md#getApplicationKey) | **GET** /api/v2/application_keys/{app_key_id} | Get an application key
 *KeyManagementApi* | [**getCurrentUserApplicationKey**](KeyManagementApi.md#getCurrentUserApplicationKey) | **GET** /api/v2/current_user/application_keys/{app_key_id} | Get one application key owned by current user
 *KeyManagementApi* | [**listAPIKeys**](KeyManagementApi.md#listAPIKeys) | **GET** /api/v2/api_keys | Get all API keys
 *KeyManagementApi* | [**listApplicationKeys**](KeyManagementApi.md#listApplicationKeys) | **GET** /api/v2/application_keys | Get all application keys
@@ -37,8 +38,8 @@ Class | Method | HTTP request | Description
 *KeyManagementApi* | [**updateApplicationKey**](KeyManagementApi.md#updateApplicationKey) | **PATCH** /api/v2/application_keys/{app_key_id} | Edit an application key
 *KeyManagementApi* | [**updateCurrentUserApplicationKey**](KeyManagementApi.md#updateCurrentUserApplicationKey) | **PATCH** /api/v2/current_user/application_keys/{app_key_id} | Edit an application key owned by current user
 *LogsApi* | [**aggregateLogs**](LogsApi.md#aggregateLogs) | **POST** /api/v2/logs/analytics/aggregate | Aggregate events
-*LogsApi* | [**listLogs**](LogsApi.md#listLogs) | **POST** /api/v2/logs/events/search | Get a list of logs
-*LogsApi* | [**listLogsGet**](LogsApi.md#listLogsGet) | **GET** /api/v2/logs/events | Get a quick list of logs
+*LogsApi* | [**listLogs**](LogsApi.md#listLogs) | **POST** /api/v2/logs/events/search | Search logs
+*LogsApi* | [**listLogsGet**](LogsApi.md#listLogsGet) | **GET** /api/v2/logs/events | Get a list of logs
 *LogsArchivesApi* | [**addReadRoleToArchive**](LogsArchivesApi.md#addReadRoleToArchive) | **POST** /api/v2/logs/config/archives/{archive_id}/readers | Grant role to an archive
 *LogsArchivesApi* | [**createLogsArchive**](LogsArchivesApi.md#createLogsArchive) | **POST** /api/v2/logs/config/archives | Create an archive
 *LogsArchivesApi* | [**deleteLogsArchive**](LogsArchivesApi.md#deleteLogsArchive) | **DELETE** /api/v2/logs/config/archives/{archive_id} | Delete an archive
@@ -54,6 +55,13 @@ Class | Method | HTTP request | Description
 *LogsMetricsApi* | [**getLogsMetric**](LogsMetricsApi.md#getLogsMetric) | **GET** /api/v2/logs/config/metrics/{metric_id} | Get a log-based metric
 *LogsMetricsApi* | [**listLogsMetrics**](LogsMetricsApi.md#listLogsMetrics) | **GET** /api/v2/logs/config/metrics | Get all log-based metrics
 *LogsMetricsApi* | [**updateLogsMetric**](LogsMetricsApi.md#updateLogsMetric) | **PATCH** /api/v2/logs/config/metrics/{metric_id} | Update a log-based metric
+*MetricsApi* | [**createTagConfiguration**](MetricsApi.md#createTagConfiguration) | **POST** /api/v2/metrics/{metric_name}/tags | Create a tag configuration
+*MetricsApi* | [**deleteTagConfiguration**](MetricsApi.md#deleteTagConfiguration) | **DELETE** /api/v2/metrics/{metric_name}/tags | Delete a tag configuration
+*MetricsApi* | [**listTagConfigurationByName**](MetricsApi.md#listTagConfigurationByName) | **GET** /api/v2/metrics/{metric_name}/tags | List tag configuration by name
+*MetricsApi* | [**listTagConfigurations**](MetricsApi.md#listTagConfigurations) | **GET** /api/v2/metrics | List tag configurations
+*MetricsApi* | [**listTagsByMetricName**](MetricsApi.md#listTagsByMetricName) | **GET** /api/v2/metrics/{metric_name}/all-tags | List tags by metric name
+*MetricsApi* | [**listVolumesByMetricName**](MetricsApi.md#listVolumesByMetricName) | **GET** /api/v2/metrics/{metric_name}/volumes | List distinct metric volumes by metric name
+*MetricsApi* | [**updateTagConfiguration**](MetricsApi.md#updateTagConfiguration) | **PATCH** /api/v2/metrics/{metric_name}/tags | Update a tag configuration
 *ProcessesApi* | [**listProcesses**](ProcessesApi.md#listProcesses) | **GET** /api/v2/processes | Get all processes
 *RolesApi* | [**addPermissionToRole**](RolesApi.md#addPermissionToRole) | **POST** /api/v2/roles/{role_id}/permissions | Grant permission to a role
 *RolesApi* | [**addUserToRole**](RolesApi.md#addUserToRole) | **POST** /api/v2/roles/{role_id}/users | Add a user to a role
@@ -67,12 +75,17 @@ Class | Method | HTTP request | Description
 *RolesApi* | [**removePermissionFromRole**](RolesApi.md#removePermissionFromRole) | **DELETE** /api/v2/roles/{role_id}/permissions | Revoke permission
 *RolesApi* | [**removeUserFromRole**](RolesApi.md#removeUserFromRole) | **DELETE** /api/v2/roles/{role_id}/users | Remove a user from a role
 *RolesApi* | [**updateRole**](RolesApi.md#updateRole) | **PATCH** /api/v2/roles/{role_id} | Update a role
+*SecurityMonitoringApi* | [**createSecurityFilter**](SecurityMonitoringApi.md#createSecurityFilter) | **POST** /api/v2/security_monitoring/configuration/security_filters | Create a security filter
 *SecurityMonitoringApi* | [**createSecurityMonitoringRule**](SecurityMonitoringApi.md#createSecurityMonitoringRule) | **POST** /api/v2/security_monitoring/rules | Create a detection rule
+*SecurityMonitoringApi* | [**deleteSecurityFilter**](SecurityMonitoringApi.md#deleteSecurityFilter) | **DELETE** /api/v2/security_monitoring/configuration/security_filters/{security_filter_id} | Delete a security filter
 *SecurityMonitoringApi* | [**deleteSecurityMonitoringRule**](SecurityMonitoringApi.md#deleteSecurityMonitoringRule) | **DELETE** /api/v2/security_monitoring/rules/{rule_id} | Delete an existing rule
+*SecurityMonitoringApi* | [**getSecurityFilter**](SecurityMonitoringApi.md#getSecurityFilter) | **GET** /api/v2/security_monitoring/configuration/security_filters/{security_filter_id} | Get a security filter
 *SecurityMonitoringApi* | [**getSecurityMonitoringRule**](SecurityMonitoringApi.md#getSecurityMonitoringRule) | **GET** /api/v2/security_monitoring/rules/{rule_id} | Get a rule&#39;s details
+*SecurityMonitoringApi* | [**listSecurityFilters**](SecurityMonitoringApi.md#listSecurityFilters) | **GET** /api/v2/security_monitoring/configuration/security_filters | Get all security filters
 *SecurityMonitoringApi* | [**listSecurityMonitoringRules**](SecurityMonitoringApi.md#listSecurityMonitoringRules) | **GET** /api/v2/security_monitoring/rules | List rules
 *SecurityMonitoringApi* | [**listSecurityMonitoringSignals**](SecurityMonitoringApi.md#listSecurityMonitoringSignals) | **GET** /api/v2/security_monitoring/signals | Get a quick list of security signals
 *SecurityMonitoringApi* | [**searchSecurityMonitoringSignals**](SecurityMonitoringApi.md#searchSecurityMonitoringSignals) | **POST** /api/v2/security_monitoring/signals/search | Get a list of security signals
+*SecurityMonitoringApi* | [**updateSecurityFilter**](SecurityMonitoringApi.md#updateSecurityFilter) | **PATCH** /api/v2/security_monitoring/configuration/security_filters/{security_filter_id} | Update a security filter
 *SecurityMonitoringApi* | [**updateSecurityMonitoringRule**](SecurityMonitoringApi.md#updateSecurityMonitoringRule) | **PUT** /api/v2/security_monitoring/rules/{rule_id} | Update an existing rule
 *UsersApi* | [**createUser**](UsersApi.md#createUser) | **POST** /api/v2/users | Create a user
 *UsersApi* | [**disableUser**](UsersApi.md#disableUser) | **DELETE** /api/v2/users/{user_id} | Disable a user
@@ -191,7 +204,7 @@ Class | Method | HTTP request | Description
  - [LogsAggregateBucketValueTimeseries](LogsAggregateBucketValueTimeseries.md)
  - [LogsAggregateBucketValueTimeseriesPoint](LogsAggregateBucketValueTimeseriesPoint.md)
  - [LogsAggregateRequest](LogsAggregateRequest.md)
- - [LogsAggregateRequestPaging](LogsAggregateRequestPaging.md)
+ - [LogsAggregateRequestPage](LogsAggregateRequestPage.md)
  - [LogsAggregateResponse](LogsAggregateResponse.md)
  - [LogsAggregateResponseData](LogsAggregateResponseData.md)
  - [LogsAggregateResponseStatus](LogsAggregateResponseStatus.md)
@@ -257,6 +270,32 @@ Class | Method | HTTP request | Description
  - [LogsSort](LogsSort.md)
  - [LogsSortOrder](LogsSortOrder.md)
  - [LogsWarning](LogsWarning.md)
+ - [Metric](Metric.md)
+ - [MetricAllTags](MetricAllTags.md)
+ - [MetricAllTagsAttributes](MetricAllTagsAttributes.md)
+ - [MetricAllTagsResponse](MetricAllTagsResponse.md)
+ - [MetricDistinctVolume](MetricDistinctVolume.md)
+ - [MetricDistinctVolumeAttributes](MetricDistinctVolumeAttributes.md)
+ - [MetricDistinctVolumeType](MetricDistinctVolumeType.md)
+ - [MetricIngestedIndexedVolume](MetricIngestedIndexedVolume.md)
+ - [MetricIngestedIndexedVolumeAttributes](MetricIngestedIndexedVolumeAttributes.md)
+ - [MetricIngestedIndexedVolumeType](MetricIngestedIndexedVolumeType.md)
+ - [MetricTagConfiguration](MetricTagConfiguration.md)
+ - [MetricTagConfigurationAttributes](MetricTagConfigurationAttributes.md)
+ - [MetricTagConfigurationCreateAttributes](MetricTagConfigurationCreateAttributes.md)
+ - [MetricTagConfigurationCreateData](MetricTagConfigurationCreateData.md)
+ - [MetricTagConfigurationCreateRequest](MetricTagConfigurationCreateRequest.md)
+ - [MetricTagConfigurationMetricTypes](MetricTagConfigurationMetricTypes.md)
+ - [MetricTagConfigurationResponse](MetricTagConfigurationResponse.md)
+ - [MetricTagConfigurationType](MetricTagConfigurationType.md)
+ - [MetricTagConfigurationUpdateAttributes](MetricTagConfigurationUpdateAttributes.md)
+ - [MetricTagConfigurationUpdateData](MetricTagConfigurationUpdateData.md)
+ - [MetricTagConfigurationUpdateRequest](MetricTagConfigurationUpdateRequest.md)
+ - [MetricType](MetricType.md)
+ - [MetricVolumes](MetricVolumes.md)
+ - [MetricVolumesResponse](MetricVolumesResponse.md)
+ - [MetricsAndMetricTagConfigurations](MetricsAndMetricTagConfigurations.md)
+ - [MetricsAndMetricTagConfigurationsResponse](MetricsAndMetricTagConfigurationsResponse.md)
  - [Organization](Organization.md)
  - [OrganizationAttributes](OrganizationAttributes.md)
  - [OrganizationsType](OrganizationsType.md)
@@ -311,15 +350,34 @@ Class | Method | HTTP request | Description
  - [RolesResponse](RolesResponse.md)
  - [RolesSort](RolesSort.md)
  - [RolesType](RolesType.md)
+ - [SecurityFilter](SecurityFilter.md)
+ - [SecurityFilterAttributes](SecurityFilterAttributes.md)
+ - [SecurityFilterCreateAttributes](SecurityFilterCreateAttributes.md)
+ - [SecurityFilterCreateData](SecurityFilterCreateData.md)
+ - [SecurityFilterCreateRequest](SecurityFilterCreateRequest.md)
+ - [SecurityFilterExclusionFilter](SecurityFilterExclusionFilter.md)
+ - [SecurityFilterExclusionFilterResponse](SecurityFilterExclusionFilterResponse.md)
+ - [SecurityFilterFilteredDataType](SecurityFilterFilteredDataType.md)
+ - [SecurityFilterMeta](SecurityFilterMeta.md)
+ - [SecurityFilterResponse](SecurityFilterResponse.md)
+ - [SecurityFilterType](SecurityFilterType.md)
+ - [SecurityFilterUpdateAttributes](SecurityFilterUpdateAttributes.md)
+ - [SecurityFilterUpdateData](SecurityFilterUpdateData.md)
+ - [SecurityFilterUpdateRequest](SecurityFilterUpdateRequest.md)
+ - [SecurityFiltersResponse](SecurityFiltersResponse.md)
  - [SecurityMonitoringFilter](SecurityMonitoringFilter.md)
  - [SecurityMonitoringFilterAction](SecurityMonitoringFilterAction.md)
  - [SecurityMonitoringListRulesResponse](SecurityMonitoringListRulesResponse.md)
  - [SecurityMonitoringRuleCase](SecurityMonitoringRuleCase.md)
  - [SecurityMonitoringRuleCaseCreate](SecurityMonitoringRuleCaseCreate.md)
  - [SecurityMonitoringRuleCreatePayload](SecurityMonitoringRuleCreatePayload.md)
+ - [SecurityMonitoringRuleDetectionMethod](SecurityMonitoringRuleDetectionMethod.md)
  - [SecurityMonitoringRuleEvaluationWindow](SecurityMonitoringRuleEvaluationWindow.md)
  - [SecurityMonitoringRuleKeepAlive](SecurityMonitoringRuleKeepAlive.md)
  - [SecurityMonitoringRuleMaxSignalDuration](SecurityMonitoringRuleMaxSignalDuration.md)
+ - [SecurityMonitoringRuleNewValueOptions](SecurityMonitoringRuleNewValueOptions.md)
+ - [SecurityMonitoringRuleNewValueOptionsForgetAfter](SecurityMonitoringRuleNewValueOptionsForgetAfter.md)
+ - [SecurityMonitoringRuleNewValueOptionsLearningDuration](SecurityMonitoringRuleNewValueOptionsLearningDuration.md)
  - [SecurityMonitoringRuleOptions](SecurityMonitoringRuleOptions.md)
  - [SecurityMonitoringRuleQuery](SecurityMonitoringRuleQuery.md)
  - [SecurityMonitoringRuleQueryAggregation](SecurityMonitoringRuleQueryAggregation.md)
@@ -327,6 +385,7 @@ Class | Method | HTTP request | Description
  - [SecurityMonitoringRuleResponse](SecurityMonitoringRuleResponse.md)
  - [SecurityMonitoringRuleSeverity](SecurityMonitoringRuleSeverity.md)
  - [SecurityMonitoringRuleUpdatePayload](SecurityMonitoringRuleUpdatePayload.md)
+ - [SecurityMonitoringRuntimeAgentRule](SecurityMonitoringRuntimeAgentRule.md)
  - [SecurityMonitoringSignal](SecurityMonitoringSignal.md)
  - [SecurityMonitoringSignalAttributes](SecurityMonitoringSignalAttributes.md)
  - [SecurityMonitoringSignalListRequest](SecurityMonitoringSignalListRequest.md)
