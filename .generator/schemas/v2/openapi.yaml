@@ -58479,6 +58479,9 @@ components:
           type: string
       type: object
     LLMObsContentBlock:
+      anyOf:
+        - $ref: '#/components/schemas/LLMObsFrontendContentBlock'
+        - $ref: '#/components/schemas/LLMObsLegacyContentBlock'
       description: |-
         A single content block rendered inside a `display_block` interaction.
         `type` discriminates which other fields are meaningful:
@@ -58489,6 +58492,7 @@ components:
         - `image`: `url` is required.
         - `widget`: `tileDef` is required (any well-formed JSON; the frontend owns the renderable schema).
         - `llmobs_trace`: `traceId` is required; `interactionType`, when set, must be `trace` or `experiment_trace`.
+        - `frontend`: `code` is required and must be a non-empty string; `label` is optional.
 
         `height`, when set, must be positive.
       properties:
@@ -58496,11 +58500,13 @@ components:
           description: Alternative text for an `image` block.
           example: "Example image"
           type: string
+        code:
+          $ref: '#/components/schemas/LLMObsFrontendContentBlockCode'
         content:
           description: |-
             Block payload. A string for `markdown`, `header`, and `text`; an
             arbitrary JSON value (object, array, or scalar) for `json`. Omitted
-            for `image`, `widget`, and `llmobs_trace`.
+            for `image`, `widget`, `llmobs_trace`, and `frontend`.
           example: "## Triage Instructions"
         height:
           description: Optional rendered height. Must be positive when set.
@@ -58510,7 +58516,7 @@ components:
         interactionType:
           $ref: '#/components/schemas/LLMObsContentBlockLLMObsTraceInteractionType'
         label:
-          description: Optional label rendered alongside the block.
+          description: Optional label rendered alongside a `frontend` block.
           example: "Triage Instructions"
           type: string
         level:
@@ -58598,6 +58604,7 @@ components:
         - image
         - widget
         - llmobs_trace
+        - frontend
       example: markdown
       type: string
       x-enum-varnames:
@@ -58608,6 +58615,7 @@ components:
         - IMAGE
         - WIDGET
         - LLMOBS_TRACE
+        - FRONTEND
     LLMObsContentBlocks:
       description: |-
         List of content blocks that make up a `display_block` interaction.
@@ -61432,6 +61440,29 @@ components:
       required:
         - data
       type: object
+    LLMObsFrontendContentBlock:
+      description: Validation requirements for a `frontend` display block.
+      properties:
+        code:
+          $ref: '#/components/schemas/LLMObsFrontendContentBlockCode'
+        type:
+          $ref: '#/components/schemas/LLMObsFrontendContentBlockType'
+      required:
+        - code
+      type: object
+    LLMObsFrontendContentBlockCode:
+      description: HTML code rendered by a `frontend` block. Required for `frontend` blocks.
+      example: '<div class="status-card">Ready for review</div>'
+      minLength: 1
+      type: string
+    LLMObsFrontendContentBlockType:
+      description: Type discriminator for a `frontend` display block.
+      enum:
+        - frontend
+      example: frontend
+      type: string
+      x-enum-varnames:
+        - FRONTEND
     LLMObsInferenceCode:
       description: A generated code snippet for running an inference request programmatically.
       properties:
@@ -62037,6 +62068,32 @@ components:
         - CATEGORICAL
         - BOOLEAN
         - TEXT
+    LLMObsLegacyContentBlock:
+      description: Validation requirements for an existing non-frontend display block.
+      properties:
+        type:
+          $ref: '#/components/schemas/LLMObsLegacyContentBlockType'
+      type: object
+    LLMObsLegacyContentBlockType:
+      description: Type discriminator for an existing non-frontend display block.
+      enum:
+        - markdown
+        - header
+        - text
+        - json
+        - image
+        - widget
+        - llmobs_trace
+      example: markdown
+      type: string
+      x-enum-varnames:
+        - MARKDOWN
+        - HEADER
+        - TEXT
+        - JSON
+        - IMAGE
+        - WIDGET
+        - LLMOBS_TRACE
     LLMObsMetricAssessment:
       description: Assessment result for an Agent Observability experiment metric.
       enum:
@@ -90750,6 +90807,8 @@ components:
         filter:
           description: Filter expression applied to the recommendations.
           type: string
+        scope:
+          $ref: '#/components/schemas/RecommendationsFilterRequestScope'
         sort:
           description: Ordered list of sort clauses applied to the result set.
           items:
@@ -90759,6 +90818,17 @@ components:
           description: Active view name (for example, `active`, `dismissed`, `open`, `in-progress`, or `completed`).
           type: string
       type: object
+    RecommendationsFilterRequestScope:
+      description: Recommendations scope. Defaults to `ccm`; use `experiment` for experimental recommendations or `*` for both.
+      enum:
+        - ccm
+        - experiment
+        - "*"
+      type: string
+      x-enum-varnames:
+        - CCM
+        - EXPERIMENT
+        - ALL
     RecommendationsFilterRequestSortItems:
       description: A single sort clause applied to the cost recommendations result set.
       properties:
@@ -170477,6 +170547,9 @@ paths:
                                 experiment_id: abc-123
                               label: "Experiments"
                               type: json
+                            - code: '<div class="status-card">Ready for review</div>'
+                              label: "Review status"
+                              type: frontend
                           type: display_block
                     type: interactions
             schema:
@@ -215750,6 +215823,11 @@ paths:
           name: filter[domain_prefix]
           schema:
             type: string
+        - description: Filter status pages by name with case-insensitive substring matching.
+          in: query
+          name: filter[name]
+          schema:
+            type: string
         - description: "Comma-separated list of resources to include. Supported values: created_by_user, last_modified_by_user."
           in: query
           name: include
@@ -223892,7 +223970,7 @@ paths:
   /api/v2/usage/quotas/{quota_namespace}:
     get:
       description: |-
-        Lists usage quotas for the caller's organization in a quota namespace. You can optionally include descendant organizations in the same datacenter as the caller. Requires the `user_access_manage`, `billing_edit`, and `org_management` permissions.
+        Lists usage quotas for the caller's organization in a quota namespace. You can optionally include descendant organizations in the same datacenter as the caller. Requires the `billing_edit` permission.
       operationId: ListQuotas
       parameters:
         - description: The product-specific namespace whose usage quotas are being managed.
@@ -223965,9 +224043,7 @@ paths:
         - apiKeyAuth: []
           appKeyAuth: []
         - AuthZ:
-            - user_access_manage
             - billing_edit
-            - org_management
       summary: List usage quotas
       tags:
         - Usage Metering
@@ -223977,17 +224053,15 @@ paths:
         limitParam: page[limit]
         resultsPath: data
       "x-permission":
-        operator: AND
+        operator: OR
         permissions:
-          - user_access_manage
           - billing_edit
-          - org_management
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: |-
-        Creates or updates one or more usage quotas by scope. If a quota already exists for a supplied scope, it is updated; otherwise, a new quota is created. Requires the `user_access_manage`, `billing_edit`, and `org_management` permissions.
+        Creates or updates one or more usage quotas by scope. If a quota already exists for a supplied scope, it is updated; otherwise, a new quota is created. Requires the `billing_edit` permission.
       operationId: CreateQuotas
       parameters:
         - description: The product-specific namespace whose usage quotas are being managed.
@@ -224075,25 +224149,21 @@ paths:
         - apiKeyAuth: []
           appKeyAuth: []
         - AuthZ:
-            - user_access_manage
             - billing_edit
-            - org_management
       summary: Create or update usage quotas
       tags:
         - Usage Metering
       "x-permission":
-        operator: AND
+        operator: OR
         permissions:
-          - user_access_manage
           - billing_edit
-          - org_management
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/usage/quotas/{quota_namespace}/{id}:
     delete:
       description: |-
-        Deletes a usage quota by its opaque identifier. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `user_access_manage`, `billing_edit`, and `org_management` permissions.
+        Deletes a usage quota by its opaque identifier. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.
       operationId: DeleteQuota
       parameters:
         - description: The product-specific namespace whose usage quotas are being managed.
@@ -224131,24 +224201,20 @@ paths:
         - apiKeyAuth: []
           appKeyAuth: []
         - AuthZ:
-            - user_access_manage
             - billing_edit
-            - org_management
       summary: Delete a usage quota
       tags:
         - Usage Metering
       "x-permission":
-        operator: AND
+        operator: OR
         permissions:
-          - user_access_manage
           - billing_edit
-          - org_management
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     patch:
       description: |-
-        Updates the supplied fields on a usage quota and leaves omitted fields unchanged. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `user_access_manage`, `billing_edit`, and `org_management` permissions.
+        Updates the supplied fields on a usage quota and leaves omitted fields unchanged. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.
       operationId: UpdateQuota
       parameters:
         - description: The product-specific namespace whose usage quotas are being managed.
@@ -224224,18 +224290,14 @@ paths:
         - apiKeyAuth: []
           appKeyAuth: []
         - AuthZ:
-            - user_access_manage
             - billing_edit
-            - org_management
       summary: Update a usage quota
       tags:
         - Usage Metering
       "x-permission":
-        operator: AND
+        operator: OR
         permissions:
-          - user_access_manage
           - billing_edit
-          - org_management
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
